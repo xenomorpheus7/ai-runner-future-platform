@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import heroImage from "@/assets/hero-bg.jpg";
+import robertAvatar from "@/assets/robert-avatar.jpg";
 
 const Index = () => {
   const features = [
@@ -116,19 +117,176 @@ const Index = () => {
         </div>
       </section>
 
+      {/* Meet Your Tutor Section */}
+      <section className="py-24 relative">
+        <div className="absolute inset-0 cyber-grid opacity-10" />
+        <div className="container mx-auto px-4 relative">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              Meet Your{" "}
+              <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                AI Tutor
+              </span>
+            </h2>
+            <p className="text-muted-foreground text-lg">
+              Your personal guide through the world of AI
+            </p>
+          </div>
+
+          <div className="max-w-5xl mx-auto">
+            <div className="glass-card p-8 md:p-12 rounded-3xl border-primary/30 glow-turquoise">
+              <div className="grid md:grid-cols-2 gap-12 items-center">
+                <div className="relative animate-fade-in">
+                  <div className="relative w-full aspect-square max-w-sm mx-auto">
+                    <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-secondary/30 rounded-full blur-3xl" />
+                    <img 
+                      src={robertAvatar} 
+                      alt="Robert - AI Tutor" 
+                      className="relative rounded-2xl border-2 border-primary/50 w-full h-full object-cover glow-turquoise"
+                    />
+                  </div>
+                </div>
+
+                <div className="space-y-6 animate-fade-in" style={{ animationDelay: "0.2s" }}>
+                  <div>
+                    <h3 className="text-3xl md:text-4xl font-bold mb-2">Robert Chen</h3>
+                    <p className="text-xl text-primary font-medium mb-4">
+                      Your Guide Through the World of AI
+                    </p>
+                  </div>
+
+                  <p className="text-muted-foreground text-lg leading-relaxed">
+                    With over a decade of experience in artificial intelligence and machine learning, 
+                    I've dedicated my career to making complex AI concepts accessible and engaging. 
+                    From neural networks to deep learning, I'll be with you every step of the way.
+                  </p>
+
+                  <div className="space-y-3">
+                    <div className="flex items-start gap-3">
+                      <div className="w-2 h-2 rounded-full bg-primary mt-2 glow-turquoise" />
+                      <p className="text-foreground">Former AI Research Lead at TechCorp</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <div className="w-2 h-2 rounded-full bg-primary mt-2 glow-turquoise" />
+                      <p className="text-foreground">Published 50+ papers in AI & ML</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <div className="w-2 h-2 rounded-full bg-primary mt-2 glow-turquoise" />
+                      <p className="text-foreground">Taught over 10,000 students worldwide</p>
+                    </div>
+                  </div>
+
+                  <div className="pt-4">
+                    <Link to="/contact">
+                      <Button 
+                        size="lg"
+                        className="bg-primary hover:bg-primary/90 text-primary-foreground glow-turquoise"
+                      >
+                        Ask Robert a Question
+                        <ArrowRight className="ml-2 h-5 w-5" />
+                      </Button>
+                    </Link>
+                  </div>
+                </div>
+              </div>
+
+              {/* Welcome Video Placeholder */}
+              <div className="mt-12 pt-12 border-t border-primary/20">
+                <h4 className="text-2xl font-bold mb-6 text-center">Welcome Message from Robert</h4>
+                <div className="relative aspect-video rounded-2xl overflow-hidden border border-primary/30 bg-muted">
+                  <div className="absolute inset-0 cyber-grid opacity-20" />
+                  <div className="relative z-10 flex items-center justify-center h-full">
+                    <div className="text-center">
+                      <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mb-4 glow-turquoise cursor-pointer hover:scale-110 transition-transform mx-auto">
+                        <ArrowRight className="h-10 w-10 text-primary ml-1 rotate-0" />
+                      </div>
+                      <p className="text-foreground font-medium">Watch Robert's Welcome Message</p>
+                      <p className="text-sm text-muted-foreground mt-2">3:45 minutes</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Workshops Section */}
+      <section className="py-24 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-secondary/5 to-transparent" />
+        <div className="container mx-auto px-4 relative">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+              Live{" "}
+              <span className="bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent">
+                AI Workshops
+              </span>
+            </h2>
+            <p className="text-muted-foreground text-lg">
+              Join Robert for exclusive live sessions and hands-on workshops
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            {[
+              {
+                title: "Neural Networks Deep Dive",
+                date: "Every Monday",
+                time: "6:00 PM PST",
+                description: "Interactive session on building neural networks from scratch with Robert",
+              },
+              {
+                title: "AI Career Q&A",
+                date: "Every Wednesday",
+                time: "7:00 PM PST",
+                description: "Ask Robert anything about breaking into the AI industry",
+              },
+              {
+                title: "Project Workshop",
+                date: "Every Friday",
+                time: "5:00 PM PST",
+                description: "Work on real-world AI projects with live guidance from Robert",
+              },
+            ].map((workshop, index) => (
+              <div
+                key={index}
+                className="glass-card p-6 rounded-2xl hover:border-secondary/50 transition-all duration-300 hover:glow-purple animate-fade-in"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div className="flex items-center gap-3 mb-4">
+                  <Sparkles className="h-6 w-6 text-secondary" />
+                  <h3 className="text-xl font-bold">{workshop.title}</h3>
+                </div>
+                <div className="space-y-2 mb-4">
+                  <p className="text-primary font-medium">{workshop.date}</p>
+                  <p className="text-muted-foreground">{workshop.time}</p>
+                </div>
+                <p className="text-foreground mb-6">{workshop.description}</p>
+                <Button 
+                  className="w-full bg-secondary/20 hover:bg-secondary/30 text-secondary-foreground border border-secondary/50 hover:border-secondary"
+                  variant="outline"
+                >
+                  Register Now
+                </Button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* Features Section */}
       <section className="py-24 relative">
         <div className="absolute inset-0 cyber-grid opacity-10" />
         <div className="container mx-auto px-4 relative">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Why Choose{" "}
+              Why Learn with{" "}
               <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                AI Runner 2033
+                Robert
               </span>
             </h2>
             <p className="text-muted-foreground text-lg">
-              Experience the next generation of AI education
+              Experience personalized, expert-led AI education
             </p>
           </div>
 

@@ -7,6 +7,7 @@ import Footer from "@/components/Footer";
 import course1 from "@/assets/course1.jpg";
 import course2 from "@/assets/course2.jpg";
 import course3 from "@/assets/course3.jpg";
+import robertAvatar from "@/assets/robert-avatar.jpg";
 
 const CourseDetail = () => {
   const { id } = useParams();
@@ -119,6 +120,21 @@ const CourseDetail = () => {
               <div className="md:col-span-2">
                 <h1 className="text-4xl font-bold mb-4">{course.title}</h1>
                 <p className="text-muted-foreground text-lg mb-6">{course.description}</p>
+                
+                {/* Instructor Section */}
+                <div className="flex items-center gap-4 mb-6 p-4 rounded-xl bg-card/40 border border-primary/20">
+                  <img 
+                    src={robertAvatar} 
+                    alt="Robert Chen" 
+                    className="w-16 h-16 rounded-full border-2 border-primary/50 object-cover"
+                  />
+                  <div>
+                    <p className="text-sm text-muted-foreground">Taught by</p>
+                    <p className="text-lg font-bold text-foreground">Robert Chen</p>
+                    <p className="text-sm text-primary">AI Expert & Lead Instructor</p>
+                  </div>
+                </div>
+
                 <div className="flex flex-wrap gap-4">
                   <div className="flex items-center">
                     <Clock className="h-5 w-5 text-primary mr-2" />
@@ -153,8 +169,25 @@ const CourseDetail = () => {
                 </div>
                 
                 <div className="p-6">
-                  <h2 className="text-2xl font-bold mb-2">{currentLesson.title}</h2>
-                  <p className="text-muted-foreground mb-4">Duration: {currentLesson.duration}</p>
+                  <div className="flex items-start justify-between mb-4">
+                    <div>
+                      <h2 className="text-2xl font-bold mb-2">{currentLesson.title}</h2>
+                      <p className="text-muted-foreground">Duration: {currentLesson.duration}</p>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center gap-3 mb-6 p-3 rounded-lg bg-card/40 border border-primary/20">
+                    <img 
+                      src={robertAvatar} 
+                      alt="Robert Chen" 
+                      className="w-12 h-12 rounded-full border-2 border-primary/50 object-cover"
+                    />
+                    <div>
+                      <p className="text-sm text-muted-foreground">Instructor</p>
+                      <p className="font-bold text-foreground">Robert Chen</p>
+                    </div>
+                  </div>
+
                   <div className="flex gap-4">
                     <Button className="bg-primary hover:bg-primary/90 text-primary-foreground">
                       Mark as Complete

@@ -1,4 +1,5 @@
-import { Mail, MapPin, Phone, Send } from "lucide-react";
+import { Mail, MapPin, Phone, Send, MessageCircle } from "lucide-react";
+import robertAvatar from "@/assets/robert-avatar.jpg";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -39,14 +40,26 @@ const Contact = () => {
 
         <div className="container mx-auto px-4 relative">
           <div className="text-center max-w-3xl mx-auto animate-fade-in">
+            <div className="flex justify-center mb-6">
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-secondary/30 rounded-full blur-2xl" />
+                <img 
+                  src={robertAvatar} 
+                  alt="Robert Chen" 
+                  className="relative w-24 h-24 rounded-full border-2 border-primary/50 object-cover glow-turquoise"
+                />
+              </div>
+            </div>
+            
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              Get in{" "}
+              Ask{" "}
               <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-                Touch
+                Robert
               </span>
             </h1>
             <p className="text-xl text-muted-foreground">
-              Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.
+              Have questions about AI or the courses? Robert personally reads and responds to every message. 
+              Get expert guidance on your learning journey.
             </p>
           </div>
         </div>
@@ -58,7 +71,10 @@ const Contact = () => {
           <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
             {/* Contact Form */}
             <div className="glass-card p-8 rounded-2xl animate-fade-in">
-              <h2 className="text-3xl font-bold mb-6">Send us a Message</h2>
+              <div className="flex items-center gap-3 mb-6">
+                <MessageCircle className="h-8 w-8 text-primary" />
+                <h2 className="text-3xl font-bold">Message Robert</h2>
+              </div>
               <form className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium mb-2">
@@ -119,9 +135,9 @@ const Contact = () => {
             {/* Contact Info */}
             <div className="space-y-8 animate-fade-in" style={{ animationDelay: "0.1s" }}>
               <div className="glass-card p-8 rounded-2xl">
-                <h2 className="text-3xl font-bold mb-6">Contact Information</h2>
+                <h2 className="text-3xl font-bold mb-6">Other Ways to Reach Robert</h2>
                 <p className="text-muted-foreground mb-8">
-                  Reach out to us through any of these channels. We're here to help!
+                  Connect with Robert through any of these channels for personalized assistance.
                 </p>
 
                 <div className="space-y-6">
@@ -145,20 +161,32 @@ const Contact = () => {
               </div>
 
               <div className="glass-card p-8 rounded-2xl border-secondary/30">
-                <h3 className="text-2xl font-bold mb-4">Office Hours</h3>
-                <div className="space-y-2 text-muted-foreground">
-                  <p className="flex justify-between">
-                    <span>Monday - Friday:</span>
-                    <span className="text-foreground">9:00 AM - 6:00 PM PST</span>
-                  </p>
-                  <p className="flex justify-between">
-                    <span>Saturday:</span>
-                    <span className="text-foreground">10:00 AM - 4:00 PM PST</span>
-                  </p>
-                  <p className="flex justify-between">
-                    <span>Sunday:</span>
-                    <span className="text-foreground">Closed</span>
-                  </p>
+                <h3 className="text-2xl font-bold mb-4">Robert's Availability</h3>
+                <p className="text-muted-foreground mb-6">
+                  Robert typically responds to messages within:
+                </p>
+                <div className="space-y-4">
+                  <div className="flex items-center gap-3 p-3 rounded-lg bg-card/40">
+                    <div className="w-2 h-2 rounded-full bg-primary glow-turquoise" />
+                    <div>
+                      <p className="font-semibold text-foreground">Course Questions</p>
+                      <p className="text-sm text-muted-foreground">Within 24 hours</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3 p-3 rounded-lg bg-card/40">
+                    <div className="w-2 h-2 rounded-full bg-primary glow-turquoise" />
+                    <div>
+                      <p className="font-semibold text-foreground">Technical Support</p>
+                      <p className="text-sm text-muted-foreground">Within 48 hours</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3 p-3 rounded-lg bg-card/40">
+                    <div className="w-2 h-2 rounded-full bg-primary glow-turquoise" />
+                    <div>
+                      <p className="font-semibold text-foreground">Career Advice</p>
+                      <p className="text-sm text-muted-foreground">Within 3-5 days</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -172,21 +200,21 @@ const Contact = () => {
         <div className="container mx-auto px-4 relative">
           <div className="glass-card p-12 rounded-3xl text-center max-w-4xl mx-auto border-primary/30 glow-turquoise">
             <h2 className="text-4xl font-bold mb-4">
-              Looking for{" "}
+              Join Robert's{" "}
               <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                Quick Answers?
+                AI Community
               </span>
             </h2>
             <p className="text-xl text-muted-foreground mb-8">
-              Check out our FAQ section for instant answers to common questions about courses, 
-              enrollment, and platform features.
+              Get instant answers from Robert and fellow students in our exclusive Discord community. 
+              Share projects, ask questions, and grow together.
             </p>
             <Button 
               size="lg"
               variant="outline"
               className="border-primary/50 hover:bg-primary/10 hover:border-primary"
             >
-              View FAQ
+              Join Discord Community
             </Button>
           </div>
         </div>
