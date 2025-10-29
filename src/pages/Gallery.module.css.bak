@@ -1,0 +1,31 @@
+.scrollContainer {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+  cursor: grab;
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+}
+
+.scrollContainer::-webkit-scrollbar {
+  display: none;  /* Chrome, Safari and Opera */
+}
+
+.scrollContainer.grabbing {
+  cursor: grabbing !important;
+  user-select: none;
+}
+
+.gallery {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+  min-width: min-content;
+}
+
+/* Ensure smooth momentum scrolling */
+@media (prefers-reduced-motion: no-preference) {
+  .scrollContainer {
+    scroll-behavior: smooth;
+  }
+}

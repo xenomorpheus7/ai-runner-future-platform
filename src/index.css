@@ -1,0 +1,98 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Cyberpunk Dark Theme - AI Runner 2033 */
+    --background: 240 10% 4%;
+    --foreground: 180 100% 95%;
+
+    --card: 240 8% 8%;
+    --card-foreground: 180 100% 95%;
+
+    --popover: 240 10% 6%;
+    --popover-foreground: 180 100% 95%;
+
+    --primary: 186 100% 50%;
+    --primary-foreground: 240 10% 4%;
+
+    --secondary: 270 100% 50%;
+    --secondary-foreground: 180 100% 95%;
+
+    --muted: 240 8% 15%;
+    --muted-foreground: 180 20% 65%;
+
+    --accent: 210 100% 50%;
+    --accent-foreground: 240 10% 4%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 180 100% 95%;
+
+    --border: 240 20% 18%;
+    --input: 240 15% 12%;
+    --ring: 186 100% 50%;
+
+    --radius: 0.75rem;
+
+    /* Neon Glow Colors */
+    --neon-turquoise: 186 100% 50%;
+    --neon-purple: 270 100% 50%;
+    --neon-blue: 210 100% 50%;
+    
+    /* Gradients */
+    --gradient-cyber: linear-gradient(135deg, hsl(186 100% 50% / 0.2), hsl(270 100% 50% / 0.2));
+    --gradient-neon: linear-gradient(90deg, hsl(186 100% 50%), hsl(270 100% 50%));
+    
+    /* Glow Effects */
+    --glow-turquoise: 0 0 20px hsl(186 100% 50% / 0.5), 0 0 40px hsl(186 100% 50% / 0.3);
+    --glow-purple: 0 0 20px hsl(270 100% 50% / 0.5), 0 0 40px hsl(270 100% 50% / 0.3);
+    --glow-blue: 0 0 20px hsl(210 100% 50% / 0.5), 0 0 40px hsl(210 100% 50% / 0.3);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Orbitron', sans-serif;
+  }
+}
+
+@layer utilities {
+  .glow-turquoise {
+    box-shadow: var(--glow-turquoise);
+  }
+  
+  .glow-purple {
+    box-shadow: var(--glow-purple);
+  }
+  
+  .glow-blue {
+    box-shadow: var(--glow-blue);
+  }
+
+  .glass-card {
+    background: hsl(var(--card) / 0.6);
+    backdrop-filter: blur(12px);
+    border: 1px solid hsl(var(--border) / 0.4);
+  }
+
+  .cyber-grid {
+    background-image: 
+      linear-gradient(hsl(186 100% 50% / 0.05) 1px, transparent 1px),
+      linear-gradient(90deg, hsl(186 100% 50% / 0.05) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+}

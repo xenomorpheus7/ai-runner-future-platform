@@ -1,0 +1,22 @@
+/* This file should only contain CSS */
+.scrollContainer {
+  display: flex;
+  overflow-x: scroll;
+  cursor: grab;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.scrollContainer::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollContainer.grabbing {
+  cursor: grabbing;
+}
+
+.gallery {
+  display: flex;
+  gap: 2rem; /* Spacing between items */
+  padding: 1rem 0;
+}
