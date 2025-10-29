@@ -15,17 +15,10 @@ const CourseDetail = () => {
 
   const courseData: Record<string, any> = {
     "1": {
-<<<<<<< HEAD
       title: "Gen-AI IRL",
       image: course1,
       description: "Understand the foundations of artificial intelligence and deep learning. Recognize key concepts, algorithms, and real-world AI case-studies.",
       duration: "1 day",
-=======
-      title: "AI Fundamentals & Neural Networks",
-      image: course1,
-      description: "Master the foundations of artificial intelligence and deep learning. This comprehensive course will take you from zero to building your first neural network.",
-      duration: "8 weeks",
->>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
       level: "Beginner",
       modules: [
         {
@@ -37,7 +30,6 @@ const CourseDetail = () => {
           ],
         },
         {
-<<<<<<< HEAD
           title: "Leonardo.ai Vs Midjourney",
           lessons: [
             { title: "Understanding Neural Networks", duration: "25:00", completed: false },
@@ -47,17 +39,6 @@ const CourseDetail = () => {
         },
         {
           title: "Content Creation with AI",
-=======
-          title: "Neural Networks Basics",
-          lessons: [
-            { title: "Understanding Neural Networks", duration: "25:00", completed: false },
-            { title: "Activation Functions", duration: "22:30", completed: false },
-            { title: "Building Your First Network", duration: "35:20", completed: false },
-          ],
-        },
-        {
-          title: "Deep Learning Fundamentals",
->>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
           lessons: [
             { title: "Introduction to Deep Learning", duration: "28:15", completed: false },
             { title: "Backpropagation Explained", duration: "30:45", completed: false },
@@ -67,7 +48,6 @@ const CourseDetail = () => {
       ],
     },
     "2": {
-<<<<<<< HEAD
       title: "Mastering Text-to-Visuals",
       image: course2,
       description: "Learn to communicate with AI through text-to-image and text-to-video generation. Learn to use tools like Leonardo, Midjourney, Runway and much more",
@@ -80,20 +60,6 @@ const CourseDetail = () => {
             { title: "Supervised vs Unsupervised Learning", duration: "20:00", completed: true },
             { title: "Data Preprocessing Techniques", duration: "25:30", completed: false },
             { title: "Character Feature Engineering", duration: "28:15", completed: false },
-=======
-      title: "Machine Learning Mastery",
-      image: course2,
-      description: "Advanced machine learning algorithms, data preprocessing, and model optimization techniques for real-world applications.",
-      duration: "10 weeks",
-      level: "Intermediate",
-      modules: [
-        {
-          title: "ML Foundations",
-          lessons: [
-            { title: "Supervised vs Unsupervised Learning", duration: "20:00", completed: true },
-            { title: "Data Preprocessing Techniques", duration: "25:30", completed: false },
-            { title: "Feature Engineering", duration: "28:15", completed: false },
->>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
           ],
         },
         {
@@ -107,7 +73,6 @@ const CourseDetail = () => {
       ],
     },
     "3": {
-<<<<<<< HEAD
       title: "Become an AI Movie Director",
       image: course3,
       description: "Master Gen-AI techniques for image and video generation using cutting-edge models like Stable Diffusion and GPT-4. Ps. Students can choose their own editing software like Premiere Pro, DaVinci Resolve, CapCut etc.",
@@ -120,20 +85,6 @@ const CourseDetail = () => {
             { title: "Image Processing Fundamentals", duration: "26:30", completed: true },
             { title: "Anatomy of Prompting", duration: "32:15", completed: false },
             { title: "Using Github for Inspiration", duration: "35:45", completed: false },
-=======
-      title: "Deep Learning & Computer Vision",
-      image: course3,
-      description: "Explore CNNs, image recognition, object detection, and cutting-edge computer vision techniques.",
-      duration: "12 weeks",
-      level: "Advanced",
-      modules: [
-        {
-          title: "Computer Vision Basics",
-          lessons: [
-            { title: "Image Processing Fundamentals", duration: "26:30", completed: true },
-            { title: "Convolutional Neural Networks", duration: "32:15", completed: false },
-            { title: "Advanced CNN Architectures", duration: "35:45", completed: false },
->>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
           ],
         },
         {
@@ -174,20 +125,12 @@ const CourseDetail = () => {
                 <div className="flex items-center gap-4 mb-6 p-4 rounded-xl bg-card/40 border border-primary/20">
                   <img 
                     src={robertAvatar} 
-<<<<<<< HEAD
                     alt="Robert Vogrinec" 
-=======
-                    alt="Robert Chen" 
->>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
                     className="w-16 h-16 rounded-full border-2 border-primary/50 object-cover"
                   />
                   <div>
                     <p className="text-sm text-muted-foreground">Taught by</p>
-<<<<<<< HEAD
                     <p className="text-lg font-bold text-foreground">Robert Vogrinec</p>
-=======
-                    <p className="text-lg font-bold text-foreground">Robert Chen</p>
->>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
                     <p className="text-sm text-primary">AI Expert & Lead Instructor</p>
                   </div>
                 </div>
@@ -236,20 +179,12 @@ const CourseDetail = () => {
                   <div className="flex items-center gap-3 mb-6 p-3 rounded-lg bg-card/40 border border-primary/20">
                     <img 
                       src={robertAvatar} 
-<<<<<<< HEAD
                       alt="Robert Vogrinec" 
-=======
-                      alt="Robert Chen" 
->>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
                       className="w-12 h-12 rounded-full border-2 border-primary/50 object-cover"
                     />
                     <div>
                       <p className="text-sm text-muted-foreground">Instructor</p>
-<<<<<<< HEAD
                       <p className="font-bold text-foreground">Robert Vogrinec</p>
-=======
-                      <p className="font-bold text-foreground">Robert Chen</p>
->>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
                     </div>
                   </div>
 
