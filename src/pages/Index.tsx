@@ -27,6 +27,7 @@ const Index = () => {
 
   const testimonials = [
     {
+<<<<<<< HEAD
       name: "Mitja Vidovič",
       role: "iSchool Founder and Principal of Hajdina Elementary school",
       content: "...",
@@ -40,6 +41,21 @@ const Index = () => {
       name: "Žan Dapčevič",
       role: "Principal at ACADEMIA, Academy of Applied Sciences",
       content: "...",
+=======
+      name: "Alex Chen",
+      role: "AI Engineer",
+      content: "AI Runner 2033 transformed my career. The futuristic approach made complex concepts incredibly engaging.",
+    },
+    {
+      name: "Sarah Kim",
+      role: "ML Researcher",
+      content: "The best AI learning platform I've experienced. The cyberpunk aesthetic keeps me motivated!",
+    },
+    {
+      name: "Marcus Johnson",
+      role: "Data Scientist",
+      content: "From zero to AI expert in months. This platform is a game-changer for anyone serious about AI.",
+>>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
     },
   ];
 
@@ -69,14 +85,22 @@ const Index = () => {
               <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
                 Master{" "}
                 <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+<<<<<<< HEAD
                   Gen-AI
+=======
+                  AI Skills
+>>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
                 </span>
                 <br />
                 for 2033
               </h1>
               
               <p className="text-xl text-muted-foreground mb-8 max-w-xl">
+<<<<<<< HEAD
                 Immerse yourself in cutting-edge AI courses with in-depth experience which will open your eyes for the future. 
+=======
+                Immerse yourself in cutting-edge AI courses with a futuristic cyberpunk experience. 
+>>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
                 Learn from industry experts and build real-world projects.
               </p>
               
@@ -129,7 +153,11 @@ const Index = () => {
               </span>
             </h2>
             <p className="text-muted-foreground text-lg">
+<<<<<<< HEAD
               Your personal guide through the world of Gen-AI
+=======
+              Your personal guide through the world of AI
+>>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
             </p>
           </div>
 
@@ -149,21 +177,34 @@ const Index = () => {
 
                 <div className="space-y-6 animate-fade-in" style={{ animationDelay: "0.2s" }}>
                   <div>
+<<<<<<< HEAD
                     <h3 className="text-3xl md:text-4xl font-bold mb-2">Robert Vogrinec</h3>
                     <p className="text-xl text-primary font-medium mb-4">
                       Your Guide Through the World of Gen-AI
+=======
+                    <h3 className="text-3xl md:text-4xl font-bold mb-2">Robert Chen</h3>
+                    <p className="text-xl text-primary font-medium mb-4">
+                      Your Guide Through the World of AI
+>>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
                     </p>
                   </div>
 
                   <p className="text-muted-foreground text-lg leading-relaxed">
+<<<<<<< HEAD
                     With rich experience in generative artificial intelligence, 
                     I've dedicated my career to making complex AI concepts accessible and engaging. 
                     From writing a perfect prompt to creating new worlds, AI RUNNER 2033 provides you with the tools and knowledge to thrive in the AI-driven future.
+=======
+                    With over a decade of experience in artificial intelligence and machine learning, 
+                    I've dedicated my career to making complex AI concepts accessible and engaging. 
+                    From neural networks to deep learning, I'll be with you every step of the way.
+>>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
                   </p>
 
                   <div className="space-y-3">
                     <div className="flex items-start gap-3">
                       <div className="w-2 h-2 rounded-full bg-primary mt-2 glow-turquoise" />
+<<<<<<< HEAD
                       <p className="text-foreground">AI Instructor</p>
                     </div>
                     <div className="flex items-start gap-3">
@@ -173,6 +214,17 @@ const Index = () => {
                     <div className="flex items-start gap-3">
                       <div className="w-2 h-2 rounded-full bg-primary mt-2 glow-turquoise" />
                       <p className="text-foreground">Developing my own AI Project</p>
+=======
+                      <p className="text-foreground">Former AI Research Lead at TechCorp</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <div className="w-2 h-2 rounded-full bg-primary mt-2 glow-turquoise" />
+                      <p className="text-foreground">Published 50+ papers in AI & ML</p>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <div className="w-2 h-2 rounded-full bg-primary mt-2 glow-turquoise" />
+                      <p className="text-foreground">Taught over 10,000 students worldwide</p>
+>>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
                     </div>
                   </div>
 
@@ -201,7 +253,11 @@ const Index = () => {
                         <ArrowRight className="h-10 w-10 text-primary ml-1 rotate-0" />
                       </div>
                       <p className="text-foreground font-medium">Watch Robert's Welcome Message</p>
+<<<<<<< HEAD
                       <p className="text-sm text-muted-foreground mt-2">2:33 minutes</p>
+=======
+                      <p className="text-sm text-muted-foreground mt-2">3:45 minutes</p>
+>>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
                     </div>
                   </div>
                 </div>
@@ -230,6 +286,7 @@ const Index = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {[
               {
+<<<<<<< HEAD
                 title: "Anatomy of Digital Life",
                 date: "Monday",
                 time: "10:00 AM CET",
@@ -239,12 +296,28 @@ const Index = () => {
                 title: "Gen-AI Q&A",
                 date: "Wednesday",
                 time: "7:00 PM CET",
+=======
+                title: "Neural Networks Deep Dive",
+                date: "Every Monday",
+                time: "6:00 PM PST",
+                description: "Interactive session on building neural networks from scratch with Robert",
+              },
+              {
+                title: "AI Career Q&A",
+                date: "Every Wednesday",
+                time: "7:00 PM PST",
+>>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
                 description: "Ask Robert anything about breaking into the AI industry",
               },
               {
                 title: "Project Workshop",
+<<<<<<< HEAD
                 date: "Friday",
                 time: "5:00 PM CET",
+=======
+                date: "Every Friday",
+                time: "5:00 PM PST",
+>>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
                 description: "Work on real-world AI projects with live guidance from Robert",
               },
             ].map((workshop, index) => (
@@ -314,6 +387,7 @@ const Index = () => {
         <div className="container mx-auto px-4 relative">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
+<<<<<<< HEAD
               Special{" "}
               <span className="bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent">
                 Testimonials
@@ -321,6 +395,15 @@ const Index = () => {
             </h2>
             <p className="text-muted-foreground text-lg">
               Join many of students transforming their careers
+=======
+              Student{" "}
+              <span className="bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent">
+                Success Stories
+              </span>
+            </h2>
+            <p className="text-muted-foreground text-lg">
+              Join thousands of students transforming their careers
+>>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
             </p>
           </div>
 
@@ -355,7 +438,11 @@ const Index = () => {
               </span>
             </h2>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
+<<<<<<< HEAD
               Join AI Runner 2033 today and unlock your potential in generative AI
+=======
+              Join AI Runner 2033 today and unlock your potential in artificial intelligence
+>>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
             </p>
             <Link to="/courses">
               <Button 

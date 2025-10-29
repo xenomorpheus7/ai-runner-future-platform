@@ -10,7 +10,11 @@ const Navigation = () => {
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "Courses", path: "/courses" },
+<<<<<<< HEAD
     { name: "Use-Cases", path: "/usecases" },
+=======
+    { name: "Use Cases", path: "/use-cases" },
+>>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
     { name: "About", path: "/about" },
     { name: "Contact", path: "/contact" },
   ];
@@ -33,7 +37,11 @@ const Navigation = () => {
           </Link>
 
           {/* Desktop Navigation */}
+<<<<<<< HEAD
           <div className="hidden md:flex items-center gap-12">
+=======
+          <div className="hidden md:flex items-center space-x-8">
+>>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
             {navLinks.map((link) => (
               <Link
                 key={link.path}
@@ -61,7 +69,11 @@ const Navigation = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
+<<<<<<< HEAD
             className="block md:hidden text-primary p-2 hover:bg-primary/10 rounded-lg transition-colors"
+=======
+            className="md:hidden text-primary p-2 hover:bg-primary/10 rounded-lg transition-colors"
+>>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
           >
             {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
           </button>

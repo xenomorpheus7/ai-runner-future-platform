@@ -39,7 +39,10 @@
     "@radix-ui/react-toggle": "^1.1.9",
     "@radix-ui/react-toggle-group": "^1.1.10",
     "@radix-ui/react-tooltip": "^1.2.7",
+<<<<<<< HEAD
     "@supabase/supabase-js": "^2.76.0",
+=======
+>>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
     "@tanstack/react-query": "^5.83.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -79,6 +82,10 @@
     "tailwindcss": "^3.4.17",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.38.0",
+<<<<<<< HEAD
     "vite": "^7.1.10"
+=======
+    "vite": "^5.4.19"
+>>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
   }
 }
