@@ -11,50 +11,26 @@ const Courses = () => {
   const courses = [
     {
       id: 1,
-<<<<<<< HEAD
       title: "Gen-AI IRL",
       description: "Master the foundations of generative artificial intelligence and recognize it in our daily lives.",
       image: course1,
       duration: "1hr35mins",
-=======
-      title: "AI Fundamentals & Neural Networks",
-      description: "Master the foundations of artificial intelligence and deep learning. Build your first neural network from scratch.",
-      image: course1,
-      duration: "8 weeks",
-      students: "2,453",
->>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
       level: "Beginner",
     },
     {
       id: 2,
-<<<<<<< HEAD
       title: "Mastering Text-to-Image",
       description: "Be fluent in prompting, fine-tuning models, and creating stunning AI-generated art and images.",
       image: course2,
       duration: "4hr20mins",
-=======
-      title: "Machine Learning Mastery",
-      description: "Advanced machine learning algorithms, data preprocessing, and model optimization techniques for real-world applications.",
-      image: course2,
-      duration: "10 weeks",
-      students: "1,892",
->>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
       level: "Intermediate",
     },
     {
       id: 3,
-<<<<<<< HEAD
       title: "Storytelling with AI",
       description: "Explore how to craft compelling creative content using AI tools. From writing to video production.",
       image: course3,
       duration: "1-3 weeks",
-=======
-      title: "Deep Learning & Computer Vision",
-      description: "Explore CNNs, image recognition, object detection, and cutting-edge computer vision techniques.",
-      image: course3,
-      duration: "12 weeks",
-      students: "1,567",
->>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
       level: "Advanced",
     },
   ];
@@ -85,21 +61,13 @@ const Courses = () => {
         <div className="container mx-auto px-4 relative">
           <div className="text-center max-w-3xl mx-auto animate-fade-in">
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
-<<<<<<< HEAD
               Explore{" "}
-=======
-              Explore Our{" "}
->>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
               <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
                 AI Courses
               </span>
             </h1>
             <p className="text-xl text-muted-foreground">
-<<<<<<< HEAD
               Practical lessons designed to transform you into an Gen-AI expert
-=======
-              Comprehensive courses designed to transform you into an AI expert
->>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
             </p>
           </div>
         </div>
@@ -147,10 +115,6 @@ const Courses = () => {
                     </div>
                     <div className="flex items-center">
                       <Users className="h-4 w-4 mr-2 text-primary" />
-<<<<<<< HEAD
-=======
-                      {course.students} students
->>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
                     </div>
                   </div>
 
@@ -176,17 +140,10 @@ const Courses = () => {
         <div className="container mx-auto px-4">
           <div className="glass-card p-12 rounded-3xl text-center max-w-4xl mx-auto border-primary/30 glow-turquoise">
             <h2 className="text-4xl font-bold mb-4">
-<<<<<<< HEAD
               Tell Us Exactly What You Are Looking For
             </h2>
             <p className="text-xl text-muted-foreground mb-8">
               Contact us to suggest new courses, share your own AI products or get personalized learning recommendations
-=======
-              Can't Find What You're Looking For?
-            </h2>
-            <p className="text-xl text-muted-foreground mb-8">
-              Contact us to suggest new courses or get personalized learning recommendations
->>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
             </p>
             <Link to="/contact">
               <Button 

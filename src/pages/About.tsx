@@ -52,13 +52,8 @@ const About = () => {
               </span>
             </h1>
             <p className="text-xl text-muted-foreground leading-relaxed">
-<<<<<<< HEAD
               On a mission to democratize AI education and prepare learners for the future of technology. 
               Our online platform combines cutting-edge curriculum with an immersive learning experience.
-=======
-              We're on a mission to democratize AI education and prepare learners for the future of technology. 
-              Our futuristic platform combines cutting-edge curriculum with an immersive cyberpunk experience.
->>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
             </p>
           </div>
         </div>
@@ -94,7 +89,6 @@ const About = () => {
               </h2>
               <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
                 <p>
-<<<<<<< HEAD
                   Founded in 2025, AI Runner 2033 was born from a vision of AI media engineer, Robert Vogrinec to transform how people
                   learn about artificial intelligence. Robert's philosophy is not biased but rather taking a safe, practical and most importantly, useful approach.
                 </p>
@@ -107,20 +101,6 @@ const About = () => {
                   Today, AI Runner 2033 serves thousands of students, from complete beginners to advanced 
                   practitioners, helping them master AI skills through hands-on projects, real-world applications, 
                   and a supportive community.
-=======
-                  Founded in 2033, AI Runner was born from a vision to transform how people learn artificial intelligence. 
-                  We recognized that traditional education methods couldn't keep pace with the rapid evolution of AI technology.
-                </p>
-                <p>
-                  Our founders, a team of AI researchers, educators, and designers, came together to create an immersive 
-                  learning platform that doesn't just teach concepts—it brings them to life through a futuristic, 
-                  cyberpunk-inspired interface that makes learning engaging and memorable.
-                </p>
-                <p>
-                  Today, AI Runner 2033 serves thousands of students worldwide, from complete beginners to advanced 
-                  practitioners, helping them master AI skills through hands-on projects, real-world applications, 
-                  and a supportive global community.
->>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
                 </p>
               </div>
             </div>
@@ -174,13 +154,8 @@ const About = () => {
               </span>
             </h2>
             <p className="text-xl text-muted-foreground mb-8">
-<<<<<<< HEAD
               I'm always looking for passionate students, developers, and AI enthusiasts to join my team 
               and help shape the future of AI education. Please share your final products, ideas, or feedback with me.
-=======
-              We're always looking for passionate educators, developers, and AI enthusiasts to join our team 
-              and help shape the future of AI education.
->>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
             </p>
           </div>
         </div>
