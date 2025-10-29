@@ -11,31 +11,19 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Email",
-<<<<<<< HEAD
       content: "robert.vogrinec7.com",
-=======
-      content: "hello@airunner2033.com",
->>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
       link: "mailto:hello@airunner2033.com",
     },
     {
       icon: Phone,
       title: "Phone",
-<<<<<<< HEAD
       content: "(+386) 31481673",
-=======
-      content: "+1 (555) 2033-AI",
->>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
       link: "tel:+15552033",
     },
     {
       icon: MapPin,
       title: "Location",
-<<<<<<< HEAD
       content: "Ptuj, Slovenia",
-=======
-      content: "Silicon Valley, CA 94025",
->>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
       link: "#",
     },
   ];
@@ -57,11 +45,7 @@ const Contact = () => {
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/30 to-secondary/30 rounded-full blur-2xl" />
                 <img 
                   src={robertAvatar} 
-<<<<<<< HEAD
                   alt="Robert Vogrinec" 
-=======
-                  alt="Robert Chen" 
->>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
                   className="relative w-24 h-24 rounded-full border-2 border-primary/50 object-cover glow-turquoise"
                 />
               </div>
@@ -89,11 +73,7 @@ const Contact = () => {
             <div className="glass-card p-8 rounded-2xl animate-fade-in">
               <div className="flex items-center gap-3 mb-6">
                 <MessageCircle className="h-8 w-8 text-primary" />
-<<<<<<< HEAD
                 <h2 className="text-3xl font-bold">Message</h2>
-=======
-                <h2 className="text-3xl font-bold">Message Robert</h2>
->>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
               </div>
               <form className="space-y-6">
                 <div>
@@ -155,11 +135,7 @@ const Contact = () => {
             {/* Contact Info */}
             <div className="space-y-8 animate-fade-in" style={{ animationDelay: "0.1s" }}>
               <div className="glass-card p-8 rounded-2xl">
-<<<<<<< HEAD
                 <h2 className="text-3xl font-bold mb-6">Info</h2>
-=======
-                <h2 className="text-3xl font-bold mb-6">Other Ways to Reach Robert</h2>
->>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
                 <p className="text-muted-foreground mb-8">
                   Connect with Robert through any of these channels for personalized assistance.
                 </p>
@@ -185,11 +161,7 @@ const Contact = () => {
               </div>
 
               <div className="glass-card p-8 rounded-2xl border-secondary/30">
-<<<<<<< HEAD
                 <h3 className="text-2xl font-bold mb-4">Tutor Availability</h3>
-=======
-                <h3 className="text-2xl font-bold mb-4">Robert's Availability</h3>
->>>>>>> 9ab53d31ba419fb35572c32a79bd0d97eb527391
                 <p className="text-muted-foreground mb-6">
                   Robert typically responds to messages within:
                 </p>
