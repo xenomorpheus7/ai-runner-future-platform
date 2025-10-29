@@ -1,5 +1,4 @@
 name = "ai-runner-frontend"
-name = "ai-runner-api"
 main = "src/index.ts"
 compatibility_date = "2025-10-16"
 
