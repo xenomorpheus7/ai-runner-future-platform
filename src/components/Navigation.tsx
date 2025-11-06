@@ -1,16 +1,38 @@
 import { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { Menu, X, Zap } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Menu, X, Zap, Settings, Trophy, TrendingUp, LogOut, User } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { useAuth } from "@/contexts/AuthContext";
+import robertAvatar from "@/assets/robert-avatar.jpg";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { user, signOut } = useAuth();
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate("/");
+  };
+
+  const getInitials = (email: string) => {
+    return email.substring(0, 2).toUpperCase();
+  };
 
   const navLinks = [
     { name: "Home", path: "/" },
     { name: "Courses", path: "/courses" },
-    { name: "Use-Cases", path: "/usecases" },
+    { name: "Projects", path: "/projects" },
     { name: "About", path: "/about" },
     { name: "Contact", path: "/contact" },
   ];
@@ -50,12 +72,60 @@ const Navigation = () => {
                 )}
               </Link>
             ))}
-            <Button
-              variant="outline"
-              className="border-primary/50 hover:bg-primary/10 hover:border-primary hover:glow-turquoise transition-all duration-300"
-            >
-              Login
-            </Button>
+            {user ? (
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                  <button className="relative h-10 w-10 rounded-full border-2 border-primary/50 hover:border-primary transition-all duration-300 hover:glow-turquoise">
+                    <Avatar className="h-full w-full">
+                      <AvatarImage src={user.user_metadata?.avatar_url || robertAvatar} alt={user.email || "User"} />
+                      <AvatarFallback className="bg-primary/20 text-primary font-bold">
+                        {user.email ? getInitials(user.email) : "U"}
+                      </AvatarFallback>
+                    </Avatar>
+                  </button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="end" className="w-56 glass-card border-primary/30">
+                  <DropdownMenuLabel>
+                    <div className="flex flex-col space-y-1">
+                      <p className="text-sm font-medium leading-none">{user.email}</p>
+                      <p className="text-xs leading-none text-muted-foreground">My Account</p>
+                    </div>
+                  </DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem asChild>
+                    <Link to="/settings" className="cursor-pointer">
+                      <Settings className="mr-2 h-4 w-4" />
+                      Settings
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/achievements" className="cursor-pointer">
+                      <Trophy className="mr-2 h-4 w-4" />
+                      Achievements
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuItem asChild>
+                    <Link to="/progression" className="cursor-pointer">
+                      <TrendingUp className="mr-2 h-4 w-4" />
+                      Progression
+                    </Link>
+                  </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer text-destructive">
+                    <LogOut className="mr-2 h-4 w-4" />
+                    Log out
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            ) : (
+              <Button
+                variant="outline"
+                className="border-primary/50 hover:bg-primary/10 hover:border-primary hover:glow-turquoise transition-all duration-300"
+                asChild
+              >
+                <Link to="/login">Login</Link>
+              </Button>
+            )}
           </div>
 
           {/* Mobile Menu Button */}
@@ -84,12 +154,47 @@ const Navigation = () => {
                 {link.name}
               </Link>
             ))}
-            <Button
-              variant="outline"
-              className="w-full mt-4 border-primary/50 hover:bg-primary/10 hover:border-primary"
-            >
-              Login
-            </Button>
+            {user ? (
+              <div className="mt-4 space-y-2">
+                <Link
+                  to="/settings"
+                  className="block py-3 px-4 rounded-lg text-foreground/70 hover:bg-primary/10 hover:text-primary transition-all"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Settings
+                </Link>
+                <Link
+                  to="/achievements"
+                  className="block py-3 px-4 rounded-lg text-foreground/70 hover:bg-primary/10 hover:text-primary transition-all"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Achievements
+                </Link>
+                <Link
+                  to="/progression"
+                  className="block py-3 px-4 rounded-lg text-foreground/70 hover:bg-primary/10 hover:text-primary transition-all"
+                  onClick={() => setIsOpen(false)}
+                >
+                  Progression
+                </Link>
+                <Button
+                  variant="outline"
+                  className="w-full mt-4 border-destructive/50 hover:bg-destructive/10 hover:border-destructive text-destructive"
+                  onClick={handleSignOut}
+                >
+                  <LogOut className="mr-2 h-4 w-4" />
+                  Log out
+                </Button>
+              </div>
+            ) : (
+              <Button
+                variant="outline"
+                className="w-full mt-4 border-primary/50 hover:bg-primary/10 hover:border-primary"
+                asChild
+              >
+                <Link to="/login" onClick={() => setIsOpen(false)}>Login</Link>
+              </Button>
+            )}
           </div>
         )}
       </div>

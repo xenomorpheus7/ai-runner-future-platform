@@ -6,6 +6,9 @@ import Footer from "@/components/Footer";
 import course1 from "@/assets/course1.jpg";
 import course2 from "@/assets/course2.jpg";
 import course3 from "@/assets/course3.jpg";
+import gallery1 from "@/assets/gallery1.jpg";
+import gallery2 from "@/assets/gallery2.jpg";
+import gallery3 from "@/assets/gallery3.jpg";
 
 const Courses = () => {
   const courses = [
@@ -32,6 +35,30 @@ const Courses = () => {
       image: course3,
       duration: "1-3 weeks",
       level: "Advanced",
+    },
+    {
+      id: 4,
+      title: "AI Visualization Techniques",
+      description: "Learn advanced techniques for creating stunning visualizations and designs using AI-powered tools and workflows.",
+      image: gallery1,
+      duration: "2hr45mins",
+      level: "Intermediate",
+    },
+    {
+      id: 5,
+      title: "Advanced AI Workflows",
+      description: "Master complex AI workflows and automation techniques to streamline your creative and professional processes.",
+      image: gallery2,
+      duration: "3hr20mins",
+      level: "Advanced",
+    },
+    {
+      id: 6,
+      title: "AI Content Creation Mastery",
+      description: "Discover the secrets of professional AI content creation, from ideation to final production and delivery.",
+      image: gallery3,
+      duration: "2hr15mins",
+      level: "Intermediate",
     },
   ];
 

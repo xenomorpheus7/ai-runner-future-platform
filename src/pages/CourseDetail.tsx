@@ -7,6 +7,9 @@ import Footer from "@/components/Footer";
 import course1 from "@/assets/course1.jpg";
 import course2 from "@/assets/course2.jpg";
 import course3 from "@/assets/course3.jpg";
+import gallery1 from "@/assets/gallery1.jpg";
+import gallery2 from "@/assets/gallery2.jpg";
+import gallery3 from "@/assets/gallery3.jpg";
 import robertAvatar from "@/assets/robert-avatar.jpg";
 
 const CourseDetail = () => {
@@ -93,6 +96,81 @@ const CourseDetail = () => {
             { title: "YOLO Algorithm", duration: "28:00", completed: false },
             { title: "R-CNN Family", duration: "30:20", completed: false },
             { title: "Real-time Object Detection", duration: "33:50", completed: false },
+          ],
+        },
+      ],
+    },
+    "4": {
+      title: "AI Visualization Techniques",
+      image: gallery1,
+      description: "Learn advanced techniques for creating stunning visualizations and designs using AI-powered tools and workflows.",
+      duration: "2 days",
+      level: "Intermediate",
+      modules: [
+        {
+          title: "Visualization Fundamentals",
+          lessons: [
+            { title: "Introduction to AI Visualization", duration: "25:00", completed: false },
+            { title: "Design Principles with AI", duration: "30:15", completed: false },
+            { title: "Color Theory and Palettes", duration: "28:45", completed: false },
+          ],
+        },
+        {
+          title: "Advanced Techniques",
+          lessons: [
+            { title: "3D Visualization with AI", duration: "32:20", completed: false },
+            { title: "Data Visualization Tools", duration: "29:30", completed: false },
+            { title: "Creating Interactive Visuals", duration: "35:10", completed: false },
+          ],
+        },
+      ],
+    },
+    "5": {
+      title: "Advanced AI Workflows",
+      image: gallery2,
+      description: "Master complex AI workflows and automation techniques to streamline your creative and professional processes.",
+      duration: "3 days",
+      level: "Advanced",
+      modules: [
+        {
+          title: "Workflow Optimization",
+          lessons: [
+            { title: "Understanding AI Workflows", duration: "28:00", completed: false },
+            { title: "Automation Strategies", duration: "32:45", completed: false },
+            { title: "Integration Techniques", duration: "30:20", completed: false },
+          ],
+        },
+        {
+          title: "Advanced Automation",
+          lessons: [
+            { title: "Complex Workflow Design", duration: "35:15", completed: false },
+            { title: "API Integration", duration: "33:30", completed: false },
+            { title: "Performance Optimization", duration: "31:45", completed: false },
+          ],
+        },
+      ],
+    },
+    "6": {
+      title: "AI Content Creation Mastery",
+      image: gallery3,
+      description: "Discover the secrets of professional AI content creation, from ideation to final production and delivery.",
+      duration: "2 days",
+      level: "Intermediate",
+      modules: [
+        {
+          title: "Content Creation Basics",
+          lessons: [
+            { title: "Content Ideation with AI", duration: "24:30", completed: false },
+            { title: "Writing and Editing", duration: "27:15", completed: false },
+            { title: "Visual Content Generation", duration: "29:45", completed: false },
+          ],
+        },
+        {
+          title: "Production and Delivery",
+          lessons: [
+            { title: "Content Production Workflows", duration: "31:20", completed: false },
+            { title: "Quality Assurance", duration: "28:50", completed: false },
+            { title: "Publishing and Distribution", duration: "26:30", completed: false },
           ],
         },
       ],

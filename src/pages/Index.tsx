@@ -63,7 +63,7 @@ const Index = () => {
             <div className="text-center lg:text-left animate-fade-in">
               <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 border border-primary/30 mb-6 glow-turquoise">
                 <Sparkles className="h-4 w-4 text-primary mr-2" />
-                <span className="text-sm font-medium">Welcome to the Future of Learning</span>
+                <span className="text-sm font-medium">Welcome to the Future of Education</span>
               </div>
               
               <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
@@ -151,7 +151,7 @@ const Index = () => {
                   <div>
                     <h3 className="text-3xl md:text-4xl font-bold mb-2">Robert Vogrinec</h3>
                     <p className="text-xl text-primary font-medium mb-4">
-                      Your Guide Through the World of Gen-AI
+                      Your Guide Through the World of AI
                     </p>
                   </div>
 
@@ -168,7 +168,7 @@ const Index = () => {
                     </div>
                     <div className="flex items-start gap-3">
                       <div className="w-2 h-2 rounded-full bg-primary mt-2 glow-turquoise" />
-                      <p className="text-foreground">Actively educating students in schools</p>
+                      <p className="text-foreground">Actively educating students across schools</p>
                     </div>
                     <div className="flex items-start gap-3">
                       <div className="w-2 h-2 rounded-full bg-primary mt-2 glow-turquoise" />
