@@ -355,7 +355,7 @@ const Index = () => {
               </span>
             </h2>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Join AI Runner 2033 today and unlock your potential in generative AI
+              Join AI Runner 2033 today and unlock your full potential by mastering how to communicate with AI and use it to your advantage.
             </p>
             <Link to="/courses">
               <Button 

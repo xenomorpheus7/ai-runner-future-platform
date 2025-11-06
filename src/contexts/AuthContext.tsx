@@ -18,10 +18,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   useEffect(() => {
     // Check if Supabase is configured
-    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-    const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-
-    if (!supabaseUrl || !supabaseAnonKey) {
+    if (!supabase) {
       // If Supabase is not configured, set loading to false and continue
       // This allows the app to work without authentication
       setLoading(false);
@@ -58,10 +55,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   const signOut = async () => {
-    try {
-      await supabase.auth.signOut();
-    } catch (error) {
-      console.warn("Sign out error:", error);
+    if (supabase) {
+      try {
+        await supabase.auth.signOut();
+      } catch (error) {
+        console.warn("Sign out error:", error);
+      }
     }
     setUser(null);
     setSession(null);

@@ -20,6 +20,10 @@ const Settings = () => {
     setLoading(true);
 
     try {
+      if (!supabase) {
+        throw new Error("Authentication is not configured.");
+      }
+
       const { error } = await supabase.auth.updateUser({
         email: email,
       });
