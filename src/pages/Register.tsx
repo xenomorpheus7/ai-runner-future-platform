@@ -44,6 +44,14 @@ const Register = () => {
     setLoading(true);
 
     try {
+      // Check if Supabase is configured
+      const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+      const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+
+      if (!supabaseUrl || !supabaseAnonKey) {
+        throw new Error("Registration is not configured. Please contact support.");
+      }
+
       const { data, error } = await supabase.auth.signUp({
         email,
         password,

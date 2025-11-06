@@ -25,7 +25,8 @@ const Navigation = () => {
     navigate("/");
   };
 
-  const getInitials = (email: string) => {
+  const getInitials = (email: string | undefined) => {
+    if (!email) return "U";
     return email.substring(0, 2).toUpperCase();
   };
 
