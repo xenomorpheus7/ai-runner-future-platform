@@ -18,14 +18,14 @@ const CourseDetail = () => {
 
   const courseData: Record<string, any> = {
     "1": {
-      title: "Gen-AI IRL",
+      title: "Recognizing AI in our daily lives",
       image: course1,
       description: "Understand the foundations of artificial intelligence and deep learning. Recognize key concepts, algorithms, and real-world AI case-studies.",
       duration: "1 day",
       level: "Beginner",
       modules: [
         {
-          title: "Introduction to AI",
+          title: "Introduction to Creative Pathways",
           lessons: [
             { title: "What is Artificial Intelligence?", duration: "15:30", completed: true },
             { title: "History and Evolution of AI", duration: "20:15", completed: true },

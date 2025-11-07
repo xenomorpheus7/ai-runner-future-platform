@@ -5,34 +5,43 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import heroImage from "@/assets/hero-bg.jpg";
 import robertAvatar from "@/assets/robert-avatar.jpg";
+import s1Image from "@/assets/s1.jpg";
+import s2Image from "@/assets/s2.jpg";
+import s3Image from "@/assets/s3.jpg";
 
 const Index = () => {
   const features = [
     {
       icon: Cpu,
-      title: "AI-Powered Learning",
-      description: "Cutting-edge curriculum designed by industry experts",
+      title: "Intelligence with Purpose",
+      description: "AI Runner redefines learning for a generation growing up with machines. We teach not only how AI works, but why it matters — guiding students, teachers, and creators to use technology with empathy, imagination, and safety.",
     },
     {
       icon: Zap,
-      title: "Lightning Fast",
-      description: "Accelerated learning paths to get you job-ready",
+      title: "Technology with a Human Heart",
+      description: "We empower young minds to explore modern technology with curiosity and confidence — shaping individuals ready for both innovation and responsibility."
     },
     {
       icon: Sparkles,
-      title: "Immersive Experience",
-      description: "Interactive projects and real-world applications",
+      title: "Connected by Creation",
+      description: "AI Runner links classrooms, experts, and innovators into one creative ecosystem. Together we build projects that don’t just advance technology — they advance humanity, cultivating a future defined by wisdom, cooperation, and ethical use of AI.",
     },
+    
   ];
 
   const testimonials = [
     {
-      name: "Mitja Vidovič",
-      role: "iSchool Founder and Principal of Hajdina Elementary school",
-      content: "...",
+      name: "Rajko Bizjak",
+      role: "Professor of Photography and Moviemaking",
+      content: "Robert is an exceptionally careful and dedicated creator who knows how to combine art, technology, and a vision of the future. His work in the field of artificial intelligence shows how important it is for young people to think boldly and seek new paths between creativity and innovation. Such individuals push the boundaries of what is possible.",
     },
     {
-      name: "Igor Prosić",
+      name: "Mitja Vidovič",
+      role: "Principal at Hajdina Elementary school and Founder of iSchool",
+      content: "The AI workshop led by Robert sparked genuine interest in the future of technology and creativity among our ninth graders. Robert knew how to present artificial intelligence in a way that inspires and opens up new perspectives—among both teachers and students. Workshops like this are extremely important because they open the door to digital literacy for young people and prepare them for a future in which knowledge of AI will be crucial.",
+    },
+    {
+      name: "Igor Prošić",
       role: "Project Leader at VIST Ljubljana",
       content: "...",
     },
@@ -129,7 +138,7 @@ const Index = () => {
               </span>
             </h2>
             <p className="text-muted-foreground text-lg">
-              Your personal guide through the world of Gen-AI
+              Your personal guide through the world of AI
             </p>
           </div>
 
@@ -223,51 +232,54 @@ const Index = () => {
               </span>
             </h2>
             <p className="text-muted-foreground text-lg">
-              Join Robert for exclusive live sessions and hands-on workshops
+            Real lessons. Real growth. Real people.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {[
               {
-                title: "Anatomy of Digital Life",
-                date: "Monday",
-                time: "10:00 AM CET",
-                description: "Interactive session on building neural networks from scratch with Robert",
+                title: "Hajdina Elementary School & iSchool",
+                image: s1Image,
               },
               {
-                title: "Gen-AI Q&A",
-                date: "Wednesday",
-                time: "7:00 PM CET",
-                description: "Ask Robert anything about breaking into the AI industry",
+                title: "Faculty of Applied Sciences - VIST Ljubljana",
+                image: s2Image,
               },
               {
-                title: "Project Workshop",
-                date: "Friday",
-                time: "5:00 PM CET",
-                description: "Work on real-world AI projects with live guidance from Robert",
+                title: "ACADEMIA - Academy of Applied Sciences Maribor",
+                image: s3Image,
               },
             ].map((workshop, index) => (
               <div
                 key={index}
-                className="glass-card p-6 rounded-2xl hover:border-secondary/50 transition-all duration-300 hover:glow-purple animate-fade-in"
+                className="glass-card rounded-2xl hover:border-secondary/50 transition-all duration-300 hover:glow-purple animate-fade-in relative overflow-hidden"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className="flex items-center gap-3 mb-4">
-                  <Sparkles className="h-6 w-6 text-secondary" />
-                  <h3 className="text-xl font-bold">{workshop.title}</h3>
+                {/* Image Container with 4:3 Aspect Ratio */}
+                <div className="relative w-full" style={{ paddingBottom: '75%' }}>
+                  {/* Background Image */}
+                  <div 
+                    className="absolute inset-0 bg-cover bg-center"
+                    style={{ backgroundImage: `url(${workshop.image})` }}
+                  />
+                  {/* Dark Gradient Overlay - Reduced opacity for better image visibility */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/40 to-background/50" />
+                  
+                  {/* Content */}
+                  <div className="absolute inset-0 z-10 flex flex-col justify-between p-6">
+                    <div className="flex items-center gap-3">
+                      <Sparkles className="h-6 w-6 text-secondary" />
+                      <h3 className="text-xl font-bold">{workshop.title}</h3>
+                    </div>
+                    <Button 
+                      className="w-full bg-secondary/20 hover:bg-secondary/30 text-secondary-foreground border border-secondary/50 hover:border-secondary"
+                      variant="outline"
+                    >
+                      Explore Students Projects
+                    </Button>
+                  </div>
                 </div>
-                <div className="space-y-2 mb-4">
-                  <p className="text-primary font-medium">{workshop.date}</p>
-                  <p className="text-muted-foreground">{workshop.time}</p>
-                </div>
-                <p className="text-foreground mb-6">{workshop.description}</p>
-                <Button 
-                  className="w-full bg-secondary/20 hover:bg-secondary/30 text-secondary-foreground border border-secondary/50 hover:border-secondary"
-                  variant="outline"
-                >
-                  Register Now
-                </Button>
               </div>
             ))}
           </div>
@@ -320,11 +332,11 @@ const Index = () => {
               </span>
             </h2>
             <p className="text-muted-foreground text-lg">
-              Join many of students transforming their careers
+            Those who believed in me when this was just a spark of an idea.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {testimonials.map((testimonial, index) => (
               <div
                 key={index}
