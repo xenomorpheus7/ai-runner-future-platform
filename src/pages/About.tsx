@@ -27,10 +27,10 @@ const About = () => {
   ];
 
   const stats = [
-    { number: "10K+", label: "Active Students" },
-    { number: "50+", label: "Expert Instructors" },
-    { number: "100+", label: "Courses" },
-    { number: "95%", label: "Success Rate" },
+    { number: "500+", label: "Students Trained" },
+    { number: "1k", label: "Completed Projects" },
+    { number: "10", label: "Live Workshops Hosted" },
+    { number: "95%", label: "Positive Feedback Score" },
   ];
 
   return (
