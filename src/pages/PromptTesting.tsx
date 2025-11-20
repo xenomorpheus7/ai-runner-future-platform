@@ -499,11 +499,6 @@ const PromptTesting = () => {
 
   return (
     <div className="min-h-screen">
-      {/* TEST: Cutting Edge Tools Section is loaded */}
-      <div className="fixed top-20 right-4 z-50 bg-primary text-primary-foreground px-4 py-2 rounded-lg text-sm font-bold">
-        Tools Section: {showToolsSection ? "OPEN" : "CLOSED"}
-      </div>
-      
       <section className="py-24 relative overflow-hidden">
         {/* Background Effects */}
         <div className="absolute inset-0 cyber-grid opacity-10" />
@@ -1519,11 +1514,6 @@ const PromptTesting = () => {
                       <div className="absolute inset-0 rounded-full border-2 border-primary/50 animate-ping" style={{ animationDuration: '2s' }} />
                       <div className="absolute inset-0 rounded-full border-2 border-secondary/50 animate-ping" style={{ animationDuration: '2s', animationDelay: '0.5s' }} />
                       <div className="absolute inset-0 rounded-full border-2 border-accent/50 animate-ping" style={{ animationDuration: '2s', animationDelay: '1s' }} />
-                    </div>
-                    
-                    {/* Glowing Indicator Dot */}
-                    <div className="absolute -top-2 -right-2 w-4 h-4 bg-primary rounded-full animate-pulse-glow">
-                      <div className="absolute inset-0 bg-primary rounded-full animate-ping opacity-75" />
                     </div>
                     
                     <Button
