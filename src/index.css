@@ -65,9 +65,76 @@ All colors MUST be HSL.
     font-family: 'Inter', sans-serif;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  /* English (default) - Orbitron font for headings */
+  :root:not(.lang-sl) h1,
+  :root:not(.lang-sl) h2,
+  :root:not(.lang-sl) h3,
+  :root:not(.lang-sl) h4,
+  :root:not(.lang-sl) h5,
+  :root:not(.lang-sl) h6,
+  :root.lang-en h1,
+  :root.lang-en h2,
+  :root.lang-en h3,
+  :root.lang-en h4,
+  :root.lang-en h5,
+  :root.lang-en h6 {
     font-family: 'Orbitron', sans-serif;
   }
+
+  /* Slovenian - Avenir Next LT Pro font for all text */
+  :root.lang-sl body,
+  :root.lang-sl p,
+  :root.lang-sl span,
+  :root.lang-sl div,
+  :root.lang-sl a,
+  :root.lang-sl button,
+  :root.lang-sl input,
+  :root.lang-sl textarea,
+  :root.lang-sl label,
+  :root.lang-sl h1,
+  :root.lang-sl h2,
+  :root.lang-sl h3,
+  :root.lang-sl h4,
+  :root.lang-sl h5,
+  :root.lang-sl h6 {
+    font-family: 'Avenir Next LT Pro', 'Avenir Next', Avenir, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  }
+}
+
+/* Avenir Next LT Pro Font - For Schools Page */
+/* Note: Avenir Next LT Pro is a commercial font. 
+   To use it, you can either:
+   1. Add it via Adobe Fonts (Typekit) - add the script in index.html
+   2. Host the font files and update the @font-face URLs below
+   3. Use local font files if installed on the system */
+@font-face {
+  font-family: 'Avenir Next LT Pro';
+  src: local('Avenir Next LT Pro Regular'), 
+       local('AvenirNextLTPro-Regular'),
+       local('Avenir Next LT Pro');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Avenir Next LT Pro';
+  src: local('Avenir Next LT Pro Medium'), 
+       local('AvenirNextLTPro-Medium'),
+       local('Avenir Next LT Pro');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Avenir Next LT Pro';
+  src: local('Avenir Next LT Pro Bold'), 
+       local('AvenirNextLTPro-Bold'),
+       local('Avenir Next LT Pro');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
 }
 
 @layer utilities {
@@ -94,5 +161,34 @@ All colors MUST be HSL.
       linear-gradient(hsl(186 100% 50% / 0.05) 1px, transparent 1px),
       linear-gradient(90deg, hsl(186 100% 50% / 0.05) 1px, transparent 1px);
     background-size: 50px 50px;
+  }
+
+  .animate-slide-in {
+    animation: slideIn 0.3s ease-out;
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(-10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Schools Page Font */
+  .schools-page {
+    font-family: 'Avenir Next LT Pro', 'Avenir Next', Avenir, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  }
+
+  .schools-page h1,
+  .schools-page h2,
+  .schools-page h3,
+  .schools-page h4,
+  .schools-page h5,
+  .schools-page h6 {
+    font-family: 'Avenir Next LT Pro', 'Avenir Next', Avenir, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
 }

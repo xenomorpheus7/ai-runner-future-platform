@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom";
+import { useParams, Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { ArrowLeft, Play, CheckCircle2, Lock, Clock, BarChart } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -14,6 +14,7 @@ import robertAvatar from "@/assets/robert-avatar.jpg";
 
 const CourseDetail = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [selectedLesson, setSelectedLesson] = useState(0);
 
   const courseData: Record<string, any> = {
@@ -237,13 +238,16 @@ const CourseDetail = () => {
               <div className="glass-card rounded-2xl overflow-hidden animate-fade-in" style={{ animationDelay: "0.1s" }}>
                 <div className="relative aspect-video bg-muted flex items-center justify-center group">
                   <div className="absolute inset-0 cyber-grid opacity-20" />
-                  <div className="relative z-10">
-                    <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mb-4 glow-turquoise cursor-pointer hover:scale-110 transition-transform">
+                  <button
+                    onClick={() => navigate("/register")}
+                    className="relative z-10 w-full h-full flex flex-col items-center justify-center cursor-pointer hover:bg-primary/5 transition-colors"
+                  >
+                    <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mb-4 glow-turquoise hover:scale-110 transition-transform">
                       <Play className="h-10 w-10 text-primary ml-1" />
                     </div>
                     <p className="text-foreground font-medium">Video Player Placeholder</p>
                     <p className="text-sm text-muted-foreground mt-2">Click to play lesson</p>
-                  </div>
+                  </button>
                 </div>
                 
                 <div className="p-6">

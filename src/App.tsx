@@ -4,6 +4,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { LanguageProvider } from "@/contexts/LanguageContext";
 import Index from "./pages/Index";
 import Courses from "./pages/Courses";
 import Projects from "./pages/Projects";
@@ -17,8 +18,12 @@ import Register from "./pages/Register";
 import Settings from "./pages/Settings";
 import Achievements from "./pages/Achievements";
 import Progression from "./pages/Progression";
+import PromptTesting from "./pages/PromptTesting";
+import PromptOptimizer from "./pages/PromptOptimizer";
+import Schools from "./pages/Schools";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
+import InterestSurveyPopup from "./components/InterestSurveyPopup";
 
 const queryClient = new QueryClient();
 
@@ -28,8 +33,10 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <AuthProvider>
-          <ScrollToTop />
+        <LanguageProvider>
+          <AuthProvider>
+            <ScrollToTop />
+            <InterestSurveyPopup />
           {/* Global navigation (fixed) */}
           <Navigation />
 
@@ -43,6 +50,9 @@ const App = () => (
               <Route path="/course/:id" element={<CourseDetail />} />
               <Route path="/about" element={<About />} />
               <Route path="/contact" element={<Contact />} />
+              <Route path="/schools" element={<Schools />} />
+              <Route path="/prompt-testing" element={<PromptTesting />} />
+              <Route path="/prompt-optimizer" element={<PromptOptimizer />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route
@@ -73,7 +83,8 @@ const App = () => (
               <Route path="*" element={<NotFound />} />
             </Routes>
           </div>
-        </AuthProvider>
+          </AuthProvider>
+        </LanguageProvider>
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>

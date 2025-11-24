@@ -508,9 +508,17 @@ const AITestingSpace = () => {
               How to efficiently communicate with AI
             </span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-6">
             Test your prompt skills and see how different approaches affect AI-generated results
           </p>
+          <Button
+            onClick={() => navigate("/prompt-testing")}
+            size="lg"
+            className="bg-primary hover:bg-primary/90 text-primary-foreground glow-turquoise transition-all duration-300 group"
+          >
+            Open Full AI Testing Space
+            <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+          </Button>
         </div>
 
         {/* Main Content */}

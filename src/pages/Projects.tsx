@@ -1,4 +1,6 @@
 import React, { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
+import { useLanguage } from "@/contexts/LanguageContext";
 import styles from "./Projects.module.css";
 import gallery1 from "../assets/gallery1.jpg";
 import gallery2 from "../assets/gallery2.jpg";
@@ -54,6 +56,8 @@ const projects = [
 ];
 
 export default function Projects() {
+  const { t } = useLanguage();
+  const navigate = useNavigate();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const isPausedRef = useRef(false);
   const autoScrollIntervalRef = useRef<number | null>(null);
@@ -174,12 +178,11 @@ export default function Projects() {
           <div className="text-center max-w-3xl mx-auto animate-fade-in">
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
               <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-                Projects
+                {t("projects.title")}
               </span>
             </h1>
             <p className="text-xl text-muted-foreground">
-              Explore how AI Runner 2033 transforms ideas into futuristic
-              visuals.
+              {t("projects.subtitle")}
             </p>
           </div>
         </div>
@@ -191,15 +194,21 @@ export default function Projects() {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-8 items-center">
             {/* Video Side */}
-            <div className="glass-card rounded-2xl overflow-hidden border border-primary/30 shadow-lg hover:border-primary/50 transition-all duration-300 hover:glow-turquoise">
-              <div className="aspect-video bg-muted">
+            <div className="glass-card rounded-2xl overflow-hidden border border-primary/30 shadow-lg hover:border-primary/50 transition-all duration-300 hover:glow-turquoise relative">
+              <div className="aspect-video bg-muted relative">
                 <iframe
-                  className="w-full h-full"
+                  className="w-full h-full pointer-events-none"
                   src="https://www.youtube.com/embed/sY01rd5B46o?autoplay=0&mute=1&playsinline=1&rel=0"
                   title="Featured AI Video"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
+                />
+                {/* Clickable overlay that redirects to register */}
+                <button
+                  onClick={() => navigate("/register")}
+                  className="absolute inset-0 w-full h-full cursor-pointer z-10 bg-transparent hover:bg-primary/5 transition-colors"
+                  aria-label="Register to watch video"
                 />
               </div>
             </div>
@@ -208,26 +217,24 @@ export default function Projects() {
             <div className="space-y-6 animate-fade-in">
               <h2 className="text-4xl font-bold">
                 <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-                  Experience the Future
+                  {t("projects.experienceFuture")}
                 </span>
               </h2>
               <p className="text-xl text-muted-foreground leading-relaxed">
-                Witness groundbreaking AI-generated content that pushes the boundaries
-                of digital creativity. From concept to execution, see how AI Runner 2033
-                is revolutionizing visual storytelling.
+                {t("projects.experienceDesc")}
               </p>
               <div className="space-y-4">
                 <div className="flex items-center space-x-2">
                   <div className="h-1 w-1 rounded-full bg-primary animate-pulse" />
-                  <span className="text-primary">Real-time Generation</span>
+                  <span className="text-primary">{t("projects.realtimeGeneration")}</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <div className="h-1 w-1 rounded-full bg-secondary animate-pulse" />
-                  <span className="text-secondary">High-fidelity Output</span>
+                  <span className="text-secondary">{t("projects.highFidelity")}</span>
                 </div>
                 <div className="flex items-center space-x-2">
                   <div className="h-1 w-1 rounded-full bg-accent animate-pulse" />
-                  <span className="text-accent">Seamless Integration</span>
+                  <span className="text-accent">{t("projects.seamlessIntegration")}</span>
                 </div>
               </div>
             </div>
@@ -358,12 +365,18 @@ export default function Projects() {
                     {item.type === "video" ? (
                       <div className="relative w-full aspect-video bg-muted flex-shrink-0">
                         <iframe
-                          className="w-full h-full absolute inset-0"
+                          className="w-full h-full absolute inset-0 pointer-events-none"
                           src={item.src}
                           title={item.title}
                           frameBorder="0"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                           allowFullScreen
+                        />
+                        {/* Clickable overlay that redirects to register */}
+                        <button
+                          onClick={() => navigate("/register")}
+                          className="absolute inset-0 w-full h-full cursor-pointer z-10 bg-transparent hover:bg-primary/5 transition-colors"
+                          aria-label="Register to watch video"
                         />
                       </div>
                     ) : (

@@ -1,6 +1,7 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, useEffect, ReactNode, useCallback } from 'react';
 import enTranslations from '../locales/en.json';
 import slTranslations from '../locales/sl.json';
+import { translateToSlovenian } from '../services/deeplService';
 
 type Language = 'en' | 'sl';
 
@@ -8,6 +9,7 @@ interface LanguageContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
   t: (key: string) => string;
+  translateText: (text: string) => Promise<string>;
 }
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
@@ -17,12 +19,21 @@ const translations = {
   sl: slTranslations,
 };
 
+// Cache for dynamically translated text
+const dynamicTranslationCache = new Map<string, string>();
+
 export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [language, setLanguageState] = useState<Language>(() => {
     // Get language from localStorage or default to 'en'
     const savedLanguage = localStorage.getItem('language') as Language;
     return savedLanguage && (savedLanguage === 'en' || savedLanguage === 'sl') ? savedLanguage : 'en';
   });
+
+  // Update html class based on language
+  useEffect(() => {
+    document.documentElement.classList.remove('lang-en', 'lang-sl');
+    document.documentElement.classList.add(`lang-${language}`);
+  }, [language]);
 
   const setLanguage = (lang: Language) => {
     setLanguageState(lang);
@@ -54,8 +65,26 @@ export const LanguageProvider: React.FC<{ children: ReactNode }> = ({ children }
     return typeof value === 'string' ? value : key;
   };
 
+  // Function to translate dynamic text using DeepL
+  const translateText = useCallback(async (text: string): Promise<string> => {
+    if (language === 'en' || !text || text.trim() === '') {
+      return text;
+    }
+
+    // Check cache first
+    const cacheKey = `dynamic-${text}`;
+    if (dynamicTranslationCache.has(cacheKey)) {
+      return dynamicTranslationCache.get(cacheKey)!;
+    }
+
+    // Use DeepL to translate
+    const translated = await translateToSlovenian(text);
+    dynamicTranslationCache.set(cacheKey, translated);
+    return translated;
+  }, [language]);
+
   return (
-    <LanguageContext.Provider value={{ language, setLanguage, t }}>
+    <LanguageContext.Provider value={{ language, setLanguage, t, translateText }}>
       {children}
     </LanguageContext.Provider>
   );

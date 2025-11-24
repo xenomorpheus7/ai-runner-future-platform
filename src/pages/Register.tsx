@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "@/contexts/AuthContext";
+import { useLanguage } from "@/contexts/LanguageContext";
 import { supabase } from "@/supabaseClient";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -33,6 +34,7 @@ const GoogleIcon = () => (
 );
 
 const Register = () => {
+  const { t } = useLanguage();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -52,7 +54,7 @@ const Register = () => {
   const handleGoogleSignIn = async () => {
     try {
       if (!supabase) {
-        throw new Error("Authentication is not configured. Please contact support.");
+        throw new Error(t("register.googleSignInNotConfigured"));
       }
 
       const { data, error } = await supabase.auth.signInWithOAuth({
@@ -65,9 +67,9 @@ const Register = () => {
       if (error) {
         // Check for specific error about provider not being enabled
         if (error.message?.includes("provider is not enabled") || error.message?.includes("Unsupported provider")) {
-          const errorMsg = "Google Sign-In is not enabled. Please enable it in your Supabase dashboard under Authentication > Providers > Google.";
+          const errorMsg = t("register.googleSignInNotEnabled");
           setError(errorMsg);
-          toast.error("Google Sign-In is not configured. Please contact support or enable it in Supabase settings.");
+          toast.error(t("register.googleSignInNotConfigured"));
           throw new Error(errorMsg);
         }
         throw error;
@@ -77,7 +79,7 @@ const Register = () => {
       if (error?.message && !error.message.includes("redirect")) {
         const errorMsg = error.message.includes("not enabled") || error.message.includes("Unsupported provider")
           ? error.message
-          : error.message || "Failed to sign in with Google";
+          : error.message || t("register.googleSignInFailed");
         setError(errorMsg);
         toast.error(errorMsg);
       }
@@ -90,22 +92,22 @@ const Register = () => {
 
     // Validation
     if (!email.trim()) {
-      setError("Email is required");
+      setError(t("register.emailRequired"));
       return;
     }
 
     if (!email.includes("@") || !email.includes(".")) {
-      setError("Please enter a valid email address");
+      setError(t("register.invalidEmail"));
       return;
     }
 
     if (password !== confirmPassword) {
-      setError("Passwords do not match");
+      setError(t("register.passwordsDoNotMatch"));
       return;
     }
 
     if (password.length < 6) {
-      setError("Password must be at least 6 characters");
+      setError(t("register.passwordMinLength"));
       return;
     }
 
@@ -114,7 +116,7 @@ const Register = () => {
     try {
       // Check if Supabase is configured
       if (!supabase) {
-        throw new Error("Registration is not configured. Please contact support.");
+        throw new Error(t("register.registrationNotConfigured"));
       }
 
       // Sign up the user
@@ -129,7 +131,7 @@ const Register = () => {
         // Check if user was automatically signed in (email confirmation disabled)
         if (data.session) {
           // User is automatically signed in
-          toast.success("Account created successfully! Welcome to AI Runner 2033!");
+          toast.success(t("register.accountCreatedSuccess"));
           navigate("/");
         } else {
           // Email confirmation is required - sign them in automatically anyway
@@ -141,17 +143,17 @@ const Register = () => {
 
           if (signInError) {
             // If sign-in fails (e.g., email not confirmed), still show success but with note
-            toast.success("Account created! Please check your email to verify your account.");
+            toast.success(t("register.accountCreatedCheckEmail"));
             navigate("/login");
           } else if (signInData.user) {
-            toast.success("Account created successfully! Welcome to AI Runner 2033!");
+            toast.success(t("register.accountCreatedSuccess"));
             navigate("/");
           }
         }
       }
     } catch (error: any) {
-      setError(error.message || "An error occurred during registration");
-      toast.error(error.message || "Failed to create account");
+      setError(error.message || t("register.registrationError"));
+      toast.error(error.message || t("register.registrationFailed"));
     } finally {
       setLoading(false);
     }
@@ -171,11 +173,11 @@ const Register = () => {
               </div>
               <h1 className="text-4xl font-bold mb-2">
                 <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-                  Create Account
+                  {t("register.createAccount")}
                 </span>
               </h1>
               <p className="text-muted-foreground">
-                Join AI Runner 2033 and start your learning journey
+                {t("register.subtitle")}
               </p>
             </div>
 
@@ -185,14 +187,14 @@ const Register = () => {
                 {/* Email Field */}
                 <div className="space-y-2">
                   <Label htmlFor="email" className="text-foreground">
-                    Email Address
+                    {t("register.emailAddress")}
                   </Label>
                   <div className="relative">
                     <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                     <Input
                       id="email"
                       type="email"
-                      placeholder="you@example.com"
+                      placeholder={t("register.emailPlaceholder")}
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       className="pl-10 bg-card/40 border-primary/30 focus:border-primary"
@@ -204,14 +206,14 @@ const Register = () => {
                 {/* Password Field */}
                 <div className="space-y-2">
                   <Label htmlFor="password" className="text-foreground">
-                    Password
+                    {t("register.password")}
                   </Label>
                   <div className="relative">
                     <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                     <Input
                       id="password"
                       type="password"
-                      placeholder="At least 6 characters"
+                      placeholder={t("register.passwordPlaceholder")}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
                       className="pl-10 bg-card/40 border-primary/30 focus:border-primary"
@@ -224,14 +226,14 @@ const Register = () => {
                 {/* Confirm Password Field */}
                 <div className="space-y-2">
                   <Label htmlFor="confirmPassword" className="text-foreground">
-                    Confirm Password
+                    {t("register.confirmPassword")}
                   </Label>
                   <div className="relative">
                     <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-muted-foreground" />
                     <Input
                       id="confirmPassword"
                       type="password"
-                      placeholder="Confirm your password"
+                      placeholder={t("register.confirmPasswordPlaceholder")}
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       className="pl-10 bg-card/40 border-primary/30 focus:border-primary"
@@ -257,10 +259,10 @@ const Register = () => {
                   {loading ? (
                     <>
                       <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                      Creating account...
+                      {t("register.creatingAccount")}
                     </>
                   ) : (
-                    "Create Account"
+                    <span>{t("register.createAccountButton")}</span>
                   )}
                 </Button>
               </form>
@@ -271,7 +273,7 @@ const Register = () => {
                   <span className="w-full border-t border-primary/20" />
                 </div>
                 <div className="relative flex justify-center text-xs uppercase">
-                  <span className="bg-card px-2 text-muted-foreground">Or continue with</span>
+                  <span className="bg-card px-2 text-muted-foreground">{t("register.orContinueWith")}</span>
                 </div>
               </div>
 
@@ -283,20 +285,17 @@ const Register = () => {
                 variant="outline"
               >
                 <GoogleIcon />
-                <span className="ml-2">Sign in with Google</span>
+                <span className="ml-2">{t("register.signInWithGoogle")}</span>
               </Button>
 
               {/* Login Link */}
               <div className="mt-6 text-center">
-                <p className="text-sm text-muted-foreground">
-                  Already have an account?{" "}
-                  <Link
-                    to="/login"
-                    className="text-primary hover:text-primary/80 font-medium transition-colors"
-                  >
-                    Sign in
-                  </Link>
-                </p>
+                <Link
+                  to="/login"
+                  className="text-primary hover:text-primary/80 font-medium transition-colors"
+                >
+                  {t("register.signIn")}
+                </Link>
               </div>
             </div>
           </div>

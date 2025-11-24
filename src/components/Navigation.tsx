@@ -12,9 +12,12 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useAuth } from "@/contexts/AuthContext";
+import { useLanguage } from "@/contexts/LanguageContext";
+import LanguageToggle from "@/components/LanguageToggle";
 import robertAvatar from "@/assets/robert-avatar.jpg";
 
 const Navigation = () => {
+  const { t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const navigate = useNavigate();
@@ -31,11 +34,11 @@ const Navigation = () => {
   };
 
   const navLinks = [
-    { name: "Home", path: "/" },
-    { name: "Courses", path: "/courses" },
-    { name: "Projects", path: "/projects" },
-    { name: "About", path: "/about" },
-    { name: "Contact", path: "/contact" },
+    { name: t("nav.home"), path: "/" },
+    { name: t("nav.courses"), path: "/courses" },
+    { name: t("nav.projects"), path: "/projects" },
+    { name: t("nav.about"), path: "/about" },
+    { name: t("nav.contact"), path: "/contact" },
   ];
 
   const isActive = (path: string) => location.pathname === path;
@@ -57,7 +60,7 @@ const Navigation = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-12">
-            {navLinks.map((link) => (
+            {navLinks.slice(0, 3).map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
@@ -73,6 +76,40 @@ const Navigation = () => {
                 )}
               </Link>
             ))}
+            
+            {/* Product Link */}
+            <Link
+              to="/prompt-optimizer"
+              className={`relative font-medium transition-all duration-300 ${
+                isActive("/prompt-optimizer")
+                  ? "text-primary"
+                  : "text-foreground/70 hover:text-primary"
+              }`}
+            >
+              Product
+              {isActive("/prompt-optimizer") && (
+                <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-primary to-secondary glow-turquoise" />
+              )}
+            </Link>
+            
+            {navLinks.slice(3).map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                className={`relative font-medium transition-all duration-300 ${
+                  isActive(link.path)
+                    ? "text-primary"
+                    : "text-foreground/70 hover:text-primary"
+                }`}
+              >
+                {link.name}
+                {isActive(link.path) && (
+                  <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-primary to-secondary glow-turquoise" />
+                )}
+              </Link>
+            ))}
+            
+            <LanguageToggle />
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -89,32 +126,32 @@ const Navigation = () => {
                   <DropdownMenuLabel>
                     <div className="flex flex-col space-y-1">
                       <p className="text-sm font-medium leading-none">{user.email}</p>
-                      <p className="text-xs leading-none text-muted-foreground">My Account</p>
+                      <p className="text-xs leading-none text-muted-foreground">{t("nav.myAccount")}</p>
                     </div>
                   </DropdownMenuLabel>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem asChild>
                     <Link to="/settings" className="cursor-pointer">
                       <Settings className="mr-2 h-4 w-4" />
-                      Settings
+                      {t("nav.settings")}
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
                     <Link to="/achievements" className="cursor-pointer">
                       <Trophy className="mr-2 h-4 w-4" />
-                      Achievements
+                      {t("nav.achievements")}
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuItem asChild>
                     <Link to="/progression" className="cursor-pointer">
                       <TrendingUp className="mr-2 h-4 w-4" />
-                      Progression
+                      {t("nav.progression")}
                     </Link>
                   </DropdownMenuItem>
                   <DropdownMenuSeparator />
                   <DropdownMenuItem onClick={handleSignOut} className="cursor-pointer text-destructive">
                     <LogOut className="mr-2 h-4 w-4" />
-                    Log out
+                    {t("nav.logout")}
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
@@ -124,7 +161,7 @@ const Navigation = () => {
                 className="border-primary/50 hover:bg-primary/10 hover:border-primary hover:glow-turquoise transition-all duration-300"
                 asChild
               >
-                <Link to="/login">Login</Link>
+                <Link to="/login">{t("nav.login")}</Link>
               </Button>
             )}
           </div>
@@ -141,7 +178,7 @@ const Navigation = () => {
         {/* Mobile Navigation */}
         {isOpen && (
           <div className="md:hidden py-4 animate-slide-in">
-            {navLinks.map((link) => (
+            {navLinks.slice(0, 3).map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
@@ -155,6 +192,34 @@ const Navigation = () => {
                 {link.name}
               </Link>
             ))}
+            <Link
+              to="/prompt-optimizer"
+              onClick={() => setIsOpen(false)}
+              className={`block py-3 px-4 rounded-lg mb-2 transition-all ${
+                isActive("/prompt-optimizer")
+                  ? "bg-primary/20 text-primary border border-primary/30"
+                  : "text-foreground/70 hover:bg-primary/10 hover:text-primary"
+              }`}
+            >
+              Product
+            </Link>
+            {navLinks.slice(3).map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                onClick={() => setIsOpen(false)}
+                className={`block py-3 px-4 rounded-lg mb-2 transition-all ${
+                  isActive(link.path)
+                    ? "bg-primary/20 text-primary border border-primary/30"
+                    : "text-foreground/70 hover:bg-primary/10 hover:text-primary"
+                }`}
+              >
+                {link.name}
+              </Link>
+            ))}
+            <div className="px-4 py-2">
+              <LanguageToggle />
+            </div>
             {user ? (
               <div className="mt-4 space-y-2">
                 <Link
@@ -162,21 +227,21 @@ const Navigation = () => {
                   className="block py-3 px-4 rounded-lg text-foreground/70 hover:bg-primary/10 hover:text-primary transition-all"
                   onClick={() => setIsOpen(false)}
                 >
-                  Settings
+                  {t("nav.settings")}
                 </Link>
                 <Link
                   to="/achievements"
                   className="block py-3 px-4 rounded-lg text-foreground/70 hover:bg-primary/10 hover:text-primary transition-all"
                   onClick={() => setIsOpen(false)}
                 >
-                  Achievements
+                  {t("nav.achievements")}
                 </Link>
                 <Link
                   to="/progression"
                   className="block py-3 px-4 rounded-lg text-foreground/70 hover:bg-primary/10 hover:text-primary transition-all"
                   onClick={() => setIsOpen(false)}
                 >
-                  Progression
+                  {t("nav.progression")}
                 </Link>
                 <Button
                   variant="outline"
@@ -184,7 +249,7 @@ const Navigation = () => {
                   onClick={handleSignOut}
                 >
                   <LogOut className="mr-2 h-4 w-4" />
-                  Log out
+                  {t("nav.logout")}
                 </Button>
               </div>
             ) : (
@@ -193,7 +258,7 @@ const Navigation = () => {
                 className="w-full mt-4 border-primary/50 hover:bg-primary/10 hover:border-primary"
                 asChild
               >
-                <Link to="/login" onClick={() => setIsOpen(false)}>Login</Link>
+                <Link to="/login" onClick={() => setIsOpen(false)}>{t("nav.login")}</Link>
               </Button>
             )}
           </div>

@@ -1,54 +1,66 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ArrowRight, Sparkles, Cpu, Zap, Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import { useLanguage } from "@/contexts/LanguageContext";
 import heroImage from "@/assets/hero-bg.jpg";
 import robertAvatar from "@/assets/robert-avatar.jpg";
 import s1Image from "@/assets/s1.jpg";
 import s2Image from "@/assets/s2.jpg";
 import s3Image from "@/assets/s3.jpg";
+import rajkobizjakLogo from "@/assets/rajkobizjak_logo.png";
+import isolaLogo from "@/assets/išola_logo.jpg";
+import vistLogo from "@/assets/vist_logo.png";
+import academiaLogo from "@/assets/academia_logo.png";
 
 const Index = () => {
+  const { t } = useLanguage();
+  const navigate = useNavigate();
+  
   const features = [
     {
       icon: Cpu,
-      title: "Intelligence with Purpose",
-      description: "AI Runner redefines learning for a generation growing up with machines. We teach not only how AI works, but why it matters — guiding students, teachers, and creators to use technology with empathy, imagination, and safety.",
+      title: t("home.feature1Title"),
+      description: t("home.feature1Desc"),
     },
     {
       icon: Zap,
-      title: "Technology with a Human Heart",
-      description: "We empower young minds to explore modern technology with curiosity and confidence — shaping individuals ready for both innovation and responsibility."
+      title: t("home.feature2Title"),
+      description: t("home.feature2Desc")
     },
     {
       icon: Sparkles,
-      title: "Connected by Creation",
-      description: "AI Runner links classrooms, experts, and innovators into one creative ecosystem. Together we build projects that don’t just advance technology — they advance humanity, cultivating a future defined by wisdom, cooperation, and ethical use of AI.",
+      title: t("home.feature3Title"),
+      description: t("home.feature3Desc"),
     },
     
   ];
 
   const testimonials = [
     {
-      name: "Rajko Bizjak",
-      role: "Professor of Photography and Moviemaking",
-      content: "Robert is an exceptionally careful and dedicated creator who knows how to combine art, technology, and a vision of the future. His work in the field of artificial intelligence shows how important it is for young people to think boldly and seek new paths between creativity and innovation. Such individuals push the boundaries of what is possible.",
+      name: t("home.testimonial1Name"),
+      role: t("home.testimonial1Role"),
+      content: t("home.testimonial1Content"),
+      logo: rajkobizjakLogo,
     },
     {
-      name: "Mitja Vidovič",
-      role: "Principal at Hajdina Elementary school and Founder of iSchool",
-      content: "The AI workshop led by Robert sparked genuine interest in the future of technology and creativity among our ninth graders. Robert knew how to present artificial intelligence in a way that inspires and opens up new perspectives—among both teachers and students. Workshops like this are extremely important because they open the door to digital literacy for young people and prepare them for a future in which knowledge of AI will be crucial.",
+      name: t("home.testimonial2Name"),
+      role: t("home.testimonial2Role"),
+      content: t("home.testimonial2Content"),
+      logo: isolaLogo,
     },
     {
-      name: "Igor Prošić",
-      role: "Project Leader at VIST Ljubljana",
-      content: "...",
+      name: t("home.testimonial3Name"),
+      role: t("home.testimonial3Role"),
+      content: t("home.testimonial3Content"),
+      logo: vistLogo,
     },
     {
-      name: "Žan Dapčevič",
-      role: "Principal at ACADEMIA, Academy of Applied Sciences",
-      content: "...",
+      name: t("home.testimonial4Name"),
+      role: t("home.testimonial4Role"),
+      content: t("home.testimonial4Content"),
+      logo: academiaLogo,
     },
   ];
 
@@ -72,21 +84,20 @@ const Index = () => {
             <div className="text-center lg:text-left animate-fade-in">
               <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 border border-primary/30 mb-6 glow-turquoise">
                 <Sparkles className="h-4 w-4 text-primary mr-2" />
-                <span className="text-sm font-medium">Welcome to the Future of Education</span>
+                <span className="text-sm font-medium">{t("home.welcomeBadge")}</span>
               </div>
               
               <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-                Master{" "}
+                {t("home.heroTitlePart1")}{" "}
                 <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-                  Gen-AI
+                  {t("home.heroTitlePart2")}
                 </span>
                 <br />
-                for 2033
+                {t("home.heroTitlePart3")}
               </h1>
               
               <p className="text-xl text-muted-foreground mb-8 max-w-xl">
-                Immerse yourself in cutting-edge AI courses with in-depth experience which will open your eyes for the future. 
-                Learn from industry experts and build real-world projects.
+                {t("home.heroDescription")}
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
@@ -95,7 +106,7 @@ const Index = () => {
                     size="lg" 
                     className="bg-primary hover:bg-primary/90 text-primary-foreground glow-turquoise transition-all duration-300 group"
                   >
-                    Start Learning
+                    {t("home.startLearning")}
                     <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
@@ -105,7 +116,7 @@ const Index = () => {
                     variant="outline"
                     className="border-primary/50 hover:bg-primary/10 hover:border-primary transition-all duration-300"
                   >
-                    Browse Courses
+                    {t("home.browseCourses")}
                   </Button>
                 </Link>
               </div>
@@ -132,13 +143,13 @@ const Index = () => {
         <div className="container mx-auto px-4 relative">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Meet Your{" "}
+              {t("home.meetTutorPart1")}{" "}
               <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                AI Tutor
+                {t("home.meetTutorPart2")}
               </span>
             </h2>
             <p className="text-muted-foreground text-lg">
-              Your personal guide through the world of AI
+              {t("home.tutorSubtitle")}
             </p>
           </div>
 
@@ -158,30 +169,28 @@ const Index = () => {
 
                 <div className="space-y-6 animate-fade-in" style={{ animationDelay: "0.2s" }}>
                   <div>
-                    <h3 className="text-3xl md:text-4xl font-bold mb-2">Robert Vogrinec</h3>
+                    <h3 className="text-3xl md:text-4xl font-bold mb-2">{t("home.tutorName")}</h3>
                     <p className="text-xl text-primary font-medium mb-4">
-                      Your Guide Through the World of AI
+                      {t("home.tutorRole")}
                     </p>
                   </div>
 
                   <p className="text-muted-foreground text-lg leading-relaxed">
-                    With rich experience in generative artificial intelligence, 
-                    I've dedicated my career to making complex AI concepts accessible and engaging. 
-                    From writing a perfect prompt to creating new worlds, AI RUNNER 2033 provides you with the tools and knowledge to thrive in the AI-driven future.
+                    {t("home.tutorDescription")}
                   </p>
 
                   <div className="space-y-3">
                     <div className="flex items-start gap-3">
                       <div className="w-2 h-2 rounded-full bg-primary mt-2 glow-turquoise" />
-                      <p className="text-foreground">AI Instructor</p>
+                      <p className="text-foreground">{t("home.tutorBullet1")}</p>
                     </div>
                     <div className="flex items-start gap-3">
                       <div className="w-2 h-2 rounded-full bg-primary mt-2 glow-turquoise" />
-                      <p className="text-foreground">Actively educating students across schools</p>
+                      <p className="text-foreground">{t("home.tutorBullet2")}</p>
                     </div>
                     <div className="flex items-start gap-3">
                       <div className="w-2 h-2 rounded-full bg-primary mt-2 glow-turquoise" />
-                      <p className="text-foreground">Developing my own AI Project</p>
+                      <p className="text-foreground">{t("home.tutorBullet3")}</p>
                     </div>
                   </div>
 
@@ -191,7 +200,7 @@ const Index = () => {
                         size="lg"
                         className="bg-primary hover:bg-primary/90 text-primary-foreground glow-turquoise"
                       >
-                        Ask Robert a Question
+                        {t("home.askRobert")}
                         <ArrowRight className="ml-2 h-5 w-5" />
                       </Button>
                     </Link>
@@ -201,19 +210,22 @@ const Index = () => {
 
               {/* Welcome Video Placeholder */}
               <div className="mt-12 pt-12 border-t border-primary/20">
-                <h4 className="text-2xl font-bold mb-6 text-center">Welcome Message from Robert</h4>
-                <div className="relative aspect-video rounded-2xl overflow-hidden border border-primary/30 bg-muted">
+                <h4 className="text-2xl font-bold mb-6 text-center">{t("home.welcomeVideo")}</h4>
+                <button
+                  onClick={() => navigate("/register")}
+                  className="relative aspect-video rounded-2xl overflow-hidden border border-primary/30 bg-muted w-full cursor-pointer hover:bg-primary/5 transition-colors"
+                >
                   <div className="absolute inset-0 cyber-grid opacity-20" />
                   <div className="relative z-10 flex items-center justify-center h-full">
                     <div className="text-center">
-                      <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mb-4 glow-turquoise cursor-pointer hover:scale-110 transition-transform mx-auto">
+                      <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mb-4 glow-turquoise hover:scale-110 transition-transform mx-auto">
                         <ArrowRight className="h-10 w-10 text-primary ml-1 rotate-0" />
                       </div>
-                      <p className="text-foreground font-medium">Watch Robert's Welcome Message</p>
-                      <p className="text-sm text-muted-foreground mt-2">2:33 minutes</p>
+                      <p className="text-foreground font-medium">{t("home.watchVideo")}</p>
+                      <p className="text-sm text-muted-foreground mt-2">{t("home.videoDuration")}</p>
                     </div>
                   </div>
-                </div>
+                </button>
               </div>
             </div>
           </div>
@@ -226,13 +238,13 @@ const Index = () => {
         <div className="container mx-auto px-4 relative">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Live{" "}
+              {t("home.liveWorkshopsPart1")}{" "}
               <span className="bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent">
-                AI Workshops
+                {t("home.liveWorkshopsPart2")}
               </span>
             </h2>
             <p className="text-muted-foreground text-lg">
-            Real lessons. Real growth. Real people.
+              {t("home.workshopsSubtitle")}
             </p>
           </div>
 
@@ -292,13 +304,13 @@ const Index = () => {
         <div className="container mx-auto px-4 relative">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Why Learn with{" "}
+              {t("home.whyLearnPart1")}{" "}
               <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
-                Robert
+                {t("home.whyLearnPart2")}
               </span>
             </h2>
             <p className="text-muted-foreground text-lg">
-              Experience personalized, expert-led AI education
+              {t("home.whyLearnSubtitle")}
             </p>
           </div>
 
@@ -326,13 +338,13 @@ const Index = () => {
         <div className="container mx-auto px-4 relative">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              Special{" "}
+              {t("home.testimonialsPart1")}{" "}
               <span className="bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent">
-                Testimonials
+                {t("home.testimonialsPart2")}
               </span>
             </h2>
             <p className="text-muted-foreground text-lg">
-            Those who believed in me when this was just a spark of an idea.
+              {t("home.testimonialsSubtitle")}
             </p>
           </div>
 
@@ -346,8 +358,17 @@ const Index = () => {
                 <Quote className="h-8 w-8 text-secondary mb-4" />
                 <p className="text-foreground mb-6 italic">"{testimonial.content}"</p>
                 <div>
-                  <p className="font-bold text-foreground">{testimonial.name}</p>
-                  <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                  <p className="font-bold text-foreground mb-2">{testimonial.name}</p>
+                  <p className="text-sm text-muted-foreground mb-3">{testimonial.role}</p>
+                  {testimonial.logo && (
+                    <div className="mt-3 pt-3 border-t border-primary/20">
+                      <img 
+                        src={testimonial.logo} 
+                        alt={`${testimonial.name} logo`}
+                        className="h-8 max-w-full object-contain opacity-80 hover:opacity-100 transition-opacity"
+                      />
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
@@ -361,20 +382,20 @@ const Index = () => {
         <div className="container mx-auto px-4 relative">
           <div className="glass-card p-12 rounded-3xl text-center max-w-4xl mx-auto border-primary/30 glow-turquoise">
             <h2 className="text-4xl md:text-5xl font-bold mb-6">
-              Ready to Start Your{" "}
+              {t("home.ctaTitlePart1")}{" "}
               <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-                AI Journey?
+                {t("home.ctaTitlePart2")}
               </span>
             </h2>
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Join AI Runner 2033 today and unlock your full potential by mastering how to communicate with AI and use it to your advantage.
+              {t("home.ctaDescription")}
             </p>
             <Link to="/courses">
               <Button 
                 size="lg"
                 className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-foreground glow-turquoise transition-all duration-300 text-lg px-8"
               >
-                Explore Courses
+                {t("home.exploreCourses")}
                 <ArrowRight className="ml-2 h-5 w-5" />
               </Button>
             </Link>
