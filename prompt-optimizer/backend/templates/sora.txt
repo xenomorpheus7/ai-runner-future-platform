@@ -30,3 +30,5 @@ OUTPUT REQUIREMENTS:
 - The output should be ready to use directly in Sora
 - Use clear, visual language that describes motion and cinematography
 
+
+

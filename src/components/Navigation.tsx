@@ -49,50 +49,71 @@ const Navigation = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2 group">
-            <div className="relative">
-              <Zap className="h-8 w-8 text-primary animate-glow-pulse" />
-              <div className="absolute inset-0 blur-xl bg-primary/30 animate-glow-pulse" />
-            </div>
-            <span className="text-xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+            {/* Lightning bolt icon with Gen-AI gradient: cyan → purple → blue */}
+            <svg 
+              className="h-8 w-8 animate-glow-pulse logo-icon" 
+              viewBox="0 0 24 24" 
+              fill="none" 
+              stroke="url(#logo-gradient-nav)" 
+              strokeWidth="2" 
+              strokeLinecap="round" 
+              strokeLinejoin="round"
+              style={{
+                filter: 'none',
+                WebkitFilter: 'none',
+              }}
+              data-darkreader-inline-stroke="false"
+            >
+              <defs>
+                <linearGradient id="logo-gradient-nav" x1="0%" y1="0%" x2="100%" y2="0%" gradientUnits="userSpaceOnUse">
+                  <stop offset="0%" stopColor="hsl(186 100% 50%)" style={{ stopColor: 'hsl(186 100% 50%)' }} />
+                  <stop offset="50%" stopColor="hsl(270 100% 50%)" style={{ stopColor: 'hsl(270 100% 50%)' }} />
+                  <stop offset="100%" stopColor="hsl(210 100% 50%)" style={{ stopColor: 'hsl(210 100% 50%)' }} />
+                </linearGradient>
+              </defs>
+              <path 
+                d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"
+                style={{ filter: 'none' }}
+              />
+            </svg>
+            <span 
+              className="text-xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent logo-text"
+              aria-label="AI RUNNER 2033"
+              style={{
+                filter: 'none',
+                WebkitFilter: 'none',
+                mixBlendMode: 'normal',
+                opacity: 1,
+              }}
+              data-darkreader-inline-color="false"
+            >
               AI RUNNER 2033
             </span>
           </Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center gap-12">
-            {navLinks.slice(0, 3).map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                className={`relative font-medium transition-all duration-300 ${
-                  isActive(link.path)
-                    ? "text-primary"
-                    : "text-foreground/70 hover:text-primary"
-                }`}
-              >
-                {link.name}
-                {isActive(link.path) && (
-                  <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-primary to-secondary glow-turquoise" />
-                )}
-              </Link>
-            ))}
-            
-            {/* Product Link */}
+            {/* AI LAB Button - Special Glowing Neon Outline */}
             <Link
               to="/prompt-optimizer"
-              className={`relative font-medium transition-all duration-300 ${
+              className={`relative px-6 py-2 rounded-lg font-bold text-sm uppercase tracking-wider transition-all duration-300 ${
                 isActive("/prompt-optimizer")
-                  ? "text-primary"
-                  : "text-foreground/70 hover:text-primary"
+                  ? "border-2 border-primary bg-primary/10 text-primary glow-turquoise"
+                  : "border-2 border-primary/50 bg-transparent text-primary/80 hover:border-primary hover:text-primary hover:bg-primary/5 hover:glow-turquoise"
               }`}
+              style={{
+                boxShadow: isActive("/prompt-optimizer")
+                  ? "0 0 20px hsl(186 100% 50% / 0.6), 0 0 40px hsl(186 100% 50% / 0.4), 0 0 60px hsl(186 100% 50% / 0.2), inset 0 0 20px hsl(186 100% 50% / 0.1)"
+                  : "0 0 10px hsl(186 100% 50% / 0.3), 0 0 20px hsl(186 100% 50% / 0.2)"
+              }}
             >
-              Product
+              <span className="relative z-10">AI LAB</span>
               {isActive("/prompt-optimizer") && (
-                <span className="absolute -bottom-1 left-0 right-0 h-0.5 bg-gradient-to-r from-primary to-secondary glow-turquoise" />
+                <span className="absolute inset-0 rounded-lg bg-gradient-to-r from-primary/20 via-secondary/20 to-primary/20 animate-pulse" />
               )}
             </Link>
-            
-            {navLinks.slice(3).map((link) => (
+
+            {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
@@ -110,6 +131,7 @@ const Navigation = () => {
             ))}
             
             <LanguageToggle />
+            
             {user ? (
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
@@ -178,32 +200,18 @@ const Navigation = () => {
         {/* Mobile Navigation */}
         {isOpen && (
           <div className="md:hidden py-4 animate-slide-in">
-            {navLinks.slice(0, 3).map((link) => (
-              <Link
-                key={link.path}
-                to={link.path}
-                onClick={() => setIsOpen(false)}
-                className={`block py-3 px-4 rounded-lg mb-2 transition-all ${
-                  isActive(link.path)
-                    ? "bg-primary/20 text-primary border border-primary/30"
-                    : "text-foreground/70 hover:bg-primary/10 hover:text-primary"
-                }`}
-              >
-                {link.name}
-              </Link>
-            ))}
             <Link
               to="/prompt-optimizer"
               onClick={() => setIsOpen(false)}
-              className={`block py-3 px-4 rounded-lg mb-2 transition-all ${
+              className={`block py-3 px-4 rounded-lg mb-2 transition-all font-bold uppercase tracking-wider ${
                 isActive("/prompt-optimizer")
-                  ? "bg-primary/20 text-primary border border-primary/30"
-                  : "text-foreground/70 hover:bg-primary/10 hover:text-primary"
+                  ? "bg-primary/20 text-primary border-2 border-primary glow-turquoise"
+                  : "text-primary/80 border-2 border-primary/50 hover:bg-primary/10 hover:text-primary hover:border-primary"
               }`}
             >
-              Product
+              AI LAB
             </Link>
-            {navLinks.slice(3).map((link) => (
+            {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}

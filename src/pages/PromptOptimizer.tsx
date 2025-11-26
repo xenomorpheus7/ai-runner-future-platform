@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Sparkles, Zap, Copy, CheckCircle2, Loader2, ArrowRight, RefreshCw, AlertCircle, Settings, SlidersHorizontal, Download, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
@@ -58,6 +59,7 @@ const SUPPORTED_MODELS = [
 ];
 
 const PromptOptimizer = () => {
+  const navigate = useNavigate();
   const [rawPrompt, setRawPrompt] = useState("");
   const [selectedModel, setSelectedModel] = useState<string>("");
   const [optimizedPrompt, setOptimizedPrompt] = useState<string>("");
@@ -198,6 +200,20 @@ const PromptOptimizer = () => {
       {/* Hero Section */}
       <div className="container mx-auto px-4 py-16 relative z-10">
         <div className="text-center mb-16">
+          {/* AI LAB Title with Energy Effects */}
+          <div className="mb-8">
+            <h1 className="text-7xl md:text-9xl font-black mb-4 electric-glow electric-flicker electric-pulse relative inline-block">
+              <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent relative z-10">
+                AI LAB
+              </span>
+              {/* Electric spark effects */}
+              <span className="absolute -top-2 -left-2 w-2 h-2 bg-primary rounded-full electric-spark" style={{ animationDelay: "0s" }} />
+              <span className="absolute -top-4 right-4 w-1.5 h-1.5 bg-secondary rounded-full electric-spark" style={{ animationDelay: "0.2s" }} />
+              <span className="absolute -bottom-2 left-8 w-1 h-1 bg-accent rounded-full electric-spark" style={{ animationDelay: "0.4s" }} />
+              <span className="absolute -bottom-4 -right-2 w-2 h-2 bg-primary rounded-full electric-spark" style={{ animationDelay: "0.6s" }} />
+            </h1>
+          </div>
+          
           <div className="flex items-center justify-center gap-4 mb-6">
             <div className="relative">
               <Zap className="h-16 w-16 text-primary animate-pulse" />
@@ -205,16 +221,16 @@ const PromptOptimizer = () => {
               <div className="absolute inset-0 blur-xl bg-primary/20 animate-ping" style={{ animationDuration: "3s" }} />
             </div>
             <div>
-              <h1 className="text-6xl md:text-7xl font-bold mb-2">
+              <h2 className="text-6xl md:text-7xl font-bold mb-2">
                 <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
                   AI Runner 2033
                 </span>
-              </h1>
-              <h2 className="text-4xl md:text-5xl font-bold">
+              </h2>
+              <h3 className="text-4xl md:text-5xl font-bold">
                 <span className="underline decoration-primary decoration-4 underline-offset-8 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
                   Prompt Optimizer
                 </span>
-              </h2>
+              </h3>
             </div>
           </div>
           <p className="text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto">
@@ -311,9 +327,12 @@ const PromptOptimizer = () => {
                   <SelectContent>
                     {SUPPORTED_MODELS.map((model) => (
                       <SelectItem key={model.value} value={model.value}>
-                        <div className="flex flex-col">
-                          <span className="font-medium" style={{ fontFamily: "'Orbitron', sans-serif" }}>{model.label}</span>
-                          <span className="text-xs text-muted-foreground">{model.description}</span>
+                        <div className="flex items-center gap-3">
+                          <span className="text-2xl">{model.logo}</span>
+                          <div className="flex flex-col">
+                            <span className="font-medium">{model.label}</span>
+                            <span className="text-xs text-muted-foreground">{model.description}</span>
+                          </div>
                         </div>
                       </SelectItem>
                     ))}
@@ -425,7 +444,8 @@ const PromptOptimizer = () => {
                   {selectedModelData && (
                     <div className={`p-4 rounded-lg bg-gradient-to-r ${selectedModelData.color} bg-opacity-10 border border-primary/20`}>
                       <div className="flex items-center gap-2 mb-2">
-                        <span className="font-semibold" style={{ fontFamily: "'Orbitron', sans-serif" }}>Optimized for {selectedModelData.label}</span>
+                        <span className="text-2xl">{selectedModelData.logo}</span>
+                        <span className="font-semibold">Optimized for {selectedModelData.label}</span>
                       </div>
                       <p className="text-sm text-muted-foreground">{selectedModelData.description}</p>
                     </div>
@@ -459,13 +479,16 @@ const PromptOptimizer = () => {
                     <button
                       key={model.value}
                       onClick={() => setSelectedModel(model.value)}
-                      className={`relative group p-6 rounded-xl border-2 transition-all duration-300 flex flex-col items-center justify-center ${
+                      className={`relative group p-6 rounded-xl border-2 transition-all duration-300 ${
                         selectedModel === model.value
                           ? `border-primary bg-gradient-to-br ${model.color} bg-opacity-20 glow-turquoise scale-105`
                           : "border-primary/20 bg-primary/5 hover:border-primary/50 hover:bg-primary/10"
                       }`}
                     >
-                      <div className="text-sm font-semibold" style={{ fontFamily: "'Orbitron', sans-serif" }}>{model.label}</div>
+                      <div className={`text-5xl mb-2 filter drop-shadow-lg ${selectedModel === model.value ? "animate-bounce" : ""}`}>
+                        {model.logo}
+                      </div>
+                      <div className="text-sm font-semibold">{model.label}</div>
                       {selectedModel === model.value && (
                         <div className="absolute -top-2 -right-2 w-4 h-4 bg-primary rounded-full animate-ping" />
                       )}
@@ -522,6 +545,66 @@ const PromptOptimizer = () => {
             </CardContent>
           </Card>
         </div>
+
+        {/* AI Testing Space Section */}
+        <section className="max-w-7xl mx-auto mb-12 py-24 relative overflow-hidden">
+          {/* Background Effects */}
+          <div className="absolute inset-0 cyber-grid opacity-10" />
+          <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[120px] animate-pulse" />
+          <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary/10 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: "2s" }} />
+
+          <div className="container mx-auto px-4 relative z-10">
+            {/* Header */}
+            <div className="text-center mb-12 animate-fade-in">
+              <div className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 border border-primary/30 mb-6 glow-turquoise">
+                <Sparkles className="h-4 w-4 text-primary mr-2" />
+                <span className="text-sm font-medium">AI Testing Space</span>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold mb-4">
+                <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+                  How to efficiently communicate with AI
+                </span>
+              </h2>
+              <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-6">
+                Test your prompt skills and see how different approaches affect AI-generated results
+              </p>
+              <Button
+                onClick={() => navigate("/prompt-testing")}
+                size="lg"
+                className="bg-primary hover:bg-primary/90 text-primary-foreground glow-turquoise transition-all duration-300 group"
+              >
+                Open Full AI Testing Space
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </div>
+
+            {/* Main Content - Test Your Prompt Skills Card */}
+            <div className="max-w-6xl mx-auto">
+              <Card className="glass-card p-12 rounded-3xl border-primary/30 glow-turquoise text-center animate-fade-in">
+                <div className="mb-8">
+                  <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/20 mb-6 glow-turquoise">
+                    <Zap className="h-10 w-10 text-primary" />
+                  </div>
+                  <h3 className="text-3xl font-bold mb-4">Test Your Prompt Skills</h3>
+                  <p className="text-lg text-muted-foreground mb-8 max-w-xl mx-auto">
+                    Write a prompt and see how the AI interprets it. Learn what makes a good prompt versus a weak one.
+                  </p>
+                </div>
+                <Button
+                  size="lg"
+                  onClick={() => {
+                    // Scroll to top of the AI lab page
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                  className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-foreground glow-turquoise transition-all duration-300"
+                >
+                  Start Mission
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Card>
+            </div>
+          </div>
+        </section>
       </div>
 
       <Footer />

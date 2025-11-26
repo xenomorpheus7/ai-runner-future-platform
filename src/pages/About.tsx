@@ -36,7 +36,7 @@ const About = () => {
     { number: "500+", label: "studentsTrained" },
     { number: "1k", label: "completedProjects" },
     { number: "10", label: "liveWorkshops" },
-    { number: "95%", label: "positiveFeedback" },
+    { number: "97%", label: "positiveFeedback" },
   ];
 
   return (

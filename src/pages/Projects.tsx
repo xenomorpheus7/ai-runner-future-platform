@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
 import { useLanguage } from "@/contexts/LanguageContext";
+import Footer from "@/components/Footer";
 import styles from "./Projects.module.css";
 import gallery1 from "../assets/gallery1.jpg";
 import gallery2 from "../assets/gallery2.jpg";
@@ -57,7 +57,6 @@ const projects = [
 
 export default function Projects() {
   const { t } = useLanguage();
-  const navigate = useNavigate();
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const isPausedRef = useRef(false);
   const autoScrollIntervalRef = useRef<number | null>(null);
@@ -173,6 +172,8 @@ export default function Projects() {
       {/* Hero Section (match Courses styling) */}
       <section className="relative pt-32 pb-16 overflow-hidden">
         <div className="absolute inset-0 cyber-grid opacity-20" />
+        <div className="absolute top-20 right-0 w-96 h-96 bg-primary/20 rounded-full blur-[120px]" />
+        <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary/20 rounded-full blur-[120px]" />
 
         <div className="container mx-auto px-4 relative">
           <div className="text-center max-w-3xl mx-auto animate-fade-in">
@@ -197,18 +198,12 @@ export default function Projects() {
             <div className="glass-card rounded-2xl overflow-hidden border border-primary/30 shadow-lg hover:border-primary/50 transition-all duration-300 hover:glow-turquoise relative">
               <div className="aspect-video bg-muted relative">
                 <iframe
-                  className="w-full h-full pointer-events-none"
+                  className="w-full h-full"
                   src="https://www.youtube.com/embed/sY01rd5B46o?autoplay=0&mute=1&playsinline=1&rel=0"
                   title="Featured AI Video"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
-                />
-                {/* Clickable overlay that redirects to register */}
-                <button
-                  onClick={() => navigate("/register")}
-                  className="absolute inset-0 w-full h-full cursor-pointer z-10 bg-transparent hover:bg-primary/5 transition-colors"
-                  aria-label="Register to watch video"
                 />
               </div>
             </div>
@@ -365,18 +360,12 @@ export default function Projects() {
                     {item.type === "video" ? (
                       <div className="relative w-full aspect-video bg-muted flex-shrink-0">
                         <iframe
-                          className="w-full h-full absolute inset-0 pointer-events-none"
+                          className="w-full h-full absolute inset-0"
                           src={item.src}
                           title={item.title}
                           frameBorder="0"
                           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                           allowFullScreen
-                        />
-                        {/* Clickable overlay that redirects to register */}
-                        <button
-                          onClick={() => navigate("/register")}
-                          className="absolute inset-0 w-full h-full cursor-pointer z-10 bg-transparent hover:bg-primary/5 transition-colors"
-                          aria-label="Register to watch video"
                         />
                       </div>
                     ) : (
@@ -414,6 +403,8 @@ export default function Projects() {
           </div>
         </div>
       </section>
+
+      <Footer />
     </div>
   );
 }

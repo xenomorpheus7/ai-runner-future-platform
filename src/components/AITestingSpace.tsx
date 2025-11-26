@@ -536,7 +536,13 @@ const AITestingSpace = () => {
               </div>
               <Button
                 size="lg"
-                onClick={() => navigate("/prompt-testing")}
+                onClick={() => {
+                  navigate("/prompt-testing");
+                  // Ensure scroll to top after navigation
+                  setTimeout(() => {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }, 100);
+                }}
                 className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-foreground glow-turquoise transition-all duration-300"
               >
                 Start Mission

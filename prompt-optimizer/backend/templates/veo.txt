@@ -22,3 +22,5 @@ OUTPUT REQUIREMENTS:
 - Format as a single, cohesive prompt that clearly describes the video's visual and motion characteristics
 - Make it clear whether the video is vertical or horizontal format
 
+
+

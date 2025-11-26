@@ -39,28 +39,32 @@ const Index = () => {
 
   const testimonials = [
     {
-      name: t("home.testimonial1Name"),
-      role: t("home.testimonial1Role"),
-      content: t("home.testimonial1Content"),
-      logo: rajkobizjakLogo,
-    },
-    {
       name: t("home.testimonial2Name"),
       role: t("home.testimonial2Role"),
       content: t("home.testimonial2Content"),
       logo: isolaLogo,
+      url: "https://www.isola.si/",
+    },
+    {
+      name: t("home.testimonial1Name"),
+      role: t("home.testimonial1Role"),
+      content: t("home.testimonial1Content"),
+      logo: rajkobizjakLogo,
+      url: "https://www.os-rajkobizjak.si/",
     },
     {
       name: t("home.testimonial3Name"),
       role: t("home.testimonial3Role"),
       content: t("home.testimonial3Content"),
       logo: vistLogo,
+      url: "https://www.vist.si/",
     },
     {
       name: t("home.testimonial4Name"),
       role: t("home.testimonial4Role"),
       content: t("home.testimonial4Content"),
       logo: academiaLogo,
+      url: "https://www.academia.si/",
     },
   ];
 
@@ -89,7 +93,16 @@ const Index = () => {
               
               <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
                 {t("home.heroTitlePart1")}{" "}
-                <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+                <span 
+                  className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent gen-ai-text"
+                  style={{
+                    filter: 'none',
+                    WebkitFilter: 'none',
+                    mixBlendMode: 'normal',
+                    opacity: 1,
+                  }}
+                  data-darkreader-inline-color="false"
+                >
                   {t("home.heroTitlePart2")}
                 </span>
                 <br />
@@ -110,13 +123,13 @@ const Index = () => {
                     <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                   </Button>
                 </Link>
-                <Link to="/courses">
+                <Link to="/prompt-optimizer">
                   <Button 
                     size="lg" 
                     variant="outline"
                     className="border-primary/50 hover:bg-primary/10 hover:border-primary transition-all duration-300"
                   >
-                    {t("home.browseCourses")}
+                    Explore AI Labs
                   </Button>
                 </Link>
               </div>
@@ -362,11 +375,18 @@ const Index = () => {
                   <p className="text-sm text-muted-foreground mb-3">{testimonial.role}</p>
                   {testimonial.logo && (
                     <div className="mt-3 pt-3 border-t border-primary/20">
-                      <img 
-                        src={testimonial.logo} 
-                        alt={`${testimonial.name} logo`}
-                        className="h-8 max-w-full object-contain opacity-80 hover:opacity-100 transition-opacity"
-                      />
+                      <a
+                        href={testimonial.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block hover:opacity-100 transition-opacity group"
+                      >
+                        <img 
+                          src={testimonial.logo} 
+                          alt={`${testimonial.name} logo`}
+                          className="h-12 max-w-full object-contain opacity-80 group-hover:opacity-100 transition-opacity"
+                        />
+                      </a>
                     </div>
                   )}
                 </div>

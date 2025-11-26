@@ -38,7 +38,6 @@ import { useLanguage } from "@/contexts/LanguageContext";
 import { sendSchoolBookingEmail } from "@/services/emailService";
 import { toast } from "sonner";
 import robertAvatar from "@/assets/robert-avatar.jpg";
-import rajkobizjakLogo from "@/assets/rajkobizjak_logo.png";
 import isolaLogo from "@/assets/išola_logo.jpg";
 import vistLogo from "@/assets/vist_logo.png";
 import academiaLogo from "@/assets/academia_logo.png";
@@ -147,9 +146,48 @@ const Schools = () => {
               </Button>
             </div>
 
-            <p className="text-sm text-muted-foreground mt-8">
+            <p className="text-sm text-muted-foreground mt-8 mb-8">
               {t("schools.trustedBy")}
             </p>
+
+            {/* School Logos */}
+            <div className="mt-12">
+              <div className="bg-white rounded-2xl p-6 md:p-8 shadow-lg">
+                <div className="flex flex-nowrap items-center justify-center gap-6 md:gap-10">
+                  {[
+                    { 
+                      name: "iŠola", 
+                      logo: isolaLogo, 
+                      url: "https://www.isola.si/" 
+                    },
+                    { 
+                      name: "VIST", 
+                      logo: vistLogo, 
+                      url: "https://www.vist.si/" 
+                    },
+                    { 
+                      name: "ACADEMIA Maribor", 
+                      logo: academiaLogo, 
+                      url: "https://www.academia.si/" 
+                    },
+                  ].map((school, index) => (
+                    <a
+                      key={index}
+                      href={school.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group transition-all duration-300 hover:scale-110 p-4 rounded-lg flex-shrink-0"
+                    >
+                      <img
+                        src={school.logo}
+                        alt={`${school.name} logo`}
+                        className="h-12 md:h-16 lg:h-20 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
+                      />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -315,120 +353,69 @@ const Schools = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            {/* Standard Workshop */}
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {/* Student Workshop Package */}
             <div className="glass-card p-8 rounded-2xl border-primary/30 hover:border-primary/50 transition-all duration-300 hover:glow-turquoise animate-fade-in">
               <div className="text-center mb-6">
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/20 mb-4 glow-turquoise">
-                  <Sparkles className="h-8 w-8 text-primary" />
+                  <Users className="h-8 w-8 text-primary" />
                 </div>
-                <h3 className="text-2xl font-bold mb-2">{t("schools.standardWorkshop")}</h3>
-                <p className="text-muted-foreground text-sm">{t("schools.standardWorkshopDesc")}</p>
+                <h3 className="text-2xl font-bold mb-2">Student Workshop</h3>
+                <p className="text-muted-foreground text-sm">Interactive AI workshop for students in schools</p>
               </div>
               <div className="space-y-4">
                 <div className="flex items-center gap-2">
                   <Clock className="h-4 w-4 text-primary" />
-                  <span className="text-sm text-foreground">7 {t("schools.hours")}</span>
+                  <span className="text-sm text-foreground">2-8 hours</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Users className="h-4 w-4 text-primary" />
-                  <span className="text-sm text-foreground">{t("schools.upTo25Students")}</span>
+                  <span className="text-sm text-foreground">Max 50 students</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Zap className="h-4 w-4 text-primary" />
-                  <span className="text-sm text-foreground">{t("schools.basicAITools")}</span>
+                  <Building2 className="h-4 w-4 text-primary" />
+                  <span className="text-sm text-foreground">In-person only</span>
                 </div>
                 <div className="pt-4 border-t border-primary/20">
-                  <p className="text-sm font-semibold text-foreground mb-2">{t("schools.studentsLearn")}</p>
+                  <p className="text-sm font-semibold text-foreground mb-2">What's Included:</p>
                   <ul className="space-y-1 text-sm text-muted-foreground">
-                    <li>• {t("schools.aiBasics")}</li>
-                    <li>• {t("schools.imageGen")}</li>
-                    <li>• {t("schools.safePrompting")}</li>
-                    <li>• {t("schools.ethicalConsiderations")}</li>
+                    <li>• Using AI tools to create a visual product</li>
+                    <li>• Hands-on learning experience</li>
+                    <li>• Practical AI skills development</li>
                   </ul>
-                </div>
-                <div className="pt-4">
-                  <p className="text-xs text-muted-foreground">{t("schools.recommendedFor")} {t("schools.primarySecondary")}</p>
                 </div>
               </div>
             </div>
 
-            {/* Advanced Workshop */}
-            <div className="glass-card p-8 rounded-2xl border-secondary/30 hover:border-secondary/50 transition-all duration-300 hover:glow-purple animate-fade-in relative">
-              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                <span className="px-4 py-1 rounded-full bg-secondary/20 border border-secondary/50 text-secondary text-sm font-bold">
-                  {t("schools.mostPopular")}
-                </span>
-              </div>
+            {/* Teacher Training Package */}
+            <div className="glass-card p-8 rounded-2xl border-secondary/30 hover:border-secondary/50 transition-all duration-300 hover:glow-purple animate-fade-in">
               <div className="text-center mb-6">
                 <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-secondary/20 mb-4 glow-purple">
-                  <Target className="h-8 w-8 text-secondary" />
+                  <GraduationCap className="h-8 w-8 text-secondary" />
                 </div>
-                <h3 className="text-2xl font-bold mb-2">{t("schools.advancedWorkshop")}</h3>
-                <p className="text-muted-foreground text-sm">{t("schools.advancedWorkshopDesc")}</p>
+                <h3 className="text-2xl font-bold mb-2">Teacher Training</h3>
+                <p className="text-muted-foreground text-sm">Professional development for educators</p>
               </div>
               <div className="space-y-4">
                 <div className="flex items-center gap-2">
                   <Clock className="h-4 w-4 text-secondary" />
-                  <span className="text-sm text-foreground">{t("schools.twoDays")}</span>
+                  <span className="text-sm text-foreground">1-3 hours</span>
                 </div>
                 <div className="flex items-center gap-2">
                   <Users className="h-4 w-4 text-secondary" />
-                  <span className="text-sm text-foreground">{t("schools.upTo25Students")}</span>
+                  <span className="text-sm text-foreground">Unlimited teachers</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Zap className="h-4 w-4 text-secondary" />
-                  <span className="text-sm text-foreground">{t("schools.professionalAITools")}</span>
+                  <Globe className="h-4 w-4 text-secondary" />
+                  <span className="text-sm text-foreground">In-person and online</span>
                 </div>
                 <div className="pt-4 border-t border-secondary/20">
-                  <p className="text-sm font-semibold text-foreground mb-2">{t("schools.studentsLearn")}</p>
+                  <p className="text-sm font-semibold text-foreground mb-2">What's Included:</p>
                   <ul className="space-y-1 text-sm text-muted-foreground">
-                    <li>• {t("schools.advancedPrompting")}</li>
-                    <li>• {t("schools.videoGen")}</li>
-                    <li>• {t("schools.workflowAutomation")}</li>
-                    <li>• {t("schools.projectCreation")}</li>
-                    <li>• {t("schools.portfolioBuilding")}</li>
+                    <li>• Educating teachers about AI ethics</li>
+                    <li>• Useful tools appropriate for schools</li>
+                    <li>• Productivity tools and strategies</li>
                   </ul>
-                </div>
-                <div className="pt-4">
-                  <p className="text-xs text-muted-foreground">{t("schools.recommendedFor")} {t("schools.secondaryVocational")}</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Teacher Training */}
-            <div className="glass-card p-8 rounded-2xl border-accent/30 hover:border-accent/50 transition-all duration-300 hover:glow-turquoise animate-fade-in">
-              <div className="text-center mb-6">
-                <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-accent/20 mb-4 glow-turquoise">
-                  <GraduationCap className="h-8 w-8 text-accent" />
-                </div>
-                <h3 className="text-2xl font-bold mb-2">{t("schools.teacherTraining")}</h3>
-                <p className="text-muted-foreground text-sm">{t("schools.teacherTrainingDesc")}</p>
-              </div>
-              <div className="space-y-4">
-                <div className="flex items-center gap-2">
-                  <Clock className="h-4 w-4 text-accent" />
-                  <span className="text-sm text-foreground">{t("schools.sixHours")}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Users className="h-4 w-4 text-accent" />
-                  <span className="text-sm text-foreground">{t("schools.upTo20Teachers")}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Zap className="h-4 w-4 text-accent" />
-                  <span className="text-sm text-foreground">{t("schools.fullCurriculumAccess")}</span>
-                </div>
-                <div className="pt-4 border-t border-accent/20">
-                  <p className="text-sm font-semibold text-foreground mb-2">{t("schools.teachersGain")}</p>
-                  <ul className="space-y-1 text-sm text-muted-foreground">
-                    <li>• {t("schools.aiTeachingMethods")}</li>
-                    <li>• {t("schools.lessonPlans")}</li>
-                    <li>• {t("schools.assessmentTools")}</li>
-                    <li>• {t("schools.studentSupportStrategies")}</li>
-                  </ul>
-                </div>
-                <div className="pt-4">
-                  <p className="text-xs text-muted-foreground">{t("schools.recommendedFor")} {t("schools.allSchoolStaff")}</p>
                 </div>
               </div>
             </div>
@@ -740,18 +727,21 @@ const Schools = () => {
                 role: t("schools.testimonial1Role"),
                 content: t("schools.testimonial1Content"),
                 logo: isolaLogo,
+                url: "https://www.isola.si/",
               },
               {
                 name: t("schools.testimonial2Name"),
                 role: t("schools.testimonial2Role"),
                 content: t("schools.testimonial2Content"),
                 logo: vistLogo,
+                url: "https://www.vist.si/",
               },
               {
                 name: t("schools.testimonial3Name"),
                 role: t("schools.testimonial3Role"),
                 content: t("schools.testimonial3Content"),
                 logo: academiaLogo,
+                url: "https://www.academia.si/",
               },
             ].map((testimonial, index) => (
               <div
@@ -769,11 +759,18 @@ const Schools = () => {
                   <p className="text-sm text-muted-foreground mb-3">{testimonial.role}</p>
                   {testimonial.logo && (
                     <div className="pt-3 border-t border-primary/20">
-                      <img 
-                        src={testimonial.logo} 
-                        alt={`${testimonial.name} logo`}
-                        className="h-8 max-w-full object-contain opacity-80 hover:opacity-100 transition-opacity"
-                      />
+                      <a
+                        href={testimonial.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-block hover:opacity-100 transition-opacity group"
+                      >
+                        <img 
+                          src={testimonial.logo} 
+                          alt={`${testimonial.name} logo`}
+                          className="h-12 max-w-full object-contain opacity-80 group-hover:opacity-100 transition-opacity"
+                        />
+                      </a>
                     </div>
                   )}
                 </div>

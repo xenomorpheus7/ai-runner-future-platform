@@ -42,11 +42,11 @@ const InterestSurveyPopup = () => {
     const hasShown = sessionStorage.getItem("interestSurveyShown");
     if (hasShown) return;
 
-    // Show popup after 15 seconds
+    // Show popup after 30 seconds
     const timer = setTimeout(() => {
       setOpen(true);
       sessionStorage.setItem("interestSurveyShown", "true");
-    }, 15000);
+    }, 30000);
 
     return () => clearTimeout(timer);
   }, []);

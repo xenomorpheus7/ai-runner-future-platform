@@ -166,7 +166,8 @@
     "loginSuccess": "Uspešno prijavljeni!",
     "googleSignInNotConfigured": "Google prijava ni konfigurirana. Prosimo, kontaktirajte podporo ali jo omogočite v nastavitvah Supabase.",
     "googleSignInFailed": "Prijava z Google ni uspela",
-    "googleSignInNotEnabled": "Google prijava ni omogočena. Prosimo, omogočite jo v nadzorni plošči Supabase pod Avtentikacija > Ponudniki > Google."
+    "googleSignInNotEnabled": "Google prijava ni omogočena. Prosimo, omogočite jo v nadzorni plošči Supabase pod Avtentikacija > Ponudniki > Google.",
+    "completingSignIn": "Dokončevanje prijave..."
   },
   "register": {
     "createAccount": "Ustvari račun",

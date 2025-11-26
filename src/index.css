@@ -6,6 +6,42 @@
 All colors MUST be HSL.
 */
 
+/* Avenir Next LT Pro Font - For Slovenian Language */
+/* Note: Avenir Next LT Pro is a commercial font. 
+   To use it, you can either:
+   1. Add it via Adobe Fonts (Typekit) - add the script in index.html
+   2. Host the font files and update the @font-face URLs below
+   3. Use local font files if installed on the system */
+@font-face {
+  font-family: 'Avenir Next LT Pro';
+  src: local('Avenir Next LT Pro Regular'), 
+       local('AvenirNextLTPro-Regular'),
+       local('Avenir Next LT Pro');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Avenir Next LT Pro';
+  src: local('Avenir Next LT Pro Medium'), 
+       local('AvenirNextLTPro-Medium'),
+       local('Avenir Next LT Pro');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Avenir Next LT Pro';
+  src: local('Avenir Next LT Pro Bold'), 
+       local('AvenirNextLTPro-Bold'),
+       local('Avenir Next LT Pro');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   :root {
     /* Cyberpunk Dark Theme - AI Runner 2033 */
@@ -65,7 +101,7 @@ All colors MUST be HSL.
     font-family: 'Inter', sans-serif;
   }
 
-  /* English (default) - Orbitron font for headings */
+  /* English (default) - Orbitron font for headings, Inter for body */
   :root:not(.lang-sl) h1,
   :root:not(.lang-sl) h2,
   :root:not(.lang-sl) h3,
@@ -81,7 +117,7 @@ All colors MUST be HSL.
     font-family: 'Orbitron', sans-serif;
   }
 
-  /* Slovenian - Avenir Next LT Pro font for all text */
+  /* Slovenian - Avenir Next LT Pro font for all text including headings */
   :root.lang-sl body,
   :root.lang-sl p,
   :root.lang-sl span,
@@ -91,50 +127,22 @@ All colors MUST be HSL.
   :root.lang-sl input,
   :root.lang-sl textarea,
   :root.lang-sl label,
+  :root.lang-sl li,
+  :root.lang-sl td,
+  :root.lang-sl th,
   :root.lang-sl h1,
   :root.lang-sl h2,
   :root.lang-sl h3,
   :root.lang-sl h4,
   :root.lang-sl h5,
-  :root.lang-sl h6 {
+  :root.lang-sl h6,
+  :root.lang-sl strong,
+  :root.lang-sl em,
+  :root.lang-sl b,
+  :root.lang-sl i,
+  :root.lang-sl small {
     font-family: 'Avenir Next LT Pro', 'Avenir Next', Avenir, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
   }
-}
-
-/* Avenir Next LT Pro Font - For Schools Page */
-/* Note: Avenir Next LT Pro is a commercial font. 
-   To use it, you can either:
-   1. Add it via Adobe Fonts (Typekit) - add the script in index.html
-   2. Host the font files and update the @font-face URLs below
-   3. Use local font files if installed on the system */
-@font-face {
-  font-family: 'Avenir Next LT Pro';
-  src: local('Avenir Next LT Pro Regular'), 
-       local('AvenirNextLTPro-Regular'),
-       local('Avenir Next LT Pro');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Avenir Next LT Pro';
-  src: local('Avenir Next LT Pro Medium'), 
-       local('AvenirNextLTPro-Medium'),
-       local('Avenir Next LT Pro');
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Avenir Next LT Pro';
-  src: local('Avenir Next LT Pro Bold'), 
-       local('AvenirNextLTPro-Bold'),
-       local('Avenir Next LT Pro');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
 }
 
 @layer utilities {
@@ -147,6 +155,10 @@ All colors MUST be HSL.
   }
   
   .glow-blue {
+    box-shadow: var(--glow-blue);
+  }
+  
+  .glow-accent {
     box-shadow: var(--glow-blue);
   }
 
@@ -163,32 +175,139 @@ All colors MUST be HSL.
     background-size: 50px 50px;
   }
 
-  .animate-slide-in {
-    animation: slideIn 0.3s ease-out;
+  /* Energy and Electricity Animation Effects */
+  @keyframes electric-glow {
+    0%, 100% {
+      text-shadow: 
+        0 0 10px hsl(186 100% 50%),
+        0 0 20px hsl(186 100% 50%),
+        0 0 30px hsl(186 100% 50%),
+        0 0 40px hsl(186 100% 50%),
+        0 0 50px hsl(186 100% 50%),
+        0 0 60px hsl(186 100% 50%);
+    }
+    25% {
+      text-shadow: 
+        0 0 5px hsl(186 100% 50%),
+        0 0 10px hsl(186 100% 50%),
+        0 0 20px hsl(270 100% 50%),
+        0 0 30px hsl(270 100% 50%),
+        0 0 40px hsl(270 100% 50%),
+        0 0 50px hsl(270 100% 50%);
+    }
+    50% {
+      text-shadow: 
+        0 0 15px hsl(210 100% 50%),
+        0 0 25px hsl(210 100% 50%),
+        0 0 35px hsl(210 100% 50%),
+        0 0 45px hsl(210 100% 50%),
+        0 0 55px hsl(210 100% 50%),
+        0 0 65px hsl(210 100% 50%);
+    }
+    75% {
+      text-shadow: 
+        0 0 8px hsl(186 100% 50%),
+        0 0 15px hsl(270 100% 50%),
+        0 0 25px hsl(186 100% 50%),
+        0 0 35px hsl(270 100% 50%),
+        0 0 45px hsl(186 100% 50%),
+        0 0 55px hsl(270 100% 50%);
+    }
   }
 
-  @keyframes slideIn {
-    from {
-      opacity: 0;
-      transform: translateY(-10px);
-    }
-    to {
+  @keyframes electric-flicker {
+    0%, 100% {
       opacity: 1;
-      transform: translateY(0);
+      filter: brightness(1);
+    }
+    10% {
+      opacity: 0.8;
+      filter: brightness(1.2);
+    }
+    20% {
+      opacity: 1;
+      filter: brightness(1);
+    }
+    30% {
+      opacity: 0.9;
+      filter: brightness(1.3);
+    }
+    40% {
+      opacity: 1;
+      filter: brightness(1);
+    }
+    50% {
+      opacity: 0.85;
+      filter: brightness(1.1);
+    }
+    60% {
+      opacity: 1;
+      filter: brightness(1);
+    }
+    70% {
+      opacity: 0.95;
+      filter: brightness(1.2);
+    }
+    80% {
+      opacity: 1;
+      filter: brightness(1);
+    }
+    90% {
+      opacity: 0.9;
+      filter: brightness(1.15);
     }
   }
 
-  /* Schools Page Font */
-  .schools-page {
-    font-family: 'Avenir Next LT Pro', 'Avenir Next', Avenir, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  @keyframes electric-pulse {
+    0%, 100% {
+      transform: scale(1);
+      filter: drop-shadow(0 0 20px hsl(186 100% 50%));
+    }
+    25% {
+      transform: scale(1.02);
+      filter: drop-shadow(0 0 30px hsl(270 100% 50%));
+    }
+    50% {
+      transform: scale(1);
+      filter: drop-shadow(0 0 25px hsl(210 100% 50%));
+    }
+    75% {
+      transform: scale(1.01);
+      filter: drop-shadow(0 0 35px hsl(186 100% 50%));
+    }
   }
 
-  .schools-page h1,
-  .schools-page h2,
-  .schools-page h3,
-  .schools-page h4,
-  .schools-page h5,
-  .schools-page h6 {
-    font-family: 'Avenir Next LT Pro', 'Avenir Next', Avenir, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  @keyframes electric-spark {
+    0% {
+      transform: translateY(0) translateX(0);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    50% {
+      transform: translateY(-10px) translateX(5px);
+      opacity: 0.8;
+    }
+    100% {
+      transform: translateY(-20px) translateX(10px);
+      opacity: 0;
+    }
+  }
+
+  .electric-glow {
+    animation: electric-glow 2s ease-in-out infinite;
+  }
+
+  .electric-flicker {
+    animation: electric-flicker 0.15s ease-in-out infinite;
+  }
+
+  .electric-pulse {
+    animation: electric-pulse 1.5s ease-in-out infinite;
+  }
+
+  .electric-spark {
+    animation: electric-spark 0.5s ease-out infinite;
   }
 }

@@ -30,3 +30,5 @@ This application uses DeepL API for dynamic translation to Slovenian. To enable 
 - For production, consider using the paid tier with `api.deepl.com` for better rate limits
 - Translations are cached in memory to reduce API calls
 
+
+

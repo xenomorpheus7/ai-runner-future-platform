@@ -19,3 +19,5 @@ OUTPUT REQUIREMENTS:
 - Format as a single, cohesive prompt with all visual details integrated naturally
 - Include Midjourney parameters (--ar, --style, etc.) when relevant
 
+
+

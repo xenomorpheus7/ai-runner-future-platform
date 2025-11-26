@@ -166,7 +166,8 @@
     "loginSuccess": "Successfully logged in!",
     "googleSignInNotConfigured": "Google Sign-In is not configured. Please contact support or enable it in Supabase settings.",
     "googleSignInFailed": "Failed to sign in with Google",
-    "googleSignInNotEnabled": "Google Sign-In is not enabled. Please enable it in your Supabase dashboard under Authentication > Providers > Google."
+    "googleSignInNotEnabled": "Google Sign-In is not enabled. Please enable it in your Supabase dashboard under Authentication > Providers > Google.",
+    "completingSignIn": "Completing sign in..."
   },
   "register": {
     "createAccount": "Create Account",

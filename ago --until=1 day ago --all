@@ -1,0 +1,27 @@
+9bd874b 2025-11-24 Publish updates
+d69181c 2025-11-20 Updating package lock after local reset
+74f4993 2025-11-20 Sync project for deployment
+803ec5f 2025-11-20 Merge branch 'main' of https://github.com/xenomorpheus7/ai-runner-future-platform
+29ac43f 2025-11-20 Update project before deployment
+c95554f 2025-11-07 Update site content and design
+430679a 2025-11-06 Rebuild after Supabase resume
+5a65a46 2025-11-06 Rebuild after Supabase resume
+04f7576 2025-11-06 Rebuild site
+26dbfc2 2025-11-06 Update home page or fix design
+46d9dcf 2025-10-30 add favicon.ico for site
+e70675b 2025-10-30 remove wrangler.toml for Pages deploy
+47c9a97 2025-10-30 remove bun lockfile for Cloudflare
+c0776ea 2025-10-29 fix wrangler config for cloudflare
+ce050d4 2025-10-29 Working Version 0.2
+8ac5825 2025-10-29 Initial commit
+f617ad9 2025-10-29 Accept remaining changes in all files
+ea119ec 2025-10-29 Accept all current changes
+06ec8ef 2025-10-29 verzija 0.2
+df9bb72 2025-10-29 verzija 0.1
+0da1583 2025-10-29 WIP on main: c425b53 Initial commit
+d96781e 2025-10-29 index on main: c425b53 Initial commit
+c425b53 2025-10-29 Initial commit
+9ab53d3 2025-10-17 Add Use Cases page and navigation link
+9af3de4 2025-10-16 Add Robert as tutor
+d6edb5c 2025-10-16 Build AI Runner 2033 website scaffold
+1e3a4bc 2025-10-16 [skip lovable] Use tech stack vite_react_shadcn_ts_20250728_minor

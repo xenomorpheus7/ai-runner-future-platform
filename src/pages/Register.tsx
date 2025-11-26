@@ -10,6 +10,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Loader2, Mail, Lock, User, Zap } from "lucide-react";
 import { toast } from "sonner";
+import { sendWelcomeEmail } from "@/services/emailService";
 
 // Google Icon Component
 const GoogleIcon = () => (
@@ -60,7 +61,7 @@ const Register = () => {
       const { data, error } = await supabase.auth.signInWithOAuth({
         provider: "google",
         options: {
-          redirectTo: `${window.location.origin}/`,
+          redirectTo: `${window.location.origin}/auth/callback`,
         },
       });
 
@@ -128,6 +129,9 @@ const Register = () => {
       if (error) throw error;
 
       if (data.user) {
+        // Fire-and-forget welcome email (do not block registration UX)
+        void sendWelcomeEmail(email.trim());
+
         // Check if user was automatically signed in (email confirmation disabled)
         if (data.session) {
           // User is automatically signed in

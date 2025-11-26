@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Zap, Facebook, Instagram, Linkedin } from "lucide-react";
+import { Zap, Facebook, Instagram, Linkedin, Mail } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -57,7 +57,7 @@ const Footer = () => {
             <p className="text-muted-foreground max-w-md mb-4">
               Master AI skills for the future with immersive, cutting-edge courses designed for the next generation of innovators.
             </p>
-            <div className="flex space-x-4">
+            <div className="flex items-center space-x-4">
               {socialLinks.map((social) => (
                 <a
                   key={social.label}
@@ -78,6 +78,14 @@ const Footer = () => {
                 className="text-muted-foreground hover:text-primary transition-all hover:glow-turquoise p-2 rounded-lg hover:bg-primary/10"
               >
                 <TikTokIcon />
+              </a>
+              <a
+                href="mailto:robert@airunner2033.com"
+                className="text-muted-foreground hover:text-primary transition-all hover:glow-turquoise p-2 rounded-lg hover:bg-primary/10 flex items-center gap-2 ml-2"
+                aria-label="Email"
+              >
+                <Mail className="h-5 w-5" />
+                <span className="text-sm">robert@airunner2033.com</span>
               </a>
             </div>
           </div>

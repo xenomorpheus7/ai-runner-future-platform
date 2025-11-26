@@ -3,3 +3,5 @@ uvicorn[standard]==0.24.0
 groq==0.4.1
 python-dotenv==1.0.0
 
+
+

@@ -1,4 +1,22 @@
+# ==========================================================
+# ENVIRONMENT VARIABLES (MOST IMPORTANT - ALWAYS AT TOP)
+# ==========================================================
+.env
+.env.*
+*.env
+*.env.local
+*/.env
+*/.env.local
+*/*.env
+
+# Prompt Optimizer backend
+prompt-optimizer/backend/.env
+prompt-optimizer/backend/.env.*
+prompt-optimizer/backend/*.env
+
+# ==========================================================
 # Logs
+# ==========================================================
 logs
 *.log
 npm-debug.log*
@@ -7,12 +25,16 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+# ==========================================================
+# Node modules & build output
+# ==========================================================
 node_modules
 dist
 dist-ssr
-*.local
 
+# ==========================================================
 # Editor directories and files
+# ==========================================================
 .vscode/*
 !.vscode/extensions.json
 .idea
@@ -22,6 +44,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-*.env
-*.vercel
 
+# Misc
+*.vercel

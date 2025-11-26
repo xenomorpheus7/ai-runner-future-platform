@@ -37,6 +37,33 @@ export interface InterestSurveyData {
 }
 
 /**
+ * Trigger welcome email via backend Resend integration
+ */
+export const sendWelcomeEmail = async (email: string): Promise<boolean> => {
+  try {
+    if (!email) return false;
+
+    const response = await fetch("/api/sendWelcomeEmail", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    });
+
+    if (!response.ok) {
+      console.error("Failed to send welcome email:", await response.text());
+      return false;
+    }
+
+    return true;
+  } catch (error) {
+    console.error("Error calling sendWelcomeEmail API:", error);
+    return false;
+  }
+};
+
+/**
  * Send contact form email
  */
 export const sendContactEmail = async (data: ContactFormData): Promise<boolean> => {

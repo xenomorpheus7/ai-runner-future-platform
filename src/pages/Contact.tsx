@@ -24,8 +24,8 @@ const Contact = () => {
     {
       icon: Mail,
       title: "Email",
-      content: "robert.vogrinec7.com",
-      link: "mailto:hello@airunner2033.com",
+      content: "robert@airunner2033.com",
+      link: "mailto:robert@airunner2033.com",
     },
     {
       icon: Phone,

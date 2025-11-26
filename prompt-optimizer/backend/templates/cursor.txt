@@ -18,3 +18,5 @@ OUTPUT REQUIREMENTS:
 - The output should be ready to use directly in Cursor
 - Structure the prompt so Cursor can execute it step-by-step
 
+
+

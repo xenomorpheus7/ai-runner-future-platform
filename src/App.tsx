@@ -24,6 +24,8 @@ import Schools from "./pages/Schools";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
 import InterestSurveyPopup from "./components/InterestSurveyPopup";
+import OAuthCallback from "./components/OAuthCallback";
+import "./utils/gradientTextFallback";
 
 const queryClient = new QueryClient();
 
@@ -55,6 +57,7 @@ const App = () => (
               <Route path="/prompt-optimizer" element={<PromptOptimizer />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/auth/callback" element={<OAuthCallback />} />
               <Route
                 path="/settings"
                 element={
