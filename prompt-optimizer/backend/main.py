@@ -35,6 +35,8 @@ allowed_origins = [
     "https://www.brainybear.ai",
     "https://airunner2033.com",
     "https://www.airunner2033.com",
+    "https://ai-runner-future-platform-production.up.railway.app",
+
 ]
 
 app.add_middleware(
@@ -119,4 +121,3 @@ async def optimize(request: OptimizeRequest):
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)
-
