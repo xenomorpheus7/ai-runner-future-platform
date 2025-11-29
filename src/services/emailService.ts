@@ -8,14 +8,22 @@ const API = axios.create({
 // Helper to send email through backend
 const sendEmail = async (to: string, subject: string, html: string) => {
   try {
-    await API.post("/send-email", {
+    const res = await API.post("/send-email", {
       to,
       subject,
       html
     });
+    // Backend returns { success: true } or { success: false, error: ... }
+    if (res && res.data && res.data.success === false) {
+      console.error("Backend responded with error:", res.data);
+      return false;
+    }
     return true;
   } catch (error) {
-    console.error("Backend Email Error:", error);
+    // Try to extract backend error message
+    const err = error as any;
+    const backendMsg = err?.response?.data || err?.message || err;
+    console.error("Backend Email Error:", backendMsg);
     return false;
   }
 };

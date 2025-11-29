@@ -16,7 +16,7 @@ import httpx
 # ---------------------------------------------------------
 load_dotenv()
 
-BREVO_API_KEY = os.getenv("BREVO_API_KEY")
+BREVO_API_KEY = os.getenv("BREVO_API_KEY") or os.getenv("VITE_BREVO_API_KEY")
 BREVO_BASE_URL = "https://api.brevo.com/v3/smtp"
 
 # ---------------------------------------------------------
@@ -61,6 +61,7 @@ async def ensure_cors_headers(request: Request, call_next):
     if origin and origin in ALLOWED_ORIGINS:
         response.headers["Access-Control-Allow-Origin"] = origin
         response.headers["Vary"] = "Origin"
+        response.headers["Access-Control-Allow-Credentials"] = "true"
 
     return response
 
