@@ -9,12 +9,23 @@ This module expects a `GROQ_API_KEY` environment variable to be set.
 
 load_dotenv()
 
+# Read the key but DO NOT raise at import time. Some deploy environments
+# may not set the GROQ_API_KEY and we don't want the whole process to crash
+# during module import. The client will be lazily initialized when needed.
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
-if not GROQ_API_KEY:
-    raise ValueError("GROQ_API_KEY environment variable is not set. Please add it to your .env file or set it in the environment.")
+client = None
 
-client = Groq(api_key=GROQ_API_KEY)
+def get_groq_client():
+    """Lazily initialize and return a Groq client or None if key missing."""
+    global client
+    if client is not None:
+        return client
+    key = GROQ_API_KEY or os.getenv("GROQ_API_KEY")
+    if not key:
+        return None
+    client = Groq(api_key=key)
+    return client
 
 def load_template(model):
     """Load optimization template for a specific model"""
@@ -35,6 +46,10 @@ async def optimize_prompt(raw_prompt, model):
         {"role": "user", "content": raw_prompt}
     ]
 
+    client = get_groq_client()
+    if not client:
+        raise Exception("GROQ_API_KEY is not configured; cannot optimize prompts.")
+
     try:
         # GROQ SDK FORMAT - response is an object, access .content attribute
         response = client.chat.completions.create(
@@ -45,11 +60,11 @@ async def optimize_prompt(raw_prompt, model):
 
         # Access content as attribute, not dictionary key
         optimized_content = response.choices[0].message.content
-        
+
         if not optimized_content:
             raise ValueError("Empty response from GROQ API")
-            
+
         return optimized_content
-        
+
     except Exception as e:
         raise Exception(f"Failed to optimize prompt with GROQ: {str(e)}")
