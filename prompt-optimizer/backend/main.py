@@ -9,14 +9,13 @@ from pydantic import BaseModel
 from optimizer import optimize_prompt
 import os
 from dotenv import load_dotenv
-import httpx  # required for Brevo emails
+import httpx
 
 # ---------------------------------------------------------
 # Load environment variables
 # ---------------------------------------------------------
 load_dotenv()
 
-# BREVO email configuration
 BREVO_API_KEY = os.getenv("BREVO_API_KEY")
 BREVO_BASE_URL = "https://api.brevo.com/v3/smtp"
 
@@ -26,16 +25,23 @@ BREVO_BASE_URL = "https://api.brevo.com/v3/smtp"
 app = FastAPI(
     title="AI Runner 2033 Prompt Optimizer",
     description="Optimize prompts & handle email sending via GROQ + Brevo",
-    version="1.1.0"
+    version="1.2.0"
 )
 
 # ---------------------------------------------------------
 # CORS configuration
 # ---------------------------------------------------------
+ALLOWED_ORIGINS = [
+    "https://airunner2033.com",
+    "https://www.airunner2033.com",
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  
-    allow_credentials=False,
+    allow_origins=ALLOWED_ORIGINS,
+    allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -45,7 +51,6 @@ app.add_middleware(
 # ---------------------------------------------------------
 SUPPORTED_MODELS = ["chatgpt", "cursor", "midjourney", "leonardo", "sora", "veo"]
 
-
 # ---------------------------------------------------------
 # Request models
 # ---------------------------------------------------------
@@ -53,10 +58,13 @@ class OptimizeRequest(BaseModel):
     model: str
     prompt: str
 
-
 class OptimizeResponse(BaseModel):
     optimized_prompt: str
 
+class EmailPayload(BaseModel):
+    to: str
+    subject: str
+    html: str
 
 # ---------------------------------------------------------
 # Health Check
@@ -69,13 +77,11 @@ async def root():
         "supported_models": SUPPORTED_MODELS
     }
 
-
 # ---------------------------------------------------------
 # Prompt Optimization Endpoint
 # ---------------------------------------------------------
 @app.post("/optimize", response_model=OptimizeResponse)
 async def optimize(request: OptimizeRequest):
-    # Validate model name
     if request.model.lower() not in SUPPORTED_MODELS:
         raise HTTPException(
             status_code=400,
@@ -85,7 +91,6 @@ async def optimize(request: OptimizeRequest):
             )
         )
 
-    # Validate prompt
     if not request.prompt or not request.prompt.strip():
         raise HTTPException(
             status_code=400,
@@ -105,24 +110,13 @@ async def optimize(request: OptimizeRequest):
             detail=f"Failed to optimize prompt: {str(e)}"
         )
 
-
 # ---------------------------------------------------------
 # Email Sending Endpoint (Brevo)
 # ---------------------------------------------------------
 @app.post("/send-email")
-async def send_email(payload: dict):
-    """
-    Generic email endpoint for Brevo.
-    Frontend sends:
-    {
-        "to": "someone@gmail.com",
-        "subject": "text",
-        "html": "<p>Hello</p>"
-    }
-    """
-
+async def send_email(payload: EmailPayload):
     if not BREVO_API_KEY:
-        raise HTTPException(status_code=500, detail="Missing BREVO_API_KEY")
+        return {"success": False, "error": "Missing BREVO_API_KEY"}
 
     try:
         async with httpx.AsyncClient() as client:
@@ -138,27 +132,35 @@ async def send_email(payload: dict):
                         "email": "robert@airunner2033.com",
                         "name": "AI Runner 2033"
                     },
-                    "to": [{"email": payload["to"]}],
-                    "subject": payload["subject"],
-                    "htmlContent": payload["html"]
+                    "to": [{"email": payload.to}],
+                    "subject": payload.subject,
+                    "htmlContent": payload.html
                 }
             )
 
         if response.status_code >= 400:
-            raise HTTPException(
-                status_code=response.status_code,
-                detail=response.text
-            )
+            return {
+                "success": False,
+                "error": response.text,
+                "status_code": response.status_code
+            }
 
         return {"success": True}
 
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Email failed: {str(e)}")
+        return {"success": False, "error": str(e)}
 
+# ---------------------------------------------------------
+# Preflight OPTIONS handler (fixes CORS errors)
+# ---------------------------------------------------------
+@app.options("/{rest_of_path:path}")
+async def preflight_handler(rest_of_path: str):
+    return {}
 
 # ---------------------------------------------------------
 # Run locally
 # ---------------------------------------------------------
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
