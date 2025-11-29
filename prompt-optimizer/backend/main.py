@@ -3,7 +3,7 @@ FastAPI backend for AI Runner 2033 Prompt Optimizer
 Handles prompt optimization requests and routes them to GROQ Llama 3.1 8B
 """
 
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Response, Request
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from optimizer import optimize_prompt
@@ -45,6 +45,24 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+# Middleware to ensure CORS headers are present on every response (including errors)
+@app.middleware("http")
+async def ensure_cors_headers(request: Request, call_next):
+    try:
+        response = await call_next(request)
+    except Exception as exc:
+        # Return a JSON error response and ensure CORS headers are attached
+        content = {"success": False, "error": str(exc)}
+        response = Response(content=__import__("json").dumps(content), media_type="application/json", status_code=500)
+
+    origin = request.headers.get("origin")
+    if origin and origin in ALLOWED_ORIGINS:
+        response.headers["Access-Control-Allow-Origin"] = origin
+        response.headers["Vary"] = "Origin"
+
+    return response
 
 # ---------------------------------------------------------
 # Supported models
@@ -153,9 +171,17 @@ async def send_email(payload: EmailPayload):
 # ---------------------------------------------------------
 # Preflight OPTIONS handler (fixes CORS errors)
 # ---------------------------------------------------------
-@app.options("/{rest_of_path:path}")
-async def preflight_handler(rest_of_path: str):
-    return {}
+@app.options("/{path:path}")
+async def preflight(path: str, request: Request):
+    origin = request.headers.get("origin")
+    headers = {}
+    if origin and origin in ALLOWED_ORIGINS:
+        headers["Access-Control-Allow-Origin"] = origin
+        headers["Vary"] = "Origin"
+        headers["Access-Control-Allow-Methods"] = ",".join(["*"])
+        headers["Access-Control-Allow-Headers"] = ",".join(["*"])
+        headers["Access-Control-Allow-Credentials"] = "true"
+    return Response(status_code=204, headers=headers)
 
 # ---------------------------------------------------------
 # Run locally
