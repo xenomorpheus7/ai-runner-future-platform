@@ -1,5 +1,5 @@
 # ==========================================================
-# ENVIRONMENT VARIABLES (MOST IMPORTANT - ALWAYS AT TOP)
+# ENVIRONMENT VARIABLES (MOST IMPORTANT)
 # ==========================================================
 .env
 .env.*
@@ -9,15 +9,46 @@
 */.env.local
 */*.env
 
-# Prompt Optimizer backend
+# Backend env (FastAPI)
 prompt-optimizer/backend/.env
 prompt-optimizer/backend/.env.*
 prompt-optimizer/backend/*.env
 
 # ==========================================================
-# Logs
+# PYTHON (FastAPI, Groq SDK)
 # ==========================================================
-logs
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pyd
+*.pypi
+*.pydist
+.venv/
+venv/
+env/
+*.egg-info/
+*.egg
+
+# ==========================================================
+# NODE (React + Vite)
+# ==========================================================
+node_modules/
+dist/
+dist-ssr/
+build/
+.vite/
+.eslintcache
+
+# Remove lockfiles ONLY if you want cross-system flexibility
+# Or keep them if you prefer strict builds. Your choice:
+# package-lock.json
+# yarn.lock
+
+# ==========================================================
+# LOGS
+# ==========================================================
+logs/
 *.log
 npm-debug.log*
 yarn-debug.log*
@@ -26,24 +57,44 @@ pnpm-debug.log*
 lerna-debug.log*
 
 # ==========================================================
-# Node modules & build output
-# ==========================================================
-node_modules
-dist
-dist-ssr
-
-# ==========================================================
-# Editor directories and files
+# EDITOR DIRECTORIES
 # ==========================================================
 .vscode/*
 !.vscode/extensions.json
-.idea
+.idea/
 .DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+Thumbs.db
 
-# Misc
-*.vercel
+# ==========================================================
+# DEPLOYMENT & PLATFORM FILES
+# ==========================================================
+.vercel/
+.netlify/
+.next/
+.out/
+.cache/
+
+# Cloudflare
+.cloudflare/
+functions/.mf
+
+# Docker
+docker-data/
+docker-compose.override.yml
+
+# Heroku / Render (optional)
+Procfile
+runtime.txt
+
+# ==========================================================
+# MISC
+# ==========================================================
+*.pid
+*.seed
+*.cover
+*.orig

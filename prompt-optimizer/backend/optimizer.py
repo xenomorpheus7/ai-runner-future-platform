@@ -3,11 +3,16 @@ from pathlib import Path
 from dotenv import load_dotenv
 from groq import Groq
 
+"""Optimizer module to call GROQ Llama for prompt transformations.
+This module expects a `GROQ_API_KEY` environment variable to be set.
+"""
+
 load_dotenv()
+
 GROQ_API_KEY = os.getenv("GROQ_API_KEY")
 
 if not GROQ_API_KEY:
-    raise ValueError("GROQ_API_KEY environment variable is not set. Please add it to your .env file.")
+    raise ValueError("GROQ_API_KEY environment variable is not set. Please add it to your .env file or set it in the environment.")
 
 client = Groq(api_key=GROQ_API_KEY)
 

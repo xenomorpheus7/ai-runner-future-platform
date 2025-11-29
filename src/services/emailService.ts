@@ -1,160 +1,162 @@
-import emailjs from '@emailjs/browser';
+import axios from "axios";
 
-// EmailJS configuration
-// These should be set in your .env file
-const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID || '';
-const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID || '';
-const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY || '';
+const BREVO_API_KEY = import.meta.env.VITE_BREVO_API_KEY;
 
-// Initialize EmailJS
-if (EMAILJS_PUBLIC_KEY) {
-  emailjs.init(EMAILJS_PUBLIC_KEY);
-}
+// SHARED BREVO CONFIG
+const brevo = axios.create({
+  baseURL: "https://api.brevo.com/v3/smtp",
+  headers: {
+    "accept": "application/json",
+    "content-type": "application/json",
+    "api-key": BREVO_API_KEY
+  }
+});
 
-// Recipient email (default for all forms)
-const RECIPIENT_EMAIL = 'robert@airunner2033.com';
-
-export interface ContactFormData {
+// -------------------------------------------------------
+// 1. CONTACT FORM EMAIL
+// -------------------------------------------------------
+export const sendContactEmail = async (formData: {
   name: string;
   email: string;
   subject: string;
   message: string;
-}
+}) => {
+  try {
+    await brevo.post("/email", {
+      sender: { email: "robert@airunner2033.com", name: "AI Runner 2033" },
+      to: [{ email: "robert@airunner2033.com" }],
+      subject: `📩 New Contact Form Submission: ${formData.subject || "No Subject"}`,
+      htmlContent: `
+        <h2>New Contact Message</h2>
+        <p><b>Name:</b> ${formData.name}</p>
+        <p><b>Email:</b> ${formData.email}</p>
+        <p><b>Message:</b> ${formData.message}</p>
+      `
+    });
 
-export interface SchoolFormData {
+    await brevo.post("/email", {
+      sender: { email: "robert@airunner2033.com", name: "AI Runner 2033" },
+      to: [{ email: formData.email }],
+      subject: "Thank you for your message!",
+      htmlContent: `
+        <h1>🚀 Thank you for reaching out!</h1>
+        <p>Hi ${formData.name},</p>
+        <p>Your message is received — I’ll reply shortly.</p>
+        <p>— Robert</p>
+      `
+    });
+
+    return true;
+  } catch (error) {
+    console.error("Brevo Contact Error:", error);
+    return false;
+  }
+};
+
+
+// -------------------------------------------------------
+// 2. POPUP / SURVEY EMAIL
+// -------------------------------------------------------
+export const sendPopupEmail = async (email: string, message: string) => {
+  try {
+    await brevo.post("/email", {
+      sender: { email: "robert@airunner2033.com", name: "AI Runner 2033" },
+      to: [{ email: "robert@airunner2033.com" }],
+      subject: "📢 New Popup Form Submission",
+      htmlContent: `
+        <h2>New Popup Submission</h2>
+        <p><b>Email:</b> ${email}</p>
+        <p><b>Message:</b></p>
+        <p>${message}</p>
+      `
+    });
+
+    await brevo.post("/email", {
+      sender: { email: "robert@airunner2033.com", name: "AI Runner 2033" },
+      to: [{ email }],
+      subject: "Thank you for your submission!",
+      htmlContent: `
+        <h1>🙏 Thanks!</h1>
+        <p>I received your popup message.</p>
+        <p>— Robert</p>
+      `
+    });
+
+    return true;
+  } catch (error) {
+    console.error("Brevo Popup Error:", error);
+    return false;
+  }
+};
+
+
+// -------------------------------------------------------
+// 3. SCHOOLS EMAIL (big form)
+// -------------------------------------------------------
+export const sendSchoolsEmail = async (formData: {
   schoolName: string;
   contactPerson: string;
   email: string;
-  phone: string;
-  preferredDate?: string;
-  studentAge?: string;
-  notes?: string;
-}
-
-export interface InterestSurveyData {
-  email: string;
-  selectedInterests: string[];
-}
-
-/**
- * Trigger welcome email via backend Resend integration
- */
-export const sendWelcomeEmail = async (email: string): Promise<boolean> => {
+  phone?: string;
+  message?: string;
+}) => {
   try {
-    if (!email) return false;
-
-    const response = await fetch("/api/sendWelcomeEmail", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email }),
+    await brevo.post("/email", {
+      sender: { email: "robert@airunner2033.com", name: "AI Runner 2033" },
+      to: [{ email: "robert@airunner2033.com" }],
+      subject: `🏫 New School Inquiry from ${formData.schoolName}`,
+      htmlContent: `
+        <h2>New School Inquiry</h2>
+        <p><b>School:</b> ${formData.schoolName}</p>
+        <p><b>Contact Person:</b> ${formData.contactPerson}</p>
+        <p><b>Email:</b> ${formData.email}</p>
+        <p><b>Phone:</b> ${formData.phone}</p>
+        <p><b>Message:</b> ${formData.message || "No message"}</p>
+      `
     });
 
-    if (!response.ok) {
-      console.error("Failed to send welcome email:", await response.text());
-      return false;
-    }
+    await brevo.post("/email", {
+      sender: { email: "robert@airunner2033.com", name: "AI Runner 2033" },
+      to: [{ email: formData.email }],
+      subject: "Thank you for your inquiry!",
+      htmlContent: `
+        <h1>📘 Thank you!</h1>
+        <p>Hello ${formData.contactPerson},</p>
+        <p>Your school has been registered for workshop interest.</p>
+        <p>I’ll contact you shortly.</p>
+        <p>— Robert</p>
+      `
+    });
 
     return true;
   } catch (error) {
-    console.error("Error calling sendWelcomeEmail API:", error);
+    console.error("Brevo School Error:", error);
     return false;
   }
 };
 
-/**
- * Send contact form email
- */
-export const sendContactEmail = async (data: ContactFormData): Promise<boolean> => {
+
+// -------------------------------------------------------
+// 4. WELCOME EMAIL (Google OAuth / Register)
+// -------------------------------------------------------
+export const sendWelcomeEmail = async (email: string) => {
   try {
-    if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
-      console.error('EmailJS is not configured. Please add EmailJS credentials to your .env file.');
-      return false;
-    }
+    await brevo.post("/email", {
+      sender: { email: "robert@airunner2033.com", name: "AI Runner 2033" },
+      to: [{ email }],
+      subject: "Welcome to AI Runner 2033 🚀",
+      htmlContent: `
+        <h1>🎉 Welcome aboard!</h1>
+        <p>Your account was successfully created using Google Sign-In.</p>
+        <p>Get ready to explore the future of AI learning and tools.</p>
+        <br/>
+        <p>— Robert from AI Runner 2033</p>
+      `
+    });
 
-    const templateParams = {
-      to_email: RECIPIENT_EMAIL,
-      from_name: data.name,
-      from_email: data.email,
-      subject: data.subject,
-      message: data.message,
-      reply_to: data.email,
-    };
-
-    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
     return true;
   } catch (error) {
-    console.error('Error sending contact email:', error);
+    console.error("Brevo Welcome Email Error:", error);
     return false;
   }
 };
-
-/**
- * Send school workshop booking email
- */
-export const sendSchoolBookingEmail = async (data: SchoolFormData): Promise<boolean> => {
-  try {
-    if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
-      console.error('EmailJS is not configured. Please add EmailJS credentials to your .env file.');
-      return false;
-    }
-
-    const templateParams = {
-      to_email: RECIPIENT_EMAIL,
-      from_name: data.contactPerson,
-      from_email: data.email,
-      subject: `School Workshop Booking - ${data.schoolName}`,
-      message: `
-School Name: ${data.schoolName}
-Contact Person: ${data.contactPerson}
-Email: ${data.email}
-Phone: ${data.phone}
-Preferred Date: ${data.preferredDate || 'Not specified'}
-Student Age: ${data.studentAge || 'Not specified'}
-
-Additional Notes:
-${data.notes || 'None'}
-      `.trim(),
-      reply_to: data.email,
-    };
-
-    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
-    return true;
-  } catch (error) {
-    console.error('Error sending school booking email:', error);
-    return false;
-  }
-};
-
-/**
- * Send interest survey email
- */
-export const sendInterestSurveyEmail = async (data: InterestSurveyData): Promise<boolean> => {
-  try {
-    if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
-      console.error('EmailJS is not configured. Please add EmailJS credentials to your .env file.');
-      return false;
-    }
-
-    const templateParams = {
-      to_email: RECIPIENT_EMAIL,
-      from_email: data.email,
-      subject: 'AI Runner 2033 - Interest Survey Submission',
-      message: `
-Email: ${data.email}
-
-Selected Interests:
-${data.selectedInterests.map(interest => `- ${interest}`).join('\n')}
-      `.trim(),
-      reply_to: data.email,
-    };
-
-    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams);
-    return true;
-  } catch (error) {
-    console.error('Error sending interest survey email:', error);
-    return false;
-  }
-};
-

@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { sendInterestSurveyEmail } from "@/services/emailService";
+import { sendPopupEmail } from "@/services/emailService";
 import { toast } from "sonner";
 import { X, Mail, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -84,10 +84,10 @@ const InterestSurveyPopup = () => {
     setIsSubmitting(true);
 
     try {
-      const success = await sendInterestSurveyEmail({
-        email: email.trim(),
-        selectedInterests,
-      });
+      const success = await sendPopupEmail(
+        email.trim(),
+        selectedInterests.join(", ")
+      );
 
       if (success) {
         toast.success(t("popup.successMessage") || "Thank you! Your preferences have been submitted.");
@@ -129,7 +129,7 @@ const InterestSurveyPopup = () => {
           )}
         >
         <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-center bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+          <DialogTitle className="text-3xl font-bold text-center bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
             {t("popup.title")}
           </DialogTitle>
         </DialogHeader>
@@ -137,7 +137,7 @@ const InterestSurveyPopup = () => {
         <div className="space-y-6 py-4">
           {/* Email Input */}
           <div className="space-y-2">
-            <Label htmlFor="popup-email" className="text-base">
+            <Label htmlFor="popup-email" className="text-sm font-semibold">
               {t("popup.emailLabel")}
             </Label>
             <div className="relative">
@@ -280,11 +280,11 @@ const InterestSurveyPopup = () => {
 
           {/* WEB & APP DESIGN WITH AI */}
           <div className="space-y-3">
-            <h3 className="text-lg font-bold text-accent border-b border-accent/30 pb-2">
+            <h3 className="text-lg font-bold text-cyan-400 border-b border-cyan-400/30 pb-2">
               {t("popup.webAppDesignAI")}
             </h3>
             <div className="space-y-2 pl-4">
-              <label className="flex items-center space-x-3 cursor-pointer hover:text-accent transition-colors">
+              <label className="flex items-center space-x-3 cursor-pointer hover:text-cyan-400 transition-colors">
                 <Checkbox
                   id="web-builders"
                   checked={checkedItems["web-builders"]}
@@ -294,24 +294,24 @@ const InterestSurveyPopup = () => {
                       checked as boolean
                     )
                   }
-                  className="border-accent/50 data-[state=checked]:bg-accent data-[state=checked]:border-accent"
+                  className="border-cyan-400/50 data-[state=checked]:bg-cyan-400 data-[state=checked]:border-cyan-400"
                 />
                 <span className="text-sm">
                   {t("popup.web-builders")}
                 </span>
               </label>
-              <label className="flex items-center space-x-3 cursor-pointer hover:text-accent transition-colors">
+              <label className="flex items-center space-x-3 cursor-pointer hover:text-cyan-400 transition-colors">
                 <Checkbox
                   id="app-prototypes"
                   checked={checkedItems["app-prototypes"]}
                   onCheckedChange={(checked) =>
                     handleCheckboxChange("app-prototypes", checked as boolean)
                   }
-                  className="border-accent/50 data-[state=checked]:bg-accent data-[state=checked]:border-accent"
+                  className="border-cyan-400/50 data-[state=checked]:bg-cyan-400 data-[state=checked]:border-cyan-400"
                 />
                 <span className="text-sm">{t("popup.app-prototypes")}</span>
               </label>
-              <label className="flex items-center space-x-3 cursor-pointer hover:text-accent transition-colors">
+              <label className="flex items-center space-x-3 cursor-pointer hover:text-cyan-400 transition-colors">
                 <Checkbox
                   id="locally-driven-prototypes"
                   checked={checkedItems["locally-driven-prototypes"]}
@@ -321,7 +321,7 @@ const InterestSurveyPopup = () => {
                       checked as boolean
                     )
                   }
-                  className="border-accent/50 data-[state=checked]:bg-accent data-[state=checked]:border-accent"
+                  className="border-cyan-400/50 data-[state=checked]:bg-cyan-400 data-[state=checked]:border-cyan-400"
                 />
                 <span className="text-sm">
                   {t("popup.locally-driven-prototypes")}
@@ -337,18 +337,17 @@ const InterestSurveyPopup = () => {
             onClick={() => setOpen(false)}
             className="border-primary/50 hover:bg-primary/10"
           >
-            <X className="h-4 w-4 mr-2" />
             {t("popup.close")}
           </Button>
           <Button
             onClick={handleSubmit}
             disabled={isSubmitting}
-            className="bg-primary hover:bg-primary/90 text-primary-foreground glow-turquoise"
+            className="bg-cyan-500 hover:bg-cyan-600 text-black font-semibold"
           >
             {isSubmitting ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                {t("popup.sending") || "Sending..."}
+                {t("popup.sending") || "Submitting..."}
               </>
             ) : (
               t("popup.submit")

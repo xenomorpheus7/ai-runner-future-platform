@@ -51,6 +51,49 @@ const Login = () => {
 
   // Handle Google Sign-In
   const handleGoogleSignIn = async () => {
+    // Handle Google Sign-In
+const handleGoogleSignIn = async () => {
+  try {
+    if (!supabase) {
+      throw new Error(t("login.googleSignInNotConfigured"));
+    }
+
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        redirectTo: `${window.location.origin}/oauth/callback`, // FIXED
+      },
+    });
+
+    if (error) {
+      // Specific error when provider isn't enabled
+      if (
+        error.message?.includes("provider is not enabled") ||
+        error.message?.includes("Unsupported provider")
+      ) {
+        const msg = t("login.googleSignInNotEnabled");
+        setError(msg);
+        toast.error(msg);
+        throw new Error(msg);
+      }
+
+      throw error;
+    }
+  } catch (error: any) {
+    // Only show if not a redirect (redirects are normal in OAuth)
+    if (error?.message && !error.message.includes("redirect")) {
+      const msg =
+        error.message.includes("not enabled") ||
+        error.message.includes("Unsupported provider")
+          ? error.message
+          : error.message || t("login.googleSignInFailed");
+
+      setError(msg);
+      toast.error(msg);
+    }
+  }
+};
+
     try {
       if (!supabase) {
         throw new Error(t("login.googleSignInNotConfigured"));

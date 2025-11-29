@@ -35,10 +35,10 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { sendSchoolBookingEmail } from "@/services/emailService";
+import { sendSchoolsEmail } from "@/services/emailService";
 import { toast } from "sonner";
 import robertAvatar from "@/assets/robert-avatar.jpg";
-import isolaLogo from "@/assets/išola_logo.jpg";
+import isolaLogo from "@/assets/isola_logo.jpg";
 import vistLogo from "@/assets/vist_logo.png";
 import academiaLogo from "@/assets/academia_logo.png";
 
@@ -67,7 +67,7 @@ const Schools = () => {
     setIsSubmitting(true);
 
     try {
-      const success = await sendSchoolBookingEmail(formData);
+      const success = await sendSchoolsEmail(formData);
       
       if (success) {
         toast.success(t("schools.successMessage") || "Booking request sent successfully! We'll contact you within 24 hours.");

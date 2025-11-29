@@ -49,39 +49,32 @@ const Navigation = () => {
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-2 group">
-            {/* Lightning bolt icon with Gen-AI gradient: cyan → purple → blue */}
+            {/* Lightning bolt icon with turquoise glow and pulsate */}
             <svg 
-              className="h-8 w-8 animate-glow-pulse logo-icon" 
+              className="h-8 w-8 logo-icon electric-pulse" 
               viewBox="0 0 24 24" 
               fill="none" 
-              stroke="url(#logo-gradient-nav)" 
+              stroke="hsl(186 100% 50%)" 
               strokeWidth="2" 
               strokeLinecap="round" 
               strokeLinejoin="round"
               style={{
-                filter: 'none',
-                WebkitFilter: 'none',
+                filter: 'drop-shadow(0 0 8px hsl(186 100% 50%))',
+                WebkitFilter: 'drop-shadow(0 0 8px hsl(186 100% 50%))',
               }}
               data-darkreader-inline-stroke="false"
             >
-              <defs>
-                <linearGradient id="logo-gradient-nav" x1="0%" y1="0%" x2="100%" y2="0%" gradientUnits="userSpaceOnUse">
-                  <stop offset="0%" stopColor="hsl(186 100% 50%)" style={{ stopColor: 'hsl(186 100% 50%)' }} />
-                  <stop offset="50%" stopColor="hsl(270 100% 50%)" style={{ stopColor: 'hsl(270 100% 50%)' }} />
-                  <stop offset="100%" stopColor="hsl(210 100% 50%)" style={{ stopColor: 'hsl(210 100% 50%)' }} />
-                </linearGradient>
-              </defs>
               <path 
                 d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"
                 style={{ filter: 'none' }}
               />
             </svg>
             <span 
-              className="text-xl font-bold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent logo-text"
+              className="text-xl font-bold text-cyan-400"
               aria-label="AI RUNNER 2033"
               style={{
-                filter: 'none',
-                WebkitFilter: 'none',
+                filter: 'drop-shadow(0 0 10px hsl(186 100% 50%))',
+                WebkitFilter: 'drop-shadow(0 0 10px hsl(186 100% 50%))',
                 mixBlendMode: 'normal',
                 opacity: 1,
               }}

@@ -11,6 +11,7 @@ const OAuthCallback = () => {
   const navigate = useNavigate();
   const { t } = useLanguage();
   const { user } = useAuth();
+
   const welcomeEmailSent = useRef(false);
 
   useEffect(() => {
@@ -22,8 +23,11 @@ const OAuthCallback = () => {
       }
 
       try {
-        // Get the session from the URL hash
-        const { data: { session }, error } = await supabase.auth.getSession();
+        // Get Supabase session from the redirect URL hash
+        const {
+          data: { session },
+          error,
+        } = await supabase.auth.getSession();
 
         if (error) {
           console.error("OAuth callback error:", error);
@@ -32,23 +36,21 @@ const OAuthCallback = () => {
           return;
         }
 
-        if (session) {
-          // Successfully authenticated
-          // Send welcome email for new users (only once per session)
-          if (session.user && !welcomeEmailSent.current) {
+        if (session && session.user) {
+          // Only send welcome email once per sign-in
+          if (!welcomeEmailSent.current) {
             welcomeEmailSent.current = true;
-            // Fire-and-forget welcome email (do not block login UX)
             void sendWelcomeEmail(session.user.email || "");
           }
+
           toast.success(t("login.loginSuccess") || "Successfully signed in!");
           navigate("/");
         } else {
-          // No session found, redirect to login
           navigate("/login");
         }
-      } catch (error: any) {
-        console.error("OAuth callback error:", error);
-        toast.error(error.message || t("login.googleSignInFailed") || "Google sign-in failed");
+      } catch (err: any) {
+        console.error("OAuth callback exception:", err);
+        toast.error(err.message || t("login.googleSignInFailed") || "Google sign-in failed");
         navigate("/login");
       }
     };
@@ -56,7 +58,7 @@ const OAuthCallback = () => {
     handleOAuthCallback();
   }, [navigate, t]);
 
-  // If user is already set, redirect immediately
+  // If user is already logged in (for example, autologin)
   useEffect(() => {
     if (user) {
       navigate("/");
@@ -76,4 +78,3 @@ const OAuthCallback = () => {
 };
 
 export default OAuthCallback;
-

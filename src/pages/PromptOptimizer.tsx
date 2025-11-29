@@ -11,7 +11,7 @@ import { Switch } from "@/components/ui/switch";
 import { useToast } from "@/components/ui/use-toast";
 import Footer from "@/components/Footer";
 
-const PROMPT_OPTIMIZER_API = import.meta.env.VITE_PROMPT_OPTIMIZER_API || "http://localhost:8000";
+const PROMPT_OPTIMIZER_API = "http://127.0.0.1:8000";
 
 const SUPPORTED_MODELS = [
   { 
@@ -215,17 +215,7 @@ const PromptOptimizer = () => {
           </div>
           
           <div className="flex items-center justify-center gap-4 mb-6">
-            <div className="relative">
-              <Zap className="h-16 w-16 text-primary animate-pulse" />
-              <div className="absolute inset-0 blur-2xl bg-primary/40 animate-pulse" />
-              <div className="absolute inset-0 blur-xl bg-primary/20 animate-ping" style={{ animationDuration: "3s" }} />
-            </div>
             <div>
-              <h2 className="text-6xl md:text-7xl font-bold mb-2">
-                <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
-                  AI Runner 2033
-                </span>
-              </h2>
               <h3 className="text-4xl md:text-5xl font-bold">
                 <span className="underline decoration-primary decoration-4 underline-offset-8 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
                   Prompt Optimizer
@@ -328,7 +318,7 @@ const PromptOptimizer = () => {
                     {SUPPORTED_MODELS.map((model) => (
                       <SelectItem key={model.value} value={model.value}>
                         <div className="flex items-center gap-3">
-                          <span className="text-2xl">{model.logo}</span>
+                          <span className="text-2xl">✨</span>
                           <div className="flex flex-col">
                             <span className="font-medium">{model.label}</span>
                             <span className="text-xs text-muted-foreground">{model.description}</span>
@@ -444,7 +434,7 @@ const PromptOptimizer = () => {
                   {selectedModelData && (
                     <div className={`p-4 rounded-lg bg-gradient-to-r ${selectedModelData.color} bg-opacity-10 border border-primary/20`}>
                       <div className="flex items-center gap-2 mb-2">
-                        <span className="text-2xl">{selectedModelData.logo}</span>
+                        <span className="text-2xl">✨</span>
                         <span className="font-semibold">Optimized for {selectedModelData.label}</span>
                       </div>
                       <p className="text-sm text-muted-foreground">{selectedModelData.description}</p>
@@ -486,7 +476,7 @@ const PromptOptimizer = () => {
                       }`}
                     >
                       <div className={`text-5xl mb-2 filter drop-shadow-lg ${selectedModel === model.value ? "animate-bounce" : ""}`}>
-                        {model.logo}
+                        ✨
                       </div>
                       <div className="text-sm font-semibold">{model.label}</div>
                       {selectedModel === model.value && (

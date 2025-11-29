@@ -10,7 +10,7 @@ import s1Image from "@/assets/s1.jpg";
 import s2Image from "@/assets/s2.jpg";
 import s3Image from "@/assets/s3.jpg";
 import rajkobizjakLogo from "@/assets/rajkobizjak_logo.png";
-import isolaLogo from "@/assets/išola_logo.jpg";
+import isolaLogo from "@/assets/isola_logo.jpg";
 import vistLogo from "@/assets/vist_logo.png";
 import academiaLogo from "@/assets/academia_logo.png";
 
