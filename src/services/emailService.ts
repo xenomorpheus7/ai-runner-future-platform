@@ -1,14 +1,20 @@
 import axios from "axios";
 
-const API = axios.create({
+// Contact forms use Railway backend (already has Brevo working)
+const railwayAPI = axios.create({
   baseURL: "https://ai-runner-future-platform-production.up.railway.app",
   headers: { "Content-Type": "application/json" }
 });
 
-// Helper to send email through backend
+// Serverless functions (for welcome email during registration)
+const serverlessAPI = axios.create({
+  headers: { "Content-Type": "application/json" }
+});
+
+// Helper to send email through Railway backend (for contact forms)
 const sendEmail = async (to: string, subject: string, html: string) => {
   try {
-    const res = await API.post("/send-email", {
+    const res = await railwayAPI.post("/send-email", {
       to,
       subject,
       html
@@ -118,16 +124,19 @@ export const sendSchoolsEmail = async (formData: any) => {
 };
 
 // -------------------------------------------------------
-// 4. WELCOME EMAIL (user only)
+// 4. WELCOME EMAIL (user only - uses serverless function)
 // -------------------------------------------------------
-export const sendWelcomeEmail = (email: string) => {
-  return sendEmail(
-    email,
-    "Welcome to AI Runner 2033 🚀",
-    `
-    <h1>🎉 Welcome aboard!</h1>
-    <p>Your account was successfully created using Google Sign-In.</p>
-    <p>— Robert from AI Runner 2033</p>
-    `
-  );
+export const sendWelcomeEmail = async (email: string) => {
+  try {
+    const res = await serverlessAPI.post("/api/sendWelcomeEmail", {
+      email
+    });
+    if (res && res.data && res.data.success) {
+      return true;
+    }
+    return false;
+  } catch (error) {
+    console.error("Welcome email error:", error);
+    return false;
+  }
 };

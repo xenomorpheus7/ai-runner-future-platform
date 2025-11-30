@@ -4,6 +4,7 @@ Handles prompt optimization requests and routes them to GROQ Llama 3.1 8B
 """
 
 from fastapi import FastAPI, HTTPException, Response, Request
+import logging
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from optimizer import optimize_prompt
@@ -28,12 +29,18 @@ app = FastAPI(
     version="1.2.0"
 )
 
+# Configure basic logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger("prompt-optimizer")
+
 # ---------------------------------------------------------
 # CORS configuration
 # ---------------------------------------------------------
 ALLOWED_ORIGINS = [
     "https://airunner2033.com",
     "https://www.airunner2033.com",
+    # include the deployed railway domain as a safe origin for testing/proxying
+    "https://ai-runner-future-platform-production.up.railway.app",
     "http://localhost:5173",
     "http://127.0.0.1:5173",
 ]
@@ -58,9 +65,15 @@ async def ensure_cors_headers(request: Request, call_next):
         response = Response(content=__import__("json").dumps(content), media_type="application/json", status_code=500)
 
     origin = request.headers.get("origin")
-    if origin and origin in ALLOWED_ORIGINS:
+    # Log for debugging CORS issues in production
+    logger.info("Incoming request %s %s origin=%s", request.method, request.url.path, origin)
+    # ECHO the Origin header back to the client so browsers receive Access-Control-Allow-Origin.
+    # This is permissive (accepts any origin sent by the client) — acceptable for testing
+    # and common when requests are proxied. For production you may restrict to ALLOWED_ORIGINS.
+    if origin:
         response.headers["Access-Control-Allow-Origin"] = origin
         response.headers["Vary"] = "Origin"
+        # Allow credentials for cross-site requests (cookies/auth) where needed
         response.headers["Access-Control-Allow-Credentials"] = "true"
 
     return response
@@ -176,11 +189,17 @@ async def send_email(payload: EmailPayload):
 async def preflight(path: str, request: Request):
     origin = request.headers.get("origin")
     headers = {}
-    if origin and origin in ALLOWED_ORIGINS:
+    # Echo requested method/headers if provided (helps preflight handling)
+    req_method = request.headers.get("access-control-request-method")
+    req_headers = request.headers.get("access-control-request-headers")
+    logger.info("Preflight request for %s origin=%s req-method=%s req-headers=%s", path, origin, req_method, req_headers)
+    # Echo the Origin and requested methods/headers back to the client to satisfy preflight.
+    # This will return ACAO for any Origin value provided (permissive). Restrict later if needed.
+    if origin:
         headers["Access-Control-Allow-Origin"] = origin
         headers["Vary"] = "Origin"
-        headers["Access-Control-Allow-Methods"] = ",".join(["*"])
-        headers["Access-Control-Allow-Headers"] = ",".join(["*"])
+        headers["Access-Control-Allow-Methods"] = req_method or ",".join(["*"])
+        headers["Access-Control-Allow-Headers"] = req_headers or ",".join(["*"])
         headers["Access-Control-Allow-Credentials"] = "true"
     return Response(status_code=204, headers=headers)
 

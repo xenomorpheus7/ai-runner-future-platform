@@ -1,4 +1,4 @@
-const RESEND_API_URL = "https://api.resend.com/emails";
+const BREVO_BASE_URL = "https://api.brevo.com/v3/smtp";
 
 // Configure your defaults here
 const SUPPORT_EMAIL = "robert@airunner2033.com";
@@ -32,6 +32,7 @@ function createHtml(email: string): string {
   </div>
 </div>
 `.trim();
+
 }
 
 export default {
@@ -60,13 +61,16 @@ export default {
 
     try {
       // For Cloudflare Pages Functions, env is passed as parameter
-      // For local dev, try process.env first, then check request headers
-      const apiKey = (process.env as any)?.RESEND_API_KEY || 
-                     request.headers.get("X-Resend-Api-Key") as string | undefined;
+      // For local dev / Railway, try process.env first; allow a Vite-prefixed fallback
+      // (server-only fallback — VITE_ keys must NOT be exposed to client builds)
+      const apiKey = (process.env as any)?.BREVO_API_KEY ||
+                     (process.env as any)?.VITE_BREVO_API_KEY ||
+                     request.headers.get("X-Brevo-Api-Key") as string | undefined ||
+                     request.headers.get("X-BREVO-API-KEY") as string | undefined;
 
       if (!apiKey) {
         return new Response(
-          JSON.stringify({ error: "RESEND_API_KEY is not configured" }),
+          JSON.stringify({ error: "BREVO_API_KEY is not configured" }),
           {
             status: 500,
             headers: {
@@ -92,29 +96,27 @@ export default {
 
       const html = createHtml(email);
 
-      const resendResponse = await fetch(RESEND_API_URL, {
+      const brevoResponse = await fetch(`${BREVO_BASE_URL}/email`, {
         method: "POST",
         headers: {
-          Authorization: `Bearer ${apiKey}`,
+          "api-key": apiKey,
           "Content-Type": "application/json",
+          Accept: "application/json",
         },
         body: JSON.stringify({
-          from: `AI Runner 2033 <no-reply@airunner2033.com>`,
-          to: [email],
+          sender: { email: "robert@airunner2033.com", name: "AI Runner 2033" },
+          to: [{ email }],
           subject: "Welcome to AI Runner 2033",
-          html,
+          htmlContent: html,
         }),
       });
 
-      if (!resendResponse.ok) {
-        const errorText = await resendResponse.text().catch(() => "");
-        console.error("Resend error:", resendResponse.status, errorText);
+      if (!brevoResponse.ok) {
+        const errorText = await brevoResponse.text().catch(() => "");
+        console.error("Brevo error:", brevoResponse.status, errorText);
 
         return new Response(
-          JSON.stringify({
-            error: "Failed to send welcome email",
-            status: resendResponse.status,
-          }),
+          JSON.stringify({ error: "Failed to send welcome email", status: brevoResponse.status }),
           {
             status: 500,
             headers: {

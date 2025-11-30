@@ -1,4 +1,4 @@
-const RESEND_API_URL = "https://api.resend.com/emails";
+const BREVO_BASE_URL = "https://api.brevo.com/v3/smtp";
 
 // Configure your defaults here
 const SUPPORT_EMAIL = "robert@airunner2033.com";
@@ -34,7 +34,7 @@ function createHtml(email: string): string {
 `.trim();
 }
 
-// Cloudflare Pages Function for sending welcome emails via Resend
+// Cloudflare Pages Function for sending welcome emails via Brevo
 export const onRequestOptions: PagesFunction = async () => {
   return new Response(null, {
     status: 204,
@@ -48,84 +48,81 @@ export const onRequestOptions: PagesFunction = async () => {
 
 export const onRequestPost: PagesFunction = async ({ request, env }) => {
   try {
-    // Get Resend API key from environment (Cloudflare Pages) or request header (local dev)
-    const apiKey = (env as any)?.RESEND_API_KEY || 
-                   request.headers.get("X-Resend-Api-Key") as string | undefined;
+    // Get Brevo API key from environment (Cloudflare Pages) or request header (local dev)
+    const apiKey = (env as any)?.BREVO_API_KEY ||
+      request.headers.get("X-Brevo-Api-Key") ||
+      request.headers.get("X-BREVO-API-KEY");
 
-      if (!apiKey) {
-        return new Response(
-          JSON.stringify({ error: "RESEND_API_KEY is not configured" }),
-          {
-            status: 500,
-            headers: {
-              "Content-Type": "application/json",
-              "Access-Control-Allow-Origin": "*",
-            },
-          }
-        );
-      }
-
-      const body = await request.json().catch(() => ({}));
-      const email = typeof body.email === "string" ? body.email.trim() : "";
-
-      if (!email) {
-        return new Response(JSON.stringify({ error: "Email is required" }), {
-          status: 400,
+    if (!apiKey) {
+      return new Response(
+        JSON.stringify({ error: "BREVO_API_KEY is not configured" }),
+        {
+          status: 500,
           headers: {
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin": "*",
           },
-        });
-      }
+        }
+      );
+    }
 
-      const html = createHtml(email);
+    const body = await request.json().catch(() => ({}));
+    const email = typeof body.email === "string" ? body.email.trim() : "";
 
-      const resendResponse = await fetch(RESEND_API_URL, {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${apiKey}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          from: `AI Runner 2033 <no-reply@airunner2033.com>`,
-          to: [email],
-          subject: "Welcome to AI Runner 2033",
-          html,
-        }),
-      });
-
-      if (!resendResponse.ok) {
-        const errorText = await resendResponse.text().catch(() => "");
-        console.error("Resend error:", resendResponse.status, errorText);
-
-        return new Response(
-          JSON.stringify({
-            error: "Failed to send welcome email",
-            status: resendResponse.status,
-          }),
-          {
-            status: 500,
-            headers: {
-              "Content-Type": "application/json",
-              "Access-Control-Allow-Origin": "*",
-            },
-          }
-        );
-      }
-
-      return new Response(JSON.stringify({ success: true }), {
-        status: 200,
+    if (!email) {
+      return new Response(JSON.stringify({ error: "Email is required" }), {
+        status: 400,
         headers: {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": "*",
         },
       });
+    }
+
+    const html = createHtml(email);
+
+    const brevoResponse = await fetch(`${BREVO_BASE_URL}/email`, {
+      method: "POST",
+      headers: {
+        "api-key": apiKey,
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        sender: { name: "AI Runner 2033", email: "no-reply@airunner2033.com" },
+        to: [{ email }],
+        subject: "Welcome to AI Runner 2033",
+        htmlContent: html,
+      }),
+    });
+
+    if (!brevoResponse.ok) {
+      const errorText = await brevoResponse.text().catch(() => "");
+      console.error("Brevo error:", brevoResponse.status, errorText);
+
+      return new Response(
+        JSON.stringify({ error: "Failed to send welcome email", status: brevoResponse.status }),
+        {
+          status: 500,
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin": "*",
+          },
+        }
+      );
+    }
+
+    return new Response(JSON.stringify({ success: true }), {
+      status: 200,
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+    });
   } catch (error: any) {
     console.error("sendWelcomeEmail error:", error);
     return new Response(
-      JSON.stringify({
-        error: error?.message || "Internal server error",
-      }),
+      JSON.stringify({ error: error?.message || "Internal server error" }),
       {
         status: 500,
         headers: {

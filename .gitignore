@@ -88,8 +88,7 @@ docker-data/
 docker-compose.override.yml
 
 # Heroku / Render (optional)
-Procfile
-runtime.txt
+# (Procfile and runtime.txt are useful to track; keep them in the repo)
 
 # ==========================================================
 # MISC
