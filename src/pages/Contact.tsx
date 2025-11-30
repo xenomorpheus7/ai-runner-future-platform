@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { sendContactEmail } from "@/services/emailService";
+import { sendContactEmail, sendWelcomeEmail } from "@/services/emailService";
 import { toast } from "sonner";
 
 const Contact = () => {
@@ -56,6 +56,7 @@ const Contact = () => {
       const success = await sendContactEmail(formData);
       
       if (success) {
+        void sendWelcomeEmail(formData.email.trim());
         toast.success(t("contact.successMessage") || "Message sent successfully!");
         setFormData({ name: "", email: "", subject: "", message: "" });
       } else {

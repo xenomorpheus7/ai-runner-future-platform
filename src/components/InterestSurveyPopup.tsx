@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { sendPopupEmail } from "@/services/emailService";
+import { sendPopupEmail, sendWelcomeEmail } from "@/services/emailService";
 import { toast } from "sonner";
 import { X, Mail, Loader2 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -90,9 +90,8 @@ const InterestSurveyPopup = () => {
       );
 
       if (success) {
-        toast.success(t("popup.successMessage") || "Thank you! Your preferences have been submitted.");
+        void sendWelcomeEmail(email.trim());
         setOpen(false);
-        // Reset form
         setEmail("");
         setCheckedItems({
           "text-to-image": false,

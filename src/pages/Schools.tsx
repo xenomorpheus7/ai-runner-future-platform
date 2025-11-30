@@ -35,7 +35,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { sendSchoolsEmail } from "@/services/emailService";
+import { sendSchoolsEmail, sendWelcomeEmail } from "@/services/emailService";
 import { toast } from "sonner";
 import robertAvatar from "@/assets/robert-avatar.jpg";
 import isolaLogo from "@/assets/isola_logo.jpg";
@@ -70,6 +70,7 @@ const Schools = () => {
       const success = await sendSchoolsEmail(formData);
       
       if (success) {
+        void sendWelcomeEmail(formData.email.trim());
         toast.success(t("schools.successMessage") || "Booking request sent successfully! We'll contact you within 24 hours.");
         setFormData({
           schoolName: "",

@@ -1,3 +1,5 @@
+import type { PagesFunction } from "@cloudflare/workers-types";
+
 const BREVO_BASE_URL = "https://api.brevo.com/v3/smtp";
 
 // Configure your defaults here
