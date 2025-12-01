@@ -246,34 +246,29 @@ const Contact = () => {
                   </Link>
                 </div>
               </div>
-
-              <div className="glass-card p-8 rounded-2xl border-secondary/30">
-                <h3 className="text-2xl font-bold mb-4">{t("contact.tutorAvailability")}</h3>
-                <p className="text-muted-foreground mb-6">
-                  {t("contact.tutorAvailabilityDesc")}
-                </p>
-                <div className="space-y-4">
-                  <div className="flex items-center gap-3 p-3 rounded-lg bg-card/40">
-                    <div className="w-2 h-2 rounded-full bg-primary glow-turquoise" />
-                    <div>
-                      <p className="font-semibold text-foreground">{t("contact.courseQuestions")}</p>
-                      <p className="text-sm text-muted-foreground">{t("contact.within24Hours")}</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3 p-3 rounded-lg bg-card/40">
-                    <div className="w-2 h-2 rounded-full bg-primary glow-turquoise" />
-                    <div>
-                      <p className="font-semibold text-foreground">{t("contact.technicalSupport")}</p>
-                      <p className="text-sm text-muted-foreground">{t("contact.within48Hours")}</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center gap-3 p-3 rounded-lg bg-card/40">
-                    <div className="w-2 h-2 rounded-full bg-primary glow-turquoise" />
-                    <div>
-                      <p className="font-semibold text-foreground">{t("contact.careerAdvice")}</p>
-                      <p className="text-sm text-muted-foreground">{t("contact.within3to5Days")}</p>
-                    </div>
-                  </div>
+            </div>
+          </div>
+          <div className="max-w-6xl mx-auto mt-10">
+            <div className="glass-card p-8 rounded-2xl border-secondary/30">
+              <h3 className="text-2xl font-bold mb-4">{t("contact.tutorAvailability")}</h3>
+              <p className="text-muted-foreground mb-6">
+                {t("contact.tutorAvailabilityDesc")}
+              </p>
+              <div className="space-y-6">
+                <div className="text-sm text-muted-foreground">
+                  {/* Google Calendar Appointment Scheduling begin */}
+                </div>
+                <div className="w-full overflow-hidden rounded-xl border border-primary/20 bg-background">
+                  <iframe
+                    src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0KFPfh6OcY7IMSc0YqsnAoYtv7J6T23wGVkb9boHvFMdNefsPGk_jfV-iyyHi9fOdYoxlqJF9U?gv=true"
+                    style={{ border: 0 }}
+                    width="100%"
+                    height="600"
+                    frameBorder={0}
+                  />
+                </div>
+                <div className="text-xs text-muted-foreground text-center">
+                  {/* Google Calendar Appointment Scheduling end */}
                 </div>
               </div>
             </div>

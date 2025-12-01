@@ -130,7 +130,10 @@ const Navigation = () => {
                 <DropdownMenuTrigger asChild>
                   <button className="relative h-10 w-10 rounded-full border-2 border-primary/50 hover:border-primary transition-all duration-300 hover:glow-turquoise">
                     <Avatar className="h-full w-full">
-                      <AvatarImage src={user.user_metadata?.avatar_url || robertAvatar} alt={user.email || "User"} />
+                      <AvatarImage
+                        src={(user.user_metadata as any)?.avatar_url || (user.user_metadata as any)?.picture || robertAvatar}
+                        alt={user.email || "User"}
+                      />
                       <AvatarFallback className="bg-primary/20 text-primary font-bold">
                         {user.email ? getInitials(user.email) : "U"}
                       </AvatarFallback>

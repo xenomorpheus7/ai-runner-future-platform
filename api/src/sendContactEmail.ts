@@ -1,13 +1,16 @@
-import type { PagesFunction } from "@cloudflare/workers-types";
-
 const BREVO_BASE_URL = "https://api.brevo.com/v3/smtp";
 
 // Configure your defaults here
 const SUPPORT_EMAIL = "robert@airunner2033.com";
 const SUPPORT_NAME = "AI Runner 2033";
 
+type SendContactContext = {
+  request: Request;
+  env: any;
+};
+
 // Cloudflare Pages Function for sending contact/form emails via Brevo
-export const onRequestOptions: PagesFunction = async () => {
+export const onRequestOptions = async (): Promise<Response> => {
   return new Response(null, {
     status: 204,
     headers: {
@@ -18,7 +21,7 @@ export const onRequestOptions: PagesFunction = async () => {
   });
 };
 
-export const onRequestPost: PagesFunction = async ({ request, env }) => {
+export const onRequestPost = async ({ request, env }: SendContactContext): Promise<Response> => {
   try {
     // Get Brevo API key from environment (Cloudflare Pages) or request header (local dev)
     const apiKey = (env as any)?.BREVO_API_KEY ||

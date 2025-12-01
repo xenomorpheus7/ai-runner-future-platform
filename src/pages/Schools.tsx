@@ -797,136 +797,25 @@ const Schools = () => {
             </p>
           </div>
 
-          <div className="max-w-3xl mx-auto">
-            <div className="glass-card p-8 md:p-12 rounded-3xl border-primary/30 glow-turquoise animate-fade-in">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <Label htmlFor="schoolName" className="mb-2">
-                      {t("schools.schoolName")} *
-                    </Label>
-                    <Input
-                      id="schoolName"
-                      name="schoolName"
-                      value={formData.schoolName}
-                      onChange={handleChange}
-                      required
-                      className="bg-input border-primary/20 focus:border-primary"
-                      placeholder={t("schools.schoolNamePlaceholder")}
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="contactPerson" className="mb-2">
-                      {t("schools.contactPerson")} *
-                    </Label>
-                    <Input
-                      id="contactPerson"
-                      name="contactPerson"
-                      value={formData.contactPerson}
-                      onChange={handleChange}
-                      required
-                      className="bg-input border-primary/20 focus:border-primary"
-                      placeholder={t("schools.contactPersonPlaceholder")}
-                    />
-                  </div>
+          <div className="max-w-5xl mx-auto">
+            <div className="glass-card p-6 md:p-10 lg:p-12 rounded-3xl border-primary/30 glow-turquoise animate-fade-in">
+              <div className="space-y-6">
+                <div className="text-sm text-muted-foreground">
+                  {/* Google Calendar Appointment Scheduling begin */}
                 </div>
-
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <Label htmlFor="email" className="mb-2">
-                      {t("contact.email")} *
-                    </Label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      required
-                      className="bg-input border-primary/20 focus:border-primary"
-                      placeholder={t("schools.emailPlaceholder")}
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="phone" className="mb-2">
-                      {t("contact.phoneLabel")} *
-                    </Label>
-                    <Input
-                      id="phone"
-                      name="phone"
-                      type="tel"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      required
-                      className="bg-input border-primary/20 focus:border-primary"
-                      placeholder={t("schools.phonePlaceholder")}
-                    />
-                  </div>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <Label htmlFor="preferredDate" className="mb-2">
-                      {t("schools.preferredDate")}
-                    </Label>
-                    <Input
-                      id="preferredDate"
-                      name="preferredDate"
-                      type="date"
-                      value={formData.preferredDate}
-                      onChange={handleChange}
-                      className="bg-input border-primary/20 focus:border-primary"
-                    />
-                  </div>
-                  <div>
-                    <Label htmlFor="studentAge" className="mb-2">
-                      {t("schools.ageOfStudents")}
-                    </Label>
-                    <Input
-                      id="studentAge"
-                      name="studentAge"
-                      value={formData.studentAge}
-                      onChange={handleChange}
-                      className="bg-input border-primary/20 focus:border-primary"
-                      placeholder={t("schools.ageOfStudentsPlaceholder")}
-                    />
-                  </div>
-                </div>
-
-                <div>
-                  <Label htmlFor="notes" className="mb-2">
-                    {t("schools.additionalNotes")}
-                  </Label>
-                  <Textarea
-                    id="notes"
-                    name="notes"
-                    value={formData.notes}
-                    onChange={handleChange}
-                    rows={4}
-                    className="bg-input border-primary/20 focus:border-primary resize-none"
-                    placeholder={t("schools.additionalNotesPlaceholder")}
+                <div className="w-full overflow-hidden rounded-xl border border-primary/20 bg-background">
+                  <iframe
+                    src="https://calendar.google.com/calendar/appointments/schedules/AcZssZ0KFPfh6OcY7IMSc0YqsnAoYtv7J6T23wGVkb9boHvFMdNefsPGk_jfV-iyyHi9fOdYoxlqJF9U?gv=true"
+                    style={{ border: 0 }}
+                    width="100%"
+                    height="600"
+                    frameBorder={0}
                   />
                 </div>
-
-                <Button 
-                  type="submit"
-                  size="lg"
-                  disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-foreground glow-turquoise transition-all duration-300"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-                      {t("schools.sending") || "Sending..."}
-                    </>
-                  ) : (
-                    <>
-                      {t("schools.bookWorkshopButton")}
-                      <ArrowRight className="ml-2 h-5 w-5" />
-                    </>
-                  )}
-                </Button>
-              </form>
+                <div className="text-xs text-muted-foreground text-center">
+                  {/* Google Calendar Appointment Scheduling end */}
+                </div>
+              </div>
             </div>
           </div>
         </div>

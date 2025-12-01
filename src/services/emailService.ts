@@ -1,8 +1,13 @@
 import axios from "axios";
 
 // Contact forms use Railway backend (already has Brevo working)
+// Use a Vite env variable for the backend base URL so it can be changed
+// without code changes when redeploying or moving the service.
+const RAILWAY_BASE_URL =
+  import.meta.env.VITE_RAILWAY_API_URL
+
 const railwayAPI = axios.create({
-  baseURL: "https://ai-runner-future-platform-production.up.railway.app",
+  baseURL: RAILWAY_BASE_URL,
   headers: { "Content-Type": "application/json" }
 });
 
