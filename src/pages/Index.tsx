@@ -231,6 +231,13 @@ const Index = () => {
                     onClick={() => setIsWelcomeVideoPlaying(true)}
                     className="relative aspect-video rounded-2xl overflow-hidden border border-primary/30 bg-muted w-full cursor-pointer hover:bg-primary/5 transition-colors"
                   >
+                    {/* YouTube thumbnail background */}
+                    <div
+                      className="absolute inset-0 bg-cover bg-center"
+                      style={{
+                        backgroundImage: 'url(https://img.youtube.com/vi/zWUezJumP8k/maxresdefault.jpg)',
+                      }}
+                    />
                     <div className="absolute inset-0 cyber-grid opacity-20" />
                     <div className="relative z-10 flex items-center justify-center h-full">
                       <div className="text-center">
@@ -246,8 +253,8 @@ const Index = () => {
                   <div className="relative aspect-video rounded-2xl overflow-hidden border border-primary/30 bg-black">
                     <iframe
                       className="w-full h-full"
-                      src="https://www.youtube.com/embed/4SMKTeB34Tk?autoplay=1&rel=0"
-                      title="Welcome Message from Robert"
+                      src="https://www.youtube.com/embed/zWUezJumP8k?autoplay=1&rel=0"
+                      title="AI RUNNER 2033 Intro Video"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                       allowFullScreen
                     />
