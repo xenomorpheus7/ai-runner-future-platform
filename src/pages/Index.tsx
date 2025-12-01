@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowRight, Sparkles, Cpu, Zap, Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -17,6 +18,7 @@ import academiaLogo from "@/assets/academia_logo.png";
 const Index = () => {
   const { t } = useLanguage();
   const navigate = useNavigate();
+  const [isWelcomeVideoPlaying, setIsWelcomeVideoPlaying] = useState(false);
   
   const features = [
     {
@@ -221,24 +223,36 @@ const Index = () => {
                 </div>
               </div>
 
-              {/* Welcome Video Placeholder */}
+              {/* Welcome Video Placeholder / Player */}
               <div className="mt-12 pt-12 border-t border-primary/20">
                 <h4 className="text-2xl font-bold mb-6 text-center">{t("home.welcomeVideo")}</h4>
-                <button
-                  onClick={() => navigate("/register")}
-                  className="relative aspect-video rounded-2xl overflow-hidden border border-primary/30 bg-muted w-full cursor-pointer hover:bg-primary/5 transition-colors"
-                >
-                  <div className="absolute inset-0 cyber-grid opacity-20" />
-                  <div className="relative z-10 flex items-center justify-center h-full">
-                    <div className="text-center">
-                      <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mb-4 glow-turquoise hover:scale-110 transition-transform mx-auto">
-                        <ArrowRight className="h-10 w-10 text-primary ml-1 rotate-0" />
+                {!isWelcomeVideoPlaying ? (
+                  <button
+                    onClick={() => setIsWelcomeVideoPlaying(true)}
+                    className="relative aspect-video rounded-2xl overflow-hidden border border-primary/30 bg-muted w-full cursor-pointer hover:bg-primary/5 transition-colors"
+                  >
+                    <div className="absolute inset-0 cyber-grid opacity-20" />
+                    <div className="relative z-10 flex items-center justify-center h-full">
+                      <div className="text-center">
+                        <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mb-4 glow-turquoise hover:scale-110 transition-transform mx-auto">
+                          <ArrowRight className="h-10 w-10 text-primary ml-1 rotate-0" />
+                        </div>
+                        <p className="text-foreground font-medium">{t("home.watchVideo")}</p>
+                        <p className="text-sm text-muted-foreground mt-2">{t("home.videoDuration")}</p>
                       </div>
-                      <p className="text-foreground font-medium">{t("home.watchVideo")}</p>
-                      <p className="text-sm text-muted-foreground mt-2">{t("home.videoDuration")}</p>
                     </div>
+                  </button>
+                ) : (
+                  <div className="relative aspect-video rounded-2xl overflow-hidden border border-primary/30 bg-black">
+                    <iframe
+                      className="w-full h-full"
+                      src="https://www.youtube.com/embed/4SMKTeB34Tk?autoplay=1&rel=0"
+                      title="Welcome Message from Robert"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                    />
                   </div>
-                </button>
+                )}
               </div>
             </div>
           </div>
@@ -251,7 +265,7 @@ const Index = () => {
         <div className="container mx-auto px-4 relative">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-5xl font-bold mb-4">
-              {t("home.liveWorkshopsPart1")}{" "}
+              {t("home.liveWorkshopsPart1")} {" "}
               <span className="bg-gradient-to-r from-secondary to-accent bg-clip-text text-transparent">
                 {t("home.liveWorkshopsPart2")}
               </span>
