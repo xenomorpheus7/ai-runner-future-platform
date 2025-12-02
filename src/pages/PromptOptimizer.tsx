@@ -318,7 +318,6 @@ const PromptOptimizer = () => {
                     {SUPPORTED_MODELS.map((model) => (
                       <SelectItem key={model.value} value={model.value}>
                         <div className="flex items-center gap-3">
-                          <span className="text-2xl">✨</span>
                           <div className="flex flex-col">
                             <span className="font-medium">{model.label}</span>
                             <span className="text-xs text-muted-foreground">{model.description}</span>
@@ -475,9 +474,6 @@ const PromptOptimizer = () => {
                           : "border-primary/20 bg-primary/5 hover:border-primary/50 hover:bg-primary/10"
                       }`}
                     >
-                      <div className={`text-5xl mb-2 filter drop-shadow-lg ${selectedModel === model.value ? "animate-bounce" : ""}`}>
-                        ✨
-                      </div>
                       <div className="text-sm font-semibold">{model.label}</div>
                       {selectedModel === model.value && (
                         <div className="absolute -top-2 -right-2 w-4 h-4 bg-primary rounded-full animate-ping" />

@@ -42,13 +42,28 @@ const InterestSurveyPopup = () => {
     const hasShown = sessionStorage.getItem("interestSurveyShown");
     if (hasShown) return;
 
-    // Show popup after 30 seconds
-    const timer = setTimeout(() => {
+    const showPopup = () => {
+      const alreadyShown = sessionStorage.getItem("interestSurveyShown");
+      if (alreadyShown) return;
       setOpen(true);
       sessionStorage.setItem("interestSurveyShown", "true");
-    }, 30000);
+    };
 
-    return () => clearTimeout(timer);
+    // Show popup after 30 seconds as a fallback
+    const timer = setTimeout(showPopup, 30000);
+
+    // Also allow manual triggering via a custom event (e.g. after intro video)
+    const handleCustomEvent = () => {
+      showPopup();
+      clearTimeout(timer);
+    };
+
+    window.addEventListener("showInterestSurvey", handleCustomEvent);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener("showInterestSurvey", handleCustomEvent);
+    };
   }, []);
 
   const handleCheckboxChange = (id: string, checked: boolean) => {

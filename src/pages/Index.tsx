@@ -228,7 +228,21 @@ const Index = () => {
                 <h4 className="text-2xl font-bold mb-6 text-center">{t("home.welcomeVideo")}</h4>
                 {!isWelcomeVideoPlaying ? (
                   <button
-                    onClick={() => setIsWelcomeVideoPlaying(true)}
+                    onClick={() => {
+                      setIsWelcomeVideoPlaying(true);
+
+                      // Schedule interest survey popup ~1 minute (video length) + 3s after start
+                      // Only if it hasn't already been shown this session
+                      const hasShown = sessionStorage.getItem("interestSurveyShown");
+                      if (!hasShown) {
+                        window.setTimeout(() => {
+                          const shownNow = sessionStorage.getItem("interestSurveyShown");
+                          if (!shownNow) {
+                            window.dispatchEvent(new Event("showInterestSurvey"));
+                          }
+                        }, 63000); // ~60s video + 3s delay
+                      }
+                    }}
                     className="relative aspect-video rounded-2xl overflow-hidden border border-primary/30 bg-muted w-full cursor-pointer hover:bg-primary/5 transition-colors"
                   >
                     {/* YouTube thumbnail background */}
