@@ -11,7 +11,8 @@ import { Switch } from "@/components/ui/switch";
 import { useToast } from "@/components/ui/use-toast";
 import Footer from "@/components/Footer";
 
-const PROMPT_OPTIMIZER_API = "http://127.0.0.1:8000";
+const PROMPT_OPTIMIZER_API =
+  import.meta.env.VITE_RAILWAY_API_URL || "http://127.0.0.1:8000";
 
 const SUPPORTED_MODELS = [
   { 
