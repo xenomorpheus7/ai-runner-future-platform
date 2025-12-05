@@ -66,7 +66,8 @@ export const onRequestPost: PagesFunction = async ({ request, env }) => {
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: provider === "groq" ? "llama-3.1-70b-versatile" : "gpt-4o-mini",
+        // Groq: use a currently supported fast model
+        model: provider === "groq" ? "llama-3.1-8b-instant" : "gpt-4o-mini",
         temperature: 0.4,
         max_tokens: 600,
         messages: [
