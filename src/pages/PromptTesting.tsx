@@ -58,9 +58,9 @@ const PromptTesting = () => {
     negativePrompt: "blurry, low quality, distorted, ugly, bad anatomy, watermark, signature",
     guidanceScale: 7.5,
     numInferenceSteps: 20,
-    width: 1024,
-    height: 1024,
-    aspectRatio: "1:1",
+    width: 1344,
+    height: 768,
+    aspectRatio: "16:9",
   });
 
   // Aspect ratio presets
@@ -72,29 +72,7 @@ const PromptTesting = () => {
     { label: "Tall (9:16)", value: "9:16", width: 768, height: 1344 },
   ];
 
-  // Prompt presets
-  const promptPresets = [
-    {
-      name: "Cyberpunk Portrait",
-      prompt: "A photorealistic portrait of a cyberpunk character with neon blue hair, cinematic lighting, high quality, 8k resolution, detailed facial features, futuristic background",
-    },
-    {
-      name: "Mountain Landscape",
-      prompt: "A majestic mountain landscape at sunset with dramatic clouds, cinematic composition, golden hour lighting, professional photography style, ultra-detailed, 4k",
-    },
-    {
-      name: "Futuristic City",
-      prompt: "A futuristic cityscape with flying cars and holographic advertisements, cyberpunk aesthetic, neon lights, night scene, highly detailed, 4k quality, cinematic",
-    },
-    {
-      name: "Fantasy Character",
-      prompt: "A detailed fantasy character portrait, magical atmosphere, intricate details, high quality, digital art style, vibrant colors, 8k resolution",
-    },
-    {
-      name: "Abstract Art",
-      prompt: "Abstract digital art, vibrant colors, geometric patterns, modern art style, high quality, detailed, 4k resolution, artistic composition",
-    },
-  ];
+  // Prompt presets (removed from UI to focus on user input + AI Runner)
 
   // Cursor blinking animation
   useEffect(() => {
@@ -366,15 +344,9 @@ const PromptTesting = () => {
     const enhancement = enhancePrompt(prompt);
     setEnhancedPrompt(enhancement);
 
-    // Generate both images in parallel
-    const [userImage, enhancedImg] = await Promise.all([
-      generateImage(prompt, false),
-      generateImage(enhancement.enhanced, true),
-    ]);
+    // Generate only the AI Runner enhanced image
+    const enhancedImg = await generateImage(enhancement.enhanced, true);
 
-    if (userImage) {
-      setGeneratedImage(userImage);
-    }
     if (enhancedImg) {
       setEnhancedImage(enhancedImg);
     }
@@ -398,11 +370,6 @@ const PromptTesting = () => {
 
   const showTips = () => {
     setGameState("tips");
-  };
-
-  const applyPreset = (presetPrompt: string) => {
-    setPrompt(presetPrompt);
-    setHint("");
   };
 
   const downloadImage = (imageUrl: string, filename: string) => {
@@ -608,24 +575,6 @@ const PromptTesting = () => {
                       </p>
                     )}
 
-                    {/* Prompt Presets */}
-                    <div className="mt-4">
-                      <Label className="text-xs text-muted-foreground mb-2 block">Quick Presets:</Label>
-                      <div className="flex flex-wrap gap-2">
-                        {promptPresets.map((preset, idx) => (
-                          <Button
-                            key={idx}
-                            variant="outline"
-                            size="sm"
-                            onClick={() => applyPreset(preset.prompt)}
-                            className="text-xs border-primary/30 hover:bg-primary/10"
-                          >
-                            {preset.name}
-                          </Button>
-                        ))}
-                      </div>
-                    </div>
-
                     <Button
                       onClick={handleSubmit}
                       disabled={isGenerating || !prompt.trim()}
@@ -801,64 +750,8 @@ const PromptTesting = () => {
 
             {gameState === "result" && (
               <div className="space-y-6 animate-fade-in">
-                {/* Comparison View */}
-                <div className="grid md:grid-cols-2 gap-6">
-                  {/* User Prompt Result */}
-                  <div className="glass-card p-6 rounded-2xl border-primary/30 glow-turquoise">
-                    <div className="flex items-center gap-2 mb-4">
-                      <div className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-primary/20 glow-turquoise">
-                        <User className="h-5 w-5 text-primary" />
-                      </div>
-                      <h3 className="text-xl font-bold text-primary">Your Prompt</h3>
-                    </div>
-
-                    <div className="mb-4">
-                      <p className="text-sm text-muted-foreground mb-2">Prompt:</p>
-                      <div className="bg-background/50 p-3 rounded-lg border border-primary/20">
-                        <p className="text-foreground italic text-sm">"{prompt}"</p>
-                      </div>
-                    </div>
-
-                    {/* User Generated Image */}
-                    <div className="relative aspect-video bg-muted rounded-lg overflow-hidden border border-primary/20 mb-4">
-                      {isGenerating ? (
-                        <div className="absolute inset-0 flex flex-col items-center justify-center">
-                          <Loader2 className="h-12 w-12 text-primary animate-spin mb-4" />
-                          <p className="text-muted-foreground text-sm">Generating...</p>
-                        </div>
-                      ) : generatedImage ? (
-                        <>
-                          <img
-                            src={generatedImage}
-                            alt="Your generated result"
-                            className="w-full h-full object-contain"
-                          />
-                          <div className="absolute top-2 right-2">
-                            <Button
-                              size="sm"
-                              variant="secondary"
-                              onClick={() => downloadImage(generatedImage, `user-prompt-${Date.now()}.png`)}
-                              className="bg-background/80 backdrop-blur-sm h-8"
-                            >
-                              <Download className="h-3 w-3 mr-1" />
-                              <span className="text-xs">Download</span>
-                            </Button>
-                          </div>
-                        </>
-                      ) : error ? (
-                        <div className="absolute inset-0 flex flex-col items-center justify-center p-4">
-                          <XCircle className="h-8 w-8 text-destructive mb-2" />
-                          <p className="text-center text-destructive text-sm">{error}</p>
-                        </div>
-                      ) : (
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <p className="text-muted-foreground text-sm">No image generated</p>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* AI Runner Result */}
+                {/* AI Runner Result Only */}
+                <div className="grid md:grid-cols-1 gap-6">
                   {enhancedPrompt && (
                     <div className="glass-card p-6 rounded-2xl border-secondary/30 glow-purple">
                       <div className="flex items-center gap-2 mb-4">

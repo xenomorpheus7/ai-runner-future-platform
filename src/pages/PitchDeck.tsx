@@ -1,6 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const PitchDeck: React.FC = () => {
+  useEffect(() => {
+    const title = "AI Runner 2033 Pitch Deck Download";
+    const description =
+      "Download the official AI Runner 2033 pitch deck (PPTX) to explore the vision, product roadmap and business model.";
+
+    document.title = title;
+    const meta = document.querySelector("meta[name='description']");
+    if (meta) {
+      meta.setAttribute("content", description);
+    }
+  }, []);
+
   return (
     <main className="min-h-screen flex items-center justify-center bg-slate-950 text-slate-50 px-4 py-16">
       <div className="max-w-xl w-full border border-slate-800 rounded-xl bg-slate-900/60 shadow-xl backdrop-blur-sm p-8 space-y-4">

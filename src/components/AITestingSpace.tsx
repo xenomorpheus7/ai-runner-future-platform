@@ -55,9 +55,9 @@ const AITestingSpace = () => {
     negativePrompt: "blurry, low quality, distorted, ugly, bad anatomy, watermark, signature",
     guidanceScale: 7.5,
     numInferenceSteps: 20,
-    width: 1024,
-    height: 1024,
-    aspectRatio: "1:1",
+    width: 1344,
+    height: 768,
+    aspectRatio: "16:9",
   });
 
   // Aspect ratio presets
@@ -519,6 +519,42 @@ const AITestingSpace = () => {
             Open Full AI Testing Space
             <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
           </Button>
+        </div>
+
+        {/* Reverse Engineer AI Content Placeholder */}
+        <div className="max-w-4xl mx-auto mb-12 animate-fade-in" style={{ animationDelay: "0.1s" }}>
+          <div className="glass-card p-8 md:p-10 rounded-3xl border-primary/40 glow-turquoise relative overflow-hidden">
+            <div className="absolute -inset-1 bg-gradient-to-r from-primary/40 via-secondary/40 to-accent/40 opacity-40 blur-3xl pointer-events-none" />
+            <div className="relative flex flex-col md:flex-row items-start md:items-center gap-8">
+              <div className="flex-1">
+                <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 border border-primary/40 mb-4">
+                  <Wand2 className="h-4 w-4 text-primary mr-2" />
+                  <span className="text-xs font-medium tracking-wider uppercase">New Lab Mode</span>
+                </div>
+                <h3 className="text-3xl font-bold mb-3 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+                  Reverse Engineer AI Content
+                </h3>
+                <p className="text-muted-foreground text-base md:text-lg max-w-xl">
+                  Drop in an image, video, article or website URL and let the lab reconstruct the hidden prompt, style blueprint and tech stack behind it.
+                </p>
+              </div>
+              <div className="flex flex-col items-stretch gap-3 w-full md:w-auto md:min-w-[220px]">
+                <Button
+                  size="lg"
+                  onClick={() => navigate("/reverse-ai")}
+                  className="bg-gradient-to-r from-primary via-secondary to-accent hover:from-primary/90 hover:via-secondary/90 hover:to-accent/90 text-foreground glow-turquoise text-base font-semibold tracking-wide"
+                >
+                  REVERSE AI
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+                <p className="text-xs text-muted-foreground text-center md:text-left">
+                  Glowing placeholder – full reverse-engineering model coming online soon.
+                </p>
+              </div>
+            </div>
+            <div className="absolute -bottom-10 -right-10 w-40 h-40 rounded-full bg-secondary/30 blur-3xl animate-pulse" />
+            <div className="absolute -top-10 -left-8 w-32 h-32 rounded-full bg-accent/30 blur-3xl animate-[ping_3s_ease-in-out_infinite]" />
+          </div>
         </div>
 
         {/* Main Content */}

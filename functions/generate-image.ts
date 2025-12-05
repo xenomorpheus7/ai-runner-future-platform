@@ -52,7 +52,7 @@ export const onRequestPost: PagesFunction = async ({ request, env }) => {
       ? `${prompt}. Negative prompt: ${negativePrompt}`
       : prompt;
 
-    // Call Hugging Face API (new endpoint)
+    // Call Hugging Face API via the router endpoint (required by HF)
     const hfResponse = await fetch(
       "https://router.huggingface.co/hf-inference/models/stabilityai/stable-diffusion-xl-base-1.0",
       {

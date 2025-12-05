@@ -8,6 +8,7 @@ import logging
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from optimizer import optimize_prompt
+from reverse_ai import reverse_content
 import os
 from dotenv import load_dotenv
 import httpx
@@ -39,8 +40,9 @@ logger = logging.getLogger("prompt-optimizer")
 ALLOWED_ORIGINS = [
     "https://airunner2033.com",
     "https://www.airunner2033.com",
-    # include the deployed railway domain as a safe origin for testing/proxying
-    "https://ai-runner-future-platform-production.up.railway.app",
+    # include deployed backend domains as safe origins for testing/proxying
+    "https://ai-runner-future-platform-production.up.railway.app",  # Railway (legacy)
+    "https://ai-runner-future-platform.onrender.com",  # Render backend
     "http://localhost:5173",
     "http://127.0.0.1:5173",
     "http://localhost:8080",
@@ -99,6 +101,23 @@ class EmailPayload(BaseModel):
     subject: str
     html: str
 
+
+class ReverseAIRequest(BaseModel):
+    mode: str
+    target: str
+    notes: str | None = None
+    creativity: int = 40
+    depth: int = 70
+    detect_ai: str = "balanced"
+
+
+class ReverseAIResponse(BaseModel):
+    reconstructed_prompt: str
+    style_breakdown: str | None = None
+    tech_stack: list[str] | None = None
+    ai_probability: float | None = None
+    extra_notes: str | None = None
+
 # ---------------------------------------------------------
 # Health Check
 # ---------------------------------------------------------
@@ -141,6 +160,31 @@ async def optimize(request: OptimizeRequest):
         raise HTTPException(
             status_code=500,
             detail=f"Failed to optimize prompt: {str(e)}"
+        )
+
+
+@app.post("/reverse-ai", response_model=ReverseAIResponse)
+async def reverse_ai_endpoint(request: ReverseAIRequest):
+    if not request.target or not request.target.strip():
+        raise HTTPException(
+            status_code=400,
+            detail="Target (URL or text) cannot be empty",
+        )
+
+    try:
+        result = await reverse_content(
+            mode=request.mode,
+            target=request.target,
+            notes=request.notes,
+            creativity=request.creativity,
+            depth=request.depth,
+            detect_ai=request.detect_ai,
+        )
+        return ReverseAIResponse(**result)
+    except Exception as e:
+        raise HTTPException(
+            status_code=500,
+            detail=f"Failed to analyze content: {str(e)}",
         )
 
 # ---------------------------------------------------------

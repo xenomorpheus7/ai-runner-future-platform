@@ -5,6 +5,7 @@
     "projects": "Projekti",
     "about": "O nas",
     "contact": "Kontakt",
+    "blog": "Blog",
     "login": "Prijava",
     "settings": "Nastavitve",
     "achievements": "Dosežki",
@@ -452,6 +453,13 @@
     "progressLabel": "Napredovanje",
     "timeSpent": "Preživljeni čas:",
     "completed": "Dokončano"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Vpogledi, zgodbe in posodobitve iz poti AI Runner 2033.",
+    "articleLabel": "Raziskovalni članek",
+    "publishedBy": "Avtor: Robert Vogrinec, direktor Inštituta za digitalno pismenost in umetno inteligenco",
+    "aiEducationAlt": "Ilustracija umetne inteligence v izobraževanju"
   },
   "projects": {
     "title": "Projekti",

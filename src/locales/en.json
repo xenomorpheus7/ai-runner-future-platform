@@ -5,6 +5,7 @@
     "projects": "Projects",
     "about": "About",
     "contact": "Contact",
+    "blog": "Blog",
     "login": "Login",
     "settings": "Settings",
     "achievements": "Achievements",
@@ -452,6 +453,13 @@
     "progressLabel": "Progress",
     "timeSpent": "Time spent:",
     "completed": "Completed"
+  },
+  "blog": {
+    "title": "Blog",
+    "subtitle": "Insights, stories and updates from the AI Runner 2033 journey.",
+    "articleLabel": "Research Study Article",
+    "publishedBy": "Published by: Robert Vogrinec, CEO: Institute of Digital Literacy and Artificial Intelligence",
+    "aiEducationAlt": "AI in education illustration"
   },
   "projects": {
     "title": "Projects",

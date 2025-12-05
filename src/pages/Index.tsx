@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ArrowRight, Sparkles, Cpu, Zap, Quote } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -19,6 +19,18 @@ const Index = () => {
   const { t } = useLanguage();
   const navigate = useNavigate();
   const [isWelcomeVideoPlaying, setIsWelcomeVideoPlaying] = useState(false);
+  
+  useEffect(() => {
+    const title = "AI Runner 2033 – Futuristic AI Courses & AI Labs";
+    const description =
+      "Learn AI, editing and future skills with immersive courses, live workshops and hands-on AI labs powered by AI Runner 2033.";
+
+    document.title = title;
+    const meta = document.querySelector("meta[name='description']");
+    if (meta) {
+      meta.setAttribute("content", description);
+    }
+  }, []);
   
   const features = [
     {

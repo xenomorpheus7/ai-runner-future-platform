@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Sparkles, Zap, Copy, CheckCircle2, Loader2, ArrowRight, RefreshCw, AlertCircle, Settings, SlidersHorizontal, Download, Share2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -73,6 +73,18 @@ const PromptOptimizer = () => {
   const [autoCopy, setAutoCopy] = useState(false);
   const [showModelLogos, setShowModelLogos] = useState(true);
   const { toast } = useToast();
+
+  useEffect(() => {
+    const title = "AI Prompt Optimizer – AI Runner 2033 AI Lab";
+    const description =
+      "Optimize ChatGPT, Cursor, Midjourney, Sora and other AI prompts automatically with AI Runner 2033's free prompt optimizer and testing lab.";
+
+    document.title = title;
+    const meta = document.querySelector("meta[name='description']");
+    if (meta) {
+      meta.setAttribute("content", description);
+    }
+  }, []);
 
   const selectedModelData = SUPPORTED_MODELS.find(m => m.value === selectedModel);
 
@@ -565,8 +577,44 @@ const PromptOptimizer = () => {
               </Button>
             </div>
 
+            {/* Reverse Engineer AI Content Placeholder */}
+            <div className="max-w-4xl mx-auto my-24 animate-fade-in" style={{ animationDelay: "0.1s" }}>
+              <Card className="glass-card p-8 md:p-10 rounded-3xl border-primary/40 glow-turquoise relative overflow-hidden">
+                <div className="absolute -inset-1 bg-gradient-to-r from-primary/40 via-secondary/40 to-accent/40 opacity-40 blur-3xl pointer-events-none" />
+                <div className="relative flex flex-col md:flex-row items-start md:items-center gap-8">
+                  <div className="flex-1">
+                    <div className="inline-flex items-center px-3 py-1 rounded-full bg-primary/10 border border-primary/40 mb-4">
+                      <Sparkles className="h-4 w-4 text-primary mr-2" />
+                      <span className="text-xs font-medium tracking-wider uppercase">New Lab Mode</span>
+                    </div>
+                    <h3 className="text-3xl font-bold mb-3 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+                      Reverse Engineer AI Content
+                    </h3>
+                    <p className="text-muted-foreground text-base md:text-lg max-w-xl">
+                      Drop in an image, video, article or website URL and let the lab reconstruct the hidden prompt, style blueprint and tech stack behind it.
+                    </p>
+                  </div>
+                  <div className="flex flex-col items-stretch gap-3 w-full md:w-auto md:min-w-[220px]">
+                    <Button
+                      size="lg"
+                      onClick={() => navigate("/reverse-ai")}
+                      className="bg-gradient-to-r from-primary via-secondary to-accent hover:from-primary/90 hover:via-secondary/90 hover:to-accent/90 text-foreground glow-turquoise text-base font-semibold tracking-wide"
+                    >
+                      REVERSE AI
+                      <ArrowRight className="ml-2 h-5 w-5" />
+                    </Button>
+                    <p className="text-xs text-muted-foreground text-center md:text-left">
+                      Glowing placeholder – full reverse-engineering model coming online soon.
+                    </p>
+                  </div>
+                </div>
+                <div className="absolute -bottom-10 -right-10 w-40 h-40 rounded-full bg-secondary/30 blur-3xl animate-pulse" />
+                <div className="absolute -top-10 -left-8 w-32 h-32 rounded-full bg-accent/30 blur-3xl animate-[ping_3s_ease-in-out_infinite]" />
+              </Card>
+            </div>
+
             {/* Main Content - Test Your Prompt Skills Card */}
-            <div className="max-w-6xl mx-auto">
+            <div className="max-w-6xl mx-auto mt-24">
               <Card className="glass-card p-12 rounded-3xl border-primary/30 glow-turquoise text-center animate-fade-in">
                 <div className="mb-8">
                   <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/20 mb-6 glow-turquoise">

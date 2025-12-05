@@ -19,8 +19,8 @@ const server = http.createServer(async (req, res) => {
     return;
   }
 
-  // Only handle POST requests to /generate-image
-  if (req.method === 'POST' && req.url === '/generate-image') {
+  // Only handle POST requests to /api/hf/generate-image (matching frontend path)
+  if (req.method === 'POST' && req.url === '/api/hf/generate-image') {
     let body = '';
     
     req.on('data', chunk => {
@@ -58,7 +58,7 @@ const server = http.createServer(async (req, res) => {
           ? `${prompt}. Negative prompt: ${negativePrompt}`
           : prompt;
 
-        // Call Hugging Face API (new endpoint)
+        // Call Hugging Face API via the router endpoint (required by HF)
         const hfRequest = https.request(
           'https://router.huggingface.co/hf-inference/models/stabilityai/stable-diffusion-xl-base-1.0',
           {

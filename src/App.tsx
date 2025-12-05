@@ -20,8 +20,10 @@ import Achievements from "./pages/Achievements";
 import Progression from "./pages/Progression";
 import PromptTesting from "./pages/PromptTesting";
 import PromptOptimizer from "./pages/PromptOptimizer";
+import ReverseAI from "./pages/ReverseAI";
 import Schools from "./pages/Schools";
 import PitchDeck from "./pages/PitchDeck";
+import Blog from "./pages/Blog";
 import ProtectedRoute from "./components/ProtectedRoute";
 import NotFound from "./pages/NotFound";
 import InterestSurveyPopup from "./components/InterestSurveyPopup";
@@ -56,7 +58,9 @@ const App = () => (
               <Route path="/schools" element={<Schools />} />
               <Route path="/prompt-testing" element={<PromptTesting />} />
               <Route path="/prompt-optimizer" element={<PromptOptimizer />} />
+              <Route path="/reverse-ai" element={<ReverseAI />} />
               <Route path="/pitch-deck" element={<PitchDeck />} />
+              <Route path="/blog" element={<Blog />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/auth/callback" element={<OAuthCallback />} />

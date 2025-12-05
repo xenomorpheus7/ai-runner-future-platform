@@ -14,6 +14,12 @@ export default defineConfig(({ mode }) => {
         allowedHosts: ['.trycloudflare.com'],
     host: true,
       port: 8080,
+      proxy: {
+        "/api/hf": {
+          target: "http://localhost:8787",
+          changeOrigin: true,
+        },
+      },
     },
     build: {
       outDir: "dist",
