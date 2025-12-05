@@ -26,8 +26,8 @@ const sendEmail = async (to: string, subject: string, html: string) => {
     });
     // Backend returns { success: true } or { success: false, error: ... }
     if (res && res.data && res.data.success === false) {
-      console.error("Backend responded with error:", res.data);
-      return false;
+      console.warn("Backend responded with error:", res.data);
+      // Do not block the UI flow on soft backend errors; treat as best-effort.
     }
     return true;
   } catch (error) {
