@@ -21,10 +21,10 @@ const Footer = () => {
     {
       title: "Product",
       links: [
+        { name: "Prompt Optimizer", path: "/prompt-optimizer" },
+        { name: "Reverse AI", path: "/reverse-ai" },
+        { name: "AI Testing Space", path: "/prompt-testing" },
         { name: "Courses", path: "/courses" },
-        { name: "Projects", path: "/projects" },
-        { name: "About", path: "/about" },
-        { name: "Contact", path: "/contact" },
       ],
     },
     {

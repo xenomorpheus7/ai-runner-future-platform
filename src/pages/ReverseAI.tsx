@@ -301,7 +301,7 @@ const ReverseAI = () => {
                   )}
                   {result.tech_stack && result.tech_stack.length > 0 && (
                     <div>
-                      <p className="text-xs font-semibold text-primary mb-1">Likely Tech Stack</p>
+                      <p className="text-xs font-semibold text-primary mb-1">Tech Stack</p>
                       <div className="flex flex-wrap gap-1">
                         {result.tech_stack.map((item, idx) => (
                           <span

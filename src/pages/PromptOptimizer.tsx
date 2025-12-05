@@ -604,7 +604,7 @@ const PromptOptimizer = () => {
                       <ArrowRight className="ml-2 h-5 w-5" />
                     </Button>
                     <p className="text-xs text-muted-foreground text-center md:text-left">
-                      Glowing placeholder – full reverse-engineering model coming online soon.
+                      Use our full reverse-engineering model.
                     </p>
                   </div>
                 </div>

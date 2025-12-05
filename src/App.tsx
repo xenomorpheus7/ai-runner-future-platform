@@ -5,6 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { LanguageProvider } from "@/contexts/LanguageContext";
+import AIRunnerChatWidget from "./components/AIRunnerChatWidget";
 import Index from "./pages/Index";
 import Courses from "./pages/Courses";
 import Projects from "./pages/Projects";
@@ -44,6 +45,9 @@ const App = () => (
             <InterestSurveyPopup />
           {/* Global navigation (fixed) */}
           <Navigation />
+
+          {/* Global floating AI Runner chat widget */}
+          <AIRunnerChatWidget />
 
           {/* Ensure page content starts below the fixed navbar */}
           <div className="pt-16">

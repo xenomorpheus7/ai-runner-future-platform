@@ -310,4 +310,106 @@ All colors MUST be HSL.
   .electric-spark {
     animation: electric-spark 0.5s ease-out infinite;
   }
+
+  /* Holographic AI Runner black cat orb for floating chat widget */
+  @keyframes hologram-orb-rotate {
+    0% {
+      transform: rotate(0deg) scale(1);
+      box-shadow:
+        0 0 12px hsl(186 100% 60% / 0.6),
+        0 0 28px hsl(270 100% 60% / 0.45),
+        0 0 40px hsl(210 100% 60% / 0.35);
+    }
+    50% {
+      transform: rotate(4deg) scale(1.03);
+      box-shadow:
+        0 0 18px hsl(186 100% 65% / 0.7),
+        0 0 34px hsl(270 100% 60% / 0.55),
+        0 0 52px hsl(210 100% 60% / 0.45);
+    }
+    100% {
+      transform: rotate(0deg) scale(1);
+      box-shadow:
+        0 0 12px hsl(186 100% 60% / 0.6),
+        0 0 28px hsl(270 100% 60% / 0.45),
+        0 0 40px hsl(210 100% 60% / 0.35);
+    }
+  }
+
+  @keyframes hologram-scan {
+    0% {
+      opacity: 0.2;
+      transform: translateY(120%);
+    }
+    40% {
+      opacity: 0.9;
+      transform: translateY(-10%);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-120%);
+    }
+  }
+
+  @keyframes hologram-pulse-keyframes {
+    0%, 100% {
+      transform: scale(1);
+      opacity: 0.2;
+    }
+    50% {
+      transform: scale(1.35);
+      opacity: 0.9;
+    }
+  }
+
+  .hologram-orb {
+    position: relative;
+    background: radial-gradient(circle at 20% 0%, hsl(186 100% 70% / 0.8), transparent 60%),
+      radial-gradient(circle at 80% 100%, hsl(270 100% 70% / 0.7), transparent 65%),
+      radial-gradient(circle at 50% 40%, hsl(210 100% 70% / 0.8), transparent 55%),
+      hsl(240 20% 4% / 0.9);
+    border: 1px solid hsl(186 100% 70% / 0.7);
+    box-shadow:
+      0 0 16px hsl(186 100% 60% / 0.7),
+      0 0 32px hsl(270 100% 60% / 0.5),
+      inset 0 0 18px hsl(210 100% 55% / 0.55);
+    overflow: hidden;
+    animation: hologram-orb-rotate 6s ease-in-out infinite;
+  }
+
+  .hologram-ring {
+    mix-blend-mode: screen;
+    opacity: 0.8;
+  }
+
+  .hologram-cat {
+    position: relative;
+    border-radius: 9999px;
+    background:
+      radial-gradient(circle at 20% 20%, hsl(186 100% 80% / 0.7), transparent 55%),
+      radial-gradient(circle at 60% 0%, hsl(270 100% 80% / 0.6), transparent 60%),
+      radial-gradient(circle at 50% 90%, hsl(210 100% 75% / 0.65), transparent 70%),
+      radial-gradient(circle at 25% 35%, hsl(0 0% 0% / 0.95), transparent 70%);
+    filter: drop-shadow(0 0 10px hsl(186 100% 60% / 0.8));
+  }
+
+  .hologram-cat::before,
+  .hologram-cat::after {
+    content: "";
+    position: absolute;
+    border-radius: 9999px;
+    inset: 8% 12%;
+    border: 1px solid hsl(186 100% 70% / 0.35);
+    mix-blend-mode: screen;
+    opacity: 0.75;
+  }
+
+  .hologram-cat::after {
+    border-color: hsl(270 100% 75% / 0.45);
+    transform: rotate(12deg);
+  }
+
+  .hologram-pulse {
+    animation: hologram-pulse-keyframes 1.1s ease-in-out infinite;
+  }
 }
