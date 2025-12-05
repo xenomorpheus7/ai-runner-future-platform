@@ -85,7 +85,11 @@ export const onRequestPost: PagesFunction = async ({ request, env }) => {
       const errorText = await response.text().catch(() => "");
       console.error("Chat backend error:", response.status, errorText);
       return new Response(
-        JSON.stringify({ error: "Chat backend failed", status: response.status }),
+        JSON.stringify({
+          error: "Chat backend failed",
+          status: response.status,
+          details: errorText,
+        }),
         {
           status: 500,
           headers: {
