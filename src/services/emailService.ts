@@ -133,7 +133,7 @@ export const sendSchoolsEmail = async (formData: any) => {
 // -------------------------------------------------------
 export const sendWelcomeEmail = async (email: string) => {
   try {
-    const res = await serverlessAPI.post("/api/sendWelcomeEmail", {
+    const res = await serverlessAPI.post("/sendWelcomeEmail", {
       email
     });
     if (res && res.data && res.data.success) {
