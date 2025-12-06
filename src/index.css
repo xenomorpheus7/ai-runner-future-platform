@@ -362,6 +362,40 @@ All colors MUST be HSL.
     }
   }
 
+  @keyframes hologram-cat-glow {
+    0%, 100% {
+      transform: translateY(0) scale(1);
+      filter: drop-shadow(0 0 10px hsl(186 100% 60% / 0.85));
+    }
+    25% {
+      transform: translateY(-1px) scale(1.02);
+      filter: drop-shadow(0 0 16px hsl(270 100% 65% / 0.95));
+    }
+    50% {
+      transform: translateY(0) scale(1.03);
+      filter: drop-shadow(0 0 18px hsl(210 100% 70% / 0.95));
+    }
+    75% {
+      transform: translateY(1px) scale(1.01);
+      filter: drop-shadow(0 0 14px hsl(186 100% 65% / 0.9));
+    }
+  }
+
+  @keyframes hologram-cat-eye-blink {
+    0%, 92%, 100% {
+      transform: scaleY(1);
+      opacity: 1;
+    }
+    94% {
+      transform: scaleY(0.15);
+      opacity: 0.9;
+    }
+    96% {
+      transform: scaleY(1);
+      opacity: 1;
+    }
+  }
+
   .hologram-orb {
     position: relative;
     background: radial-gradient(circle at 20% 0%, hsl(186 100% 70% / 0.8), transparent 60%),
@@ -382,6 +416,181 @@ All colors MUST be HSL.
     opacity: 0.8;
   }
 
+  /* Full holographic cat avatar for open chat header */
+  @keyframes cat-orb-breathe {
+    0%, 100% {
+      transform: scale(1) translateY(0);
+      box-shadow:
+        0 0 14px hsl(186 100% 65% / 0.8),
+        0 0 26px hsl(270 100% 65% / 0.6),
+        0 0 40px hsl(210 100% 60% / 0.5);
+    }
+    50% {
+      transform: scale(1.05) translateY(-1px);
+      box-shadow:
+        0 0 18px hsl(186 100% 70% / 0.95),
+        0 0 34px hsl(270 100% 70% / 0.8),
+        0 0 52px hsl(210 100% 65% / 0.6);
+    }
+  }
+
+  @keyframes cat-head-hover {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-2px);
+    }
+  }
+
+  @keyframes cat-ear-twitch {
+    0%, 92%, 100% {
+      transform: rotate(0deg);
+    }
+    95% {
+      transform: rotate(-6deg);
+    }
+    97% {
+      transform: rotate(4deg);
+    }
+  }
+
+  @keyframes cat-eye-glow {
+    0%, 100% {
+      opacity: 0.8;
+      filter: drop-shadow(0 0 6px hsl(186 100% 70% / 0.9));
+    }
+    50% {
+      opacity: 1;
+      filter: drop-shadow(0 0 10px hsl(270 100% 75% / 1));
+    }
+  }
+
+  @keyframes cat-mouth-pulse {
+    0%, 100% {
+      transform: scaleX(1);
+      opacity: 0.7;
+    }
+    50% {
+      transform: scaleX(1.15);
+      opacity: 1;
+    }
+  }
+
+  .cat-hologram-orb {
+    position: relative;
+    background:
+      radial-gradient(circle at 20% 0%, hsl(186 100% 60% / 0.45), transparent 55%),
+      radial-gradient(circle at 80% 100%, hsl(270 100% 70% / 0.7), transparent 60%),
+      radial-gradient(circle at 50% 40%, hsl(210 100% 70% / 0.8), transparent 55%),
+      hsl(240 20% 5% / 0.95);
+    border: 1px solid hsl(186 100% 70% / 0.9);
+    box-shadow:
+      0 0 22px hsl(186 100% 70% / 0.95),
+      0 0 40px hsl(270 100% 72% / 0.9),
+      inset 0 0 22px hsl(210 100% 65% / 0.9);
+    overflow: hidden;
+    animation: cat-orb-breathe 4s ease-in-out infinite;
+  }
+
+  .cat-hologram-orb-active {
+    animation: cat-orb-breathe 2.2s ease-in-out infinite;
+    box-shadow:
+      0 0 26px hsl(186 100% 75% / 0.98),
+      0 0 46px hsl(270 100% 80% / 0.95),
+      0 0 72px hsl(210 100% 75% / 0.9);
+  }
+
+  .cat-hologram {
+    position: relative;
+    width: 70%;
+    height: 70%;
+    filter: drop-shadow(0 0 16px hsl(186 100% 75% / 0.98));
+  }
+
+  .cat-hologram-head {
+    position: absolute;
+    inset: 18% 10% 10% 10%;
+    border-radius: 9999px;
+    background:
+      radial-gradient(circle at 50% 50%, hsl(220 20% 4% / 1), hsl(220 15% 1% / 1) 65%, transparent 90%),
+      radial-gradient(circle at 50% 0%, hsl(210 100% 40% / 0.35), transparent 85%);
+    box-shadow:
+      0 0 20px hsl(186 100% 75% / 0.98),
+      0 0 40px hsl(270 100% 80% / 0.95);
+    animation: cat-head-hover 3.2s ease-in-out infinite;
+  }
+
+  .cat-hologram-ear {
+    position: absolute;
+    top: -18%;
+    width: 32%;
+    height: 40%;
+    background:
+      radial-gradient(circle at 50% 75%, hsl(220 25% 14% / 1), hsl(220 20% 8% / 1) 55%, transparent 85%),
+      radial-gradient(circle at 50% 0%, hsl(270 100% 88% / 0.95), transparent 70%);
+    clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+    filter: drop-shadow(0 0 8px hsl(270 100% 85% / 0.95));
+  }
+
+  .cat-hologram-ear-left {
+    left: 2%;
+    animation: cat-ear-twitch 5.2s ease-in-out infinite;
+  }
+
+  .cat-hologram-ear-right {
+    right: 2%;
+    animation: cat-ear-twitch 5.2s ease-in-out infinite reverse;
+  }
+
+  .cat-hologram-face {
+    position: absolute;
+    inset: 32% 18% 20% 18%;
+  }
+
+  .cat-hologram-eye {
+    position: absolute;
+    top: 10%;
+    width: 26%;
+    height: 42%;
+    border-radius: 9999px;
+    background:
+      radial-gradient(circle at 50% 60%, hsl(0 0% 100% / 1), hsl(0 0% 96% / 1) 55%, transparent 80%),
+      radial-gradient(circle at 35% 35%, hsl(186 100% 88% / 0.85), transparent 60%),
+      radial-gradient(circle at 65% 20%, hsl(270 100% 88% / 0.85), transparent 65%);
+    animation:
+      cat-eye-glow 2.2s ease-in-out infinite,
+      hologram-cat-eye-blink 4.6s ease-in-out infinite;
+    transform-origin: center;
+  }
+
+  .cat-hologram-eye-left {
+    left: 8%;
+  }
+
+  .cat-hologram-eye-right {
+    right: 8%;
+  }
+
+  .cat-hologram-mouth {
+    position: absolute;
+    bottom: 10%;
+    left: 28%;
+    right: 28%;
+    height: 22%;
+    border-radius: 9999px;
+    border-bottom: 2px solid hsl(0 0% 100% / 0.98);
+    background:
+      radial-gradient(circle at 50% 80%, hsl(0 0% 100% / 1), transparent 75%),
+      radial-gradient(circle at 30% 40%, hsl(186 100% 92% / 0.95), transparent 70%),
+      radial-gradient(circle at 70% 40%, hsl(210 100% 92% / 0.95), transparent 70%);
+    box-shadow:
+      0 0 10px hsl(186 100% 85% / 0.95),
+      0 0 14px hsl(270 100% 85% / 0.9);
+    opacity: 1;
+    animation: cat-mouth-pulse 2.8s ease-in-out infinite;
+  }
+
   .hologram-cat {
     position: relative;
     border-radius: 9999px;
@@ -391,6 +600,7 @@ All colors MUST be HSL.
       radial-gradient(circle at 50% 90%, hsl(210 100% 75% / 0.65), transparent 70%),
       radial-gradient(circle at 25% 35%, hsl(0 0% 0% / 0.95), transparent 70%);
     filter: drop-shadow(0 0 10px hsl(186 100% 60% / 0.8));
+    animation: hologram-cat-glow 3s ease-in-out infinite;
   }
 
   .hologram-cat::before,
@@ -407,6 +617,8 @@ All colors MUST be HSL.
   .hologram-cat::after {
     border-color: hsl(270 100% 75% / 0.45);
     transform: rotate(12deg);
+    animation: hologram-cat-eye-blink 4.4s ease-in-out infinite;
+    transform-origin: center;
   }
 
   .hologram-pulse {

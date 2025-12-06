@@ -8,7 +8,7 @@ const Achievements = () => {
     {
       id: 1,
       title: "First Steps",
-      description: "Complete your first course",
+      description: "Use any tool from AI LAB",
       icon: Star,
       unlocked: true,
       progress: 100,
@@ -19,7 +19,7 @@ const Achievements = () => {
       description: "Complete 3 courses",
       icon: Trophy,
       unlocked: false,
-      progress: 33,
+      progress: 0,
     },
     {
       id: 3,
@@ -27,7 +27,7 @@ const Achievements = () => {
       description: "Complete 10 courses",
       icon: Award,
       unlocked: false,
-      progress: 10,
+      progress: 0,
     },
     {
       id: 4,
@@ -35,7 +35,7 @@ const Achievements = () => {
       description: "Learn for 30 days in a row",
       icon: Target,
       unlocked: false,
-      progress: 5,
+      progress: 0,
     },
   ];
 
@@ -103,7 +103,7 @@ const Achievements = () => {
                             />
                           </div>
                         )}
-                        {achievement.unlocked && (
+                        {achievement.unlocked && achievement.id !== 1 && (
                           <span className="inline-flex items-center px-3 py-1 rounded-full bg-primary/20 text-primary text-sm font-medium">
                             Unlocked
                           </span>

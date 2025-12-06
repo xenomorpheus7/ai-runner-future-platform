@@ -10,6 +10,7 @@ import robertAvatar from "@/assets/robert-avatar.jpg";
 import s1Image from "@/assets/s1.jpg";
 import s2Image from "@/assets/s2.jpg";
 import s3Image from "@/assets/s3.jpg";
+import teachersWebinarImage from "@/assets/teacherswebinar.jpg";
 import rajkobizjakLogo from "@/assets/rajkobizjak_logo.png";
 import isolaLogo from "@/assets/isola_logo.jpg";
 import vistLogo from "@/assets/vist_logo.png";
@@ -308,7 +309,7 @@ const Index = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
             {[
               {
                 title: "Hajdina Elementary School & iSchool",
@@ -322,34 +323,32 @@ const Index = () => {
                 title: "ACADEMIA - Academy of Applied Sciences Maribor",
                 image: s3Image,
               },
+              {
+                title: "Online Webinar for Teachers",
+                image: teachersWebinarImage,
+              },
             ].map((workshop, index) => (
               <div
                 key={index}
                 className="glass-card rounded-2xl hover:border-secondary/50 transition-all duration-300 hover:glow-purple animate-fade-in relative overflow-hidden"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                {/* Image Container with 4:3 Aspect Ratio */}
+                {/* Image Container with 4:3 Aspect Ratio and full image visible */}
                 <div className="relative w-full" style={{ paddingBottom: '75%' }}>
-                  {/* Background Image */}
-                  <div 
-                    className="absolute inset-0 bg-cover bg-center"
+                  {/* Background Image (2nd & 3rd fill, others contain) */}
+                  <div
+                    className={`absolute inset-0 ${index === 1 || index === 2 ? "bg-cover" : "bg-contain"} bg-center bg-no-repeat`}
                     style={{ backgroundImage: `url(${workshop.image})` }}
                   />
                   {/* Dark Gradient Overlay - Reduced opacity for better image visibility */}
                   <div className="absolute inset-0 bg-gradient-to-b from-background/50 via-background/40 to-background/50" />
                   
                   {/* Content */}
-                  <div className="absolute inset-0 z-10 flex flex-col justify-between p-6">
-                    <div className="flex items-center gap-3">
-                      <Sparkles className="h-6 w-6 text-secondary" />
-                      <h3 className="text-xl font-bold">{workshop.title}</h3>
+                  <div className="absolute inset-0 z-10 flex items-end p-4">
+                    <div className="flex items-center gap-2 bg-background/70 px-3 py-1.5 rounded-lg backdrop-blur-sm">
+                      <Sparkles className="h-5 w-5 text-secondary" />
+                      <h3 className="text-base font-semibold md:text-lg md:font-bold">{workshop.title}</h3>
                     </div>
-                    <Button 
-                      className="w-full bg-secondary/20 hover:bg-secondary/30 text-secondary-foreground border border-secondary/50 hover:border-secondary"
-                      variant="outline"
-                    >
-                      Explore Students Projects
-                    </Button>
                   </div>
                 </div>
               </div>

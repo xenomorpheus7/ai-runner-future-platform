@@ -1,10 +1,36 @@
-import { Target, Rocket, Users2, Zap } from "lucide-react";
+import { useEffect, useState } from "react";
+import { Target, Rocket, Users2, Zap, ArrowRight } from "lucide-react";
+import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { Button } from "@/components/ui/button";
+import aboutUsImage from "@/assets/aboutus.jpg";
 
 const About = () => {
   const { t } = useLanguage();
+  const [showCookieBanner, setShowCookieBanner] = useState(false);
+
+  useEffect(() => {
+    try {
+      const hasSeenBanner = localStorage.getItem("about_cookie_banner_seen");
+      if (!hasSeenBanner) {
+        setShowCookieBanner(true);
+      }
+    } catch (error) {
+      // If localStorage is unavailable, fail silently and still show the banner once
+      setShowCookieBanner(true);
+    }
+  }, []);
+
+  const handleCookieChoice = (choice: "accept" | "decline") => {
+    try {
+      localStorage.setItem("about_cookie_banner_seen", choice);
+    } catch (error) {
+      // Ignore storage errors
+    }
+    setShowCookieBanner(false);
+  };
   const values = [
     {
       icon: Target,
@@ -94,13 +120,23 @@ const About = () => {
               </h2>
               <div className="space-y-6 text-lg text-muted-foreground leading-relaxed">
                 <p>
-                  {t("about.story1")}
+                  Founded in 2025, AI Runner 2033 was born from a vision of AI media engineer, Robert Vogrinec, to transform how people learn about artificial intelligence. Robert's philosophy is not biased but rather taking a safe, practical and most importantly, useful approach.
                 </p>
                 <p>
-                  {t("about.story2")}
+                  The genesis of this approach was significantly influenced by Robert's academic work. His mentor and professor of video and photography, Rajko Bizjak, helped him successfully achieve his diploma titled: "Impact of AI on Visual Culture", from which students at his university are now taking notes. This foundational research deeply informs AI Runner 2033’s commitment to real-world impact and ethical AI application.
                 </p>
                 <p>
-                  {t("about.story3")}
+                  Our founders, a team of project leaders, teachers, and principals, came together to create an advanced online learning platform that doesn't just teach concepts—it brings them to life through a unique workflow which is suitable for all ages and skill levels. Today, AI Runner 2033 serves thousands of students, from complete beginners to advanced practitioners, helping them master AI skills through hands-on projects, real-world applications, and a supportive community.
+                </p>
+              </div>
+              <div className="mt-10 flex flex-col md:flex-row items-center justify-center gap-6">
+                <img
+                  src={aboutUsImage}
+                  alt="Robert, Founder of AI Runner with Rajko, Professor of Video and Photography at ACADEMIA Institute of Technology Maribor, Slovenia, 2023"
+                  className="w-1/2 h-auto rounded-2xl object-cover shadow-xl"
+                />
+                <p className="text-sm md:text-base text-muted-foreground max-w-sm text-center md:text-left">
+                  Robert, Founder of AI Runner with Rajko, Professor of Video and Photography at ACADEMIA Institute of Technology Maribor, Slovenia, 2023
                 </p>
               </div>
             </div>
@@ -156,11 +192,65 @@ const About = () => {
             <p className="text-xl text-muted-foreground mb-8">
               {t("about.joinMissionDesc")}
             </p>
+            <div className="flex justify-center">
+              <Link to="/contact">
+                <Button
+                  size="lg"
+                  className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-foreground glow-turquoise shadow-[0_0_20px_rgba(56,189,248,0.6)]"
+                >
+                  Join Here
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </section>
 
       <Footer />
+
+      {showCookieBanner && (
+        <div className="fixed inset-0 z-40 flex items-end justify-center pointer-events-none">
+          <div className="pointer-events-auto mb-6 w-full max-w-xl px-4">
+            <div className="relative overflow-hidden rounded-2xl border border-cyan-400/70 bg-slate-900/95 backdrop-blur-xl shadow-[0_0_40px_rgba(34,211,238,0.7)] animate-pulse">
+              <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 via-sky-500/10 to-indigo-500/20 opacity-80" />
+              <div className="relative p-5 sm:p-6">
+                <h3 className="text-lg sm:text-xl font-semibold text-cyan-50 mb-2 flex items-center gap-2">
+                  <span className="inline-flex h-2 w-2 rounded-full bg-cyan-300 shadow-[0_0_18px_rgba(103,232,249,1)]" />
+                  We use cookies to level up your experience
+                </h3>
+                <p className="text-xs sm:text-sm text-cyan-100/80 mb-4 leading-relaxed">
+                  We use cookies and similar technologies to understand how you use this page and to make
+                  AI Runner 2033 smoother, faster and more personalized. You can accept or continue with
+                  minimal cookies only.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
+                  <div className="flex gap-2 order-2 sm:order-1">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="border-cyan-300/70 text-cyan-100 hover:bg-cyan-500/10 hover:text-cyan-50"
+                      onClick={() => handleCookieChoice("decline")}
+                    >
+                      Decline
+                    </Button>
+                    <Button
+                      size="sm"
+                      className="bg-gradient-to-r from-cyan-400 via-sky-400 to-indigo-400 text-slate-950 font-semibold shadow-[0_0_25px_rgba(34,211,238,0.9)] hover:shadow-[0_0_35px_rgba(56,189,248,1)] hover:from-cyan-300 hover:via-sky-300 hover:to-indigo-300"
+                      onClick={() => handleCookieChoice("accept")}
+                    >
+                      Accept & continue
+                    </Button>
+                  </div>
+                  <span className="order-1 sm:order-2 text-[10px] sm:text-xs text-cyan-100/70">
+                    You can change your cookie preferences at any time in your browser settings.
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

@@ -1,4 +1,4 @@
-import { useParams, Link, useNavigate } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useState } from "react";
 import { ArrowLeft, Play, CheckCircle2, Lock, Clock, BarChart } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -14,8 +14,8 @@ import robertAvatar from "@/assets/robert-avatar.jpg";
 
 const CourseDetail = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
   const [selectedLesson, setSelectedLesson] = useState(0);
+  const [showComingSoon, setShowComingSoon] = useState(false);
 
   const courseData: Record<string, any> = {
     "1": {
@@ -239,7 +239,7 @@ const CourseDetail = () => {
                 <div className="relative aspect-video bg-muted flex items-center justify-center group">
                   <div className="absolute inset-0 cyber-grid opacity-20" />
                   <button
-                    onClick={() => navigate("/register")}
+                    onClick={() => setShowComingSoon(true)}
                     className="relative z-10 w-full h-full flex flex-col items-center justify-center cursor-pointer hover:bg-primary/5 transition-colors"
                   >
                     <div className="w-20 h-20 rounded-full bg-primary/20 flex items-center justify-center mb-4 glow-turquoise hover:scale-110 transition-transform">
@@ -249,6 +249,20 @@ const CourseDetail = () => {
                     <p className="text-sm text-muted-foreground mt-2">Click to play lesson</p>
                   </button>
                 </div>
+                {showComingSoon && (
+                  <div className="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-sm">
+                    <div className="glass-card rounded-2xl p-8 max-w-md w-full mx-4 text-center border border-primary/40">
+                      <h2 className="text-2xl font-bold mb-4">IN PRODUCTION</h2>
+                      <p className="text-muted-foreground mb-6">Courses Coming Soon</p>
+                      <Button
+                        className="bg-primary hover:bg-primary/90 text-primary-foreground w-full"
+                        onClick={() => setShowComingSoon(false)}
+                      >
+                        Close
+                      </Button>
+                    </div>
+                  </div>
+                )}
                 
                 <div className="p-6">
                   <div className="flex items-start justify-between mb-4">

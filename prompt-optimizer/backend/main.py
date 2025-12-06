@@ -84,7 +84,25 @@ async def ensure_cors_headers(request: Request, call_next):
 # ---------------------------------------------------------
 # Supported models
 # ---------------------------------------------------------
-SUPPORTED_MODELS = ["chatgpt", "cursor", "midjourney", "leonardo", "sora", "veo"]
+SUPPORTED_MODELS = [
+    "chatgpt",
+    "cursor",
+    "midjourney",
+    "leonardo",
+    "sora",
+    "veo",
+    "runway",
+    "windsurf",
+    "gemini",
+    "antigravity",
+    "github-copilot",
+    "grok",
+    "comfyui",
+    "lovable",
+    "seedance",
+    "voiceflow",
+    "anthropic",
+]
 
 # ---------------------------------------------------------
 # Request models

@@ -87,8 +87,20 @@ const AIRunnerChatWidget = () => {
             <div className="flex items-center justify-between gap-3">
               <div className="flex items-center gap-3">
                 {/* Holographic cat avatar */}
-                <div className="relative h-10 w-10 rounded-full hologram-orb flex items-center justify-center">
-                  <div className="relative h-7 w-7 hologram-cat" />
+                <div className={`relative h-12 w-12 rounded-full cat-hologram-orb flex items-center justify-center ${
+                  isThinking ? "cat-hologram-orb-active" : ""
+                }`}>
+                  <div className="cat-hologram">
+                    <div className="cat-hologram-head">
+                      <div className="cat-hologram-ear cat-hologram-ear-left" />
+                      <div className="cat-hologram-ear cat-hologram-ear-right" />
+                      <div className="cat-hologram-face">
+                        <div className="cat-hologram-eye cat-hologram-eye-left" />
+                        <div className="cat-hologram-eye cat-hologram-eye-right" />
+                        <div className="cat-hologram-mouth" />
+                      </div>
+                    </div>
+                  </div>
                 </div>
                 <div className="flex flex-col">
                   <span className="text-xs uppercase tracking-[0.22em] text-cyan-300/80">
@@ -173,7 +185,7 @@ const AIRunnerChatWidget = () => {
       >
         <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-cyan-500/60 via-purple-500/40 to-blue-500/60 blur-lg opacity-90 hologram-ring" />
         <div className="relative h-14 w-14 rounded-full bg-black/80 border border-cyan-400/70 glass-card overflow-hidden flex items-center justify-center hologram-orb">
-          <div className="relative h-9 w-9 hologram-cat" />
+          <div className="relative h-10 w-10 hologram-cat" />
         </div>
       </button>
     </div>

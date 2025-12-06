@@ -57,6 +57,83 @@ const SUPPORTED_MODELS = [
     color: "from-teal-400 to-cyan-500",
     glow: "glow-blue"
   },
+  { 
+    value: "runway", 
+    label: "Runway", 
+    description: "Optimize for Runway video and image generations",
+    color: "from-amber-400 to-orange-500",
+    glow: "glow-turquoise"
+  },
+  { 
+    value: "windsurf", 
+    label: "Windsurf", 
+    description: "Optimize for IDE-native coding assistants",
+    color: "from-sky-400 to-blue-500",
+    glow: "glow-blue"
+  },
+  { 
+    value: "gemini", 
+    label: "Gemini", 
+    description: "Optimize for Google Gemini with structured outputs",
+    color: "from-cyan-400 to-indigo-500",
+    glow: "glow-purple"
+  },
+  { 
+    value: "antigravity", 
+    label: "Antigravity", 
+    description: "Optimize for experimental frontier creativity",
+    color: "from-fuchsia-400 to-rose-500",
+    glow: "glow-purple"
+  },
+  { 
+    value: "github-copilot", 
+    label: "GitHub Copilot", 
+    description: "Optimize inline code comments for Copilot completions",
+    color: "from-emerald-400 to-teal-500",
+    glow: "glow-turquoise"
+  },
+  { 
+    value: "grok", 
+    label: "Grok", 
+    description: "Optimize for sharp, info-dense Grok prompts",
+    color: "from-slate-400 to-zinc-500",
+    glow: "glow-blue"
+  },
+  { 
+    value: "comfyui", 
+    label: "ComfyUI", 
+    description: "Optimize diffusion prompts and negative prompts",
+    color: "from-lime-400 to-emerald-500",
+    glow: "glow-turquoise"
+  },
+  { 
+    value: "lovable", 
+    label: "Lovable", 
+    description: "Optimize prompts for warm, user-facing AI assistants",
+    color: "from-pink-400 to-rose-500",
+    glow: "glow-purple"
+  },
+  { 
+    value: "seedance", 
+    label: "Seedance", 
+    description: "Optimize workflow-style, multi-step prompts",
+    color: "from-amber-400 to-yellow-500",
+    glow: "glow-turquoise"
+  },
+  { 
+    value: "voiceflow", 
+    label: "Voiceflow", 
+    description: "Optimize conversational prompts for voice and chat flows",
+    color: "from-violet-400 to-fuchsia-500",
+    glow: "glow-purple"
+  },
+  { 
+    value: "anthropic", 
+    label: "Anthropic (Claude)", 
+    description: "Optimize safe, structured prompts for Claude models",
+    color: "from-stone-400 to-neutral-500",
+    glow: "glow-blue"
+  },
 ];
 
 const PromptOptimizer = () => {
@@ -72,6 +149,7 @@ const PromptOptimizer = () => {
   const [maxTokens, setMaxTokens] = useState([2000]);
   const [autoCopy, setAutoCopy] = useState(false);
   const [showModelLogos, setShowModelLogos] = useState(true);
+  const [selectedPreset, setSelectedPreset] = useState<string>("");
   const { toast } = useToast();
 
   useEffect(() => {
@@ -114,13 +192,30 @@ const PromptOptimizer = () => {
     setOptimizedPrompt("");
 
     try {
+      // Adapt prompt based on selected preset before sending to backend
+      let promptToSend = rawPrompt;
+
+      if (selectedPreset === "text-to-image") {
+        promptToSend = `You are optimizing a text-to-image prompt for a generative model. Rewrite the following description so it is a clear, information-dense image prompt.\n\nOriginal user idea:\n${rawPrompt}`;
+      } else if (selectedPreset === "image-to-image") {
+        promptToSend = `You are optimizing an image-to-image prompt. The user already has a base image and wants to transform or enhance it. Rewrite the description so it clearly specifies what should change, what should stay consistent, and any style or composition goals.\n\nUser instructions about the transformation:\n${rawPrompt}`;
+      } else if (selectedPreset === "character-consistency") {
+        promptToSend = `You are optimizing a prompt for strict character consistency across multiple generations. Extract and rewrite the character description so it is precise and repeatable (appearance, clothing, personality, poses) while avoiding contradictions.\n\nUser description:\n${rawPrompt}`;
+      } else if (selectedPreset === "image-to-video") {
+        promptToSend = `You are optimizing an image-to-video prompt. The user has a keyframe or base image and wants a short video derived from it. Rewrite the instructions to clearly describe motion, camera movement, duration, and how the final video should evolve from the base image.\n\nUser description of desired motion/video:\n${rawPrompt}`;
+      } else if (selectedPreset === "text-to-speech") {
+        promptToSend = `You are optimizing a text-to-speech script prompt. Rewrite the text so it is natural to speak aloud, with clear pacing, emphasis, and pronunciation notes where needed. Avoid markup unless explicitly requested.\n\nOriginal script idea:\n${rawPrompt}`;
+      } else if (selectedPreset === "text-to-code") {
+        promptToSend = `You are optimizing a text-to-code generation request. Rewrite the instructions so they clearly specify the language, environment, function names, inputs, outputs, and constraints for the code the user wants.\n\nUser request for code:\n${rawPrompt}`;
+      }
+
       const response = await fetch(`${PROMPT_OPTIMIZER_API}/optimize`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          prompt: rawPrompt,
+          prompt: promptToSend,
           model: selectedModel,
         }),
       });
@@ -211,8 +306,8 @@ const PromptOptimizer = () => {
       </div>
 
       {/* Hero Section */}
-      <div className="container mx-auto px-4 py-16 relative z-10">
-        <div className="text-center mb-16">
+      <div className="container mx-auto px-4 py-24 relative z-10">
+        <div className="text-center mb-10">
           {/* AI LAB Title with Energy Effects */}
           <div className="mb-8">
             <h1 className="text-7xl md:text-9xl font-black mb-4 electric-glow electric-flicker electric-pulse relative inline-block">
@@ -227,7 +322,7 @@ const PromptOptimizer = () => {
             </h1>
           </div>
           
-          <div className="flex items-center justify-center gap-4 mb-6">
+          <div className="flex items-center justify-center gap-4 mt-16 mb-4">
             <div>
               <h3 className="text-4xl md:text-5xl font-bold">
                 <span className="underline decoration-primary decoration-4 underline-offset-8 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
@@ -359,7 +454,7 @@ const PromptOptimizer = () => {
               <div className="flex gap-3">
                 <Button
                   onClick={handleOptimize}
-                  disabled={isOptimizing || !rawPrompt.trim() || !selectedModel}
+                  disabled={isOptimizing || !rawPrompt.trim()}
                   className="flex-1 h-12 text-base font-semibold bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 glow-turquoise"
                 >
                   {isOptimizing ? (
@@ -494,6 +589,34 @@ const PromptOptimizer = () => {
                     </button>
                   ))}
                 </div>
+                <div className="mt-8">
+                  <h3 className="text-lg font-semibold mb-2">Generation Presets</h3>
+                  <p className="text-sm text-muted-foreground mb-4">
+                    Select what kind of task you are optimizing for. The optimizer will adapt your prompt for that use case before sending it to the selected model.
+                  </p>
+                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                    {[ 
+                      { id: "text-to-image", label: "Text to Image" },
+                      { id: "image-to-image", label: "Image to Image" },
+                      { id: "character-consistency", label: "Character Consistency" },
+                      { id: "image-to-video", label: "Image to Video" },
+                      { id: "text-to-speech", label: "Text to Speech" },
+                      { id: "text-to-code", label: "Text to Code" },
+                    ].map((preset) => (
+                      <button
+                        key={preset.id}
+                        onClick={() => setSelectedPreset(preset.id)}
+                        className={`px-4 py-3 rounded-lg text-sm font-medium border transition-all duration-200 text-left ${
+                          selectedPreset === preset.id
+                            ? "border-primary bg-primary/10 shadow-lg glow-turquoise"
+                            : "border-primary/20 bg-background/40 hover:border-primary/50 hover:bg-primary/5"
+                        }`}
+                      >
+                        {preset.label}
+                      </button>
+                    ))}
+                  </div>
+                </div>
               </CardContent>
             </Card>
           </div>
@@ -578,8 +701,8 @@ const PromptOptimizer = () => {
             </div>
 
             {/* Reverse Engineer AI Content Placeholder */}
-            <div className="max-w-4xl mx-auto my-24 animate-fade-in" style={{ animationDelay: "0.1s" }}>
-              <Card className="glass-card p-8 md:p-10 rounded-3xl border-primary/40 glow-turquoise relative overflow-hidden">
+            <div className="max-w-5xl mx-auto mt-32 mb-24 animate-fade-in" style={{ animationDelay: "0.1s" }}>
+              <Card className="glass-card p-10 md:p-12 rounded-3xl border-primary/40 glow-turquoise relative overflow-hidden">
                 <div className="absolute -inset-1 bg-gradient-to-r from-primary/40 via-secondary/40 to-accent/40 opacity-40 blur-3xl pointer-events-none" />
                 <div className="relative flex flex-col md:flex-row items-start md:items-center gap-8">
                   <div className="flex-1">
@@ -590,11 +713,54 @@ const PromptOptimizer = () => {
                     <h3 className="text-3xl font-bold mb-3 bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
                       Reverse Engineer AI Content
                     </h3>
-                    <p className="text-muted-foreground text-base md:text-lg max-w-xl">
-                      Drop in an image, video, article or website URL and let the lab reconstruct the hidden prompt, style blueprint and tech stack behind it.
+                    <p className="text-muted-foreground text-base md:text-lg max-w-xl mb-4">
+                      Drop in an image, video, article, code snippet or website URL and let the lab reconstruct the hidden prompt, style blueprint and tech stack behind it.
                     </p>
+                    <div className="grid sm:grid-cols-2 gap-4 mb-4">
+                      <div className="p-4 rounded-2xl border border-primary/30 bg-primary/5 backdrop-blur-sm">
+                        <p className="text-xs font-semibold tracking-wide text-primary mb-2">WHAT IT CAN UNPACK</p>
+                        <ul className="text-xs md:text-sm text-muted-foreground space-y-1 list-disc list-inside">
+                          <li>Likely prompt structure and key instructions</li>
+                          <li>Visual style, composition and camera language</li>
+                          <li>Probable tools, models and workflow choices</li>
+                          <li>Patterns you can reuse in your own prompts</li>
+                        </ul>
+                      </div>
+                      <div className="p-4 rounded-2xl border border-secondary/30 bg-secondary/5 backdrop-blur-sm">
+                        <p className="text-xs font-semibold tracking-wide text-secondary mb-2">PERFECT FOR</p>
+                        <ul className="text-xs md:text-sm text-muted-foreground space-y-1 list-disc list-inside">
+                          <li>Studying viral AI images, videos or pages</li>
+                          <li>Learning how pros structure complex prompts</li>
+                          <li>Rebuilding prompts from client references</li>
+                          <li>Documenting style guides for your own brand</li>
+                        </ul>
+                      </div>
+                    </div>
+                    <div className="inline-flex flex-wrap gap-2 mt-1">
+                      <span className="px-3 py-1 rounded-full text-xs bg-primary/10 border border-primary/30 text-primary">Prompt Blueprint</span>
+                      <span className="px-3 py-1 rounded-full text-xs bg-secondary/10 border border-secondary/30 text-secondary">Style DNA</span>
+                      <span className="px-3 py-1 rounded-full text-xs bg-accent/10 border border-accent/30 text-accent">Tech Stack Guess</span>
+                    </div>
                   </div>
                   <div className="flex flex-col items-stretch gap-3 w-full md:w-auto md:min-w-[220px]">
+                    {/* Glowing neural network looped animation */}
+                    <div className="relative h-20 mb-2 flex items-center justify-center">
+                      <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary/30 via-secondary/30 to-accent/30 blur-2xl animate-pulse" />
+                      <div className="relative w-20 h-20 border border-primary/40 rounded-full flex items-center justify-center animate-[spin_12s_linear_infinite]">
+                        {/* Outer and inner orbits */}
+                        <div className="absolute w-16 h-16 rounded-full border border-primary/40 border-dashed animate-[spin_10s_linear_infinite]" />
+                        <div className="absolute w-10 h-10 rounded-full border border-secondary/50 border-dashed animate-[spin_8s_linear_infinite_reverse]" />
+
+                        {/* Neural connection lines */}
+                        <div className="absolute w-14 h-px bg-gradient-to-r from-primary/40 via-secondary/60 to-accent/60 rotate-12 animate-pulse" />
+                        <div className="absolute w-12 h-px bg-gradient-to-r from-accent/60 via-primary/50 to-secondary/40 -rotate-24 animate-[pulse_2.5s_ease-in-out_infinite]" />
+                        <div className="absolute h-12 w-px bg-gradient-to-b from-primary/40 via-secondary/60 to-accent/60 rotate-6 animate-[pulse_3s_ease-in-out_infinite]" />
+
+                        {/* Central node */}
+                        <div className="w-2 h-2 rounded-full bg-primary shadow-[0_0_15px_rgba(56,189,248,0.8)] animate-ping" />
+                      </div>
+                    </div>
+
                     <Button
                       size="lg"
                       onClick={() => navigate("/reverse-ai")}
@@ -614,7 +780,7 @@ const PromptOptimizer = () => {
             </div>
 
             {/* Main Content - Test Your Prompt Skills Card */}
-            <div className="max-w-6xl mx-auto mt-24">
+            <div className="max-w-6xl mx-auto mt-40">
               <Card className="glass-card p-12 rounded-3xl border-primary/30 glow-turquoise text-center animate-fade-in">
                 <div className="mb-8">
                   <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/20 mb-6 glow-turquoise">
